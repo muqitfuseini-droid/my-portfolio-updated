@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aaron Douglas LLC — Case Study · Shinbu Abdul-Muqit Fuseini</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <script src="image-slot.js"></script>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --surface2: #1a1a1a;
+      --text: #f5f5f5;
+      --muted: #888;
+      --stroke: #222;
+      --ad-navy: #1a3a5c;
+      --ad-blue: #2563EB;
+      --ad-blue-light: #60A5FA;
+      --ad-gold: #C49A2A;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.6; }
+    body::-webkit-scrollbar { width: 6px; }
+    body::-webkit-scrollbar-track { background: var(--bg); }
+    body::-webkit-scrollbar-thumb { background: var(--stroke); border-radius: 3px; }
+
+    .accent-text {
+      background: linear-gradient(90deg, var(--ad-blue-light), var(--ad-blue));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .accent-line {
+      display: inline-block; width: 40px; height: 1px;
+      background: linear-gradient(90deg, var(--ad-blue-light), var(--ad-blue));
+      vertical-align: middle; margin-right: 12px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 40px; display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+    }
+    .nav-back { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--text); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+    .nav-site { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); text-decoration: none; font-size: 13px; border: 1px solid var(--stroke); border-radius: 99px; padding: 8px 18px; transition: all 0.2s; }
+    .nav-site:hover { color: var(--text); border-color: #444; }
+
+    /* ── LANGUAGE SWITCHER ── */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--stroke);
+      border-radius: 999px;
+      padding: 6px;
+      flex-shrink: 0;
+    }
+    .lang-switch-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      opacity: 0.5;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .lang-switch-btn:hover { transform: scale(1.1); opacity: 0.85; }
+    .lang-switch-btn[aria-pressed="true"] {
+      opacity: 1;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.8);
+    }
+    .lang-switch-btn svg { width: 100%; height: 100%; }
+    @media (max-width: 640px) {
+      .nav-site span { display: none; }
+    }
+
+    /* ── HERO ── */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 40px 80px; position: relative; overflow: hidden; }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 65% 25%, rgba(37,99,235,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 20% 75%, rgba(26,58,92,0.1) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+    }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; position: relative; }
+    .hero-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(44px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.02em; position: relative; margin-bottom: 40px; }
+    .hero-meta { display: flex; flex-wrap: wrap; border-top: 1px solid var(--stroke); padding-top: 32px; position: relative; }
+    .hero-meta-item { flex: 1; min-width: 150px; padding: 20px 32px 20px 0; border-right: 1px solid var(--stroke); }
+    .hero-meta-item:last-child { border-right: none; }
+    .hero-meta-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .hero-meta-value { font-size: 14px; color: var(--text); font-weight: 500; }
+    .hero-meta-value a { color: inherit; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.2); }
+
+    /* ── OVERVIEW BAND ── */
+    .overview-band { background: var(--surface); border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); padding: 80px 40px; }
+    .overview-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .overview-lead { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(20px, 2.5vw, 28px); line-height: 1.4; color: var(--text); }
+    .overview-body { font-size: 15px; line-height: 1.75; color: #aaa; }
+    .overview-body p { margin-bottom: 16px; }
+    .overview-body p:last-child { margin-bottom: 0; }
+
+    /* ── SECTION ── */
+    .section { max-width: 900px; margin: 0 auto; padding: 100px 40px; }
+    .section + .section { border-top: 1px solid var(--stroke); }
+    .section-eyebrow { display: flex; align-items: center; font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; }
+    .section-title { font-family: 'Instrument Serif', serif; font-size: clamp(32px, 4vw, 52px); line-height: 1.1; margin-bottom: 40px; }
+    .section-body { font-size: 15px; line-height: 1.8; color: #aaa; }
+    .section-body p { margin-bottom: 20px; }
+    .section-body p:last-child { margin-bottom: 0; }
+
+    /* ── CHALLENGE CARDS ── */
+    .challenge-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-top: 48px; border-radius: 16px; overflow: hidden; }
+    .challenge-card { background: var(--surface); padding: 36px; border-top: 2px solid transparent; transition: border-color 0.2s; }
+    .challenge-card:hover { border-top-color: var(--ad-blue); }
+    .challenge-num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 48px; line-height: 1; color: var(--stroke); margin-bottom: 16px; }
+    .challenge-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .challenge-desc { font-size: 13px; line-height: 1.65; color: var(--muted); }
+
+    /* ── PILLARS ── */
+    .pillars-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-top: 48px; }
+    .pillar-card { background: var(--surface); padding: 36px; position: relative; overflow: hidden; }
+    .pillar-card:first-child { border-radius: 12px 0 0 12px; }
+    .pillar-card:last-child { border-radius: 0 12px 12px 0; }
+    .pillar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--ad-blue-light), var(--ad-blue)); opacity: 0; transition: opacity 0.2s; }
+    .pillar-card:hover::before { opacity: 1; }
+    .pillar-icon { font-size: 28px; margin-bottom: 16px; }
+    .pillar-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ad-blue-light); margin-bottom: 8px; font-weight: 600; }
+    .pillar-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .pillar-body { font-size: 13px; line-height: 1.65; color: var(--muted); }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote { border-left: 2px solid var(--ad-blue); padding: 24px 36px; margin: 48px 0; background: var(--surface); border-radius: 0 12px 12px 0; }
+    .pull-quote p { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(18px, 2.5vw, 24px); line-height: 1.45; color: var(--text); }
+
+    /* ── GOALS ── */
+    .goals-list { margin-top: 40px; display: flex; flex-direction: column; gap: 2px; }
+    .goal-item { display: flex; align-items: flex-start; gap: 20px; padding: 24px 28px; background: var(--surface); transition: background 0.2s; }
+    .goal-item:first-child { border-radius: 12px 12px 0 0; }
+    .goal-item:last-child { border-radius: 0 0 12px 12px; }
+    .goal-item:hover { background: var(--surface2); }
+    .goal-dot { width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, var(--ad-blue-light), var(--ad-blue)); flex-shrink: 0; margin-top: 6px; }
+    .goal-text { font-size: 14px; line-height: 1.6; color: #bbb; }
+    .goal-text strong { color: var(--text); font-weight: 600; }
+
+    /* ── PROCESS ── */
+    .process-steps { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; }
+    .process-step { display: grid; grid-template-columns: 60px 1fr; gap: 24px; padding: 36px; background: var(--surface); align-items: start; }
+    .process-step:first-child { border-radius: 12px 12px 0 0; }
+    .process-step:last-child { border-radius: 0 0 12px 12px; }
+    .step-num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 36px; line-height: 1; color: var(--muted); padding-top: 2px; }
+    .step-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .step-body { font-size: 13px; line-height: 1.7; color: var(--muted); }
+
+    /* ── FUNNEL ── */
+    .funnel { display: flex; align-items: center; margin: 40px 0; flex-wrap: wrap; }
+    .funnel-step { flex: 1; min-width: 100px; text-align: center; padding: 20px 12px; background: var(--surface); position: relative; }
+    .funnel-step::after { content: '→'; position: absolute; right: -12px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 16px; z-index: 1; }
+    .funnel-step:last-child::after { display: none; }
+    .funnel-step:first-child { border-radius: 10px 0 0 10px; }
+    .funnel-step:last-child { border-radius: 0 10px 10px 0; }
+    .funnel-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); }
+    .funnel-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+    /* ── KEY SECTIONS ── */
+    .decisions-grid { display: flex; flex-direction: column; gap: 2px; margin-top: 48px; }
+    .decision-item { padding: 40px; background: var(--surface); }
+    .decision-item:first-child { border-radius: 12px 12px 0 0; }
+    .decision-item:last-child { border-radius: 0 0 12px 12px; }
+    .decision-tag { display: inline-block; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; background: rgba(37,99,235,0.1); color: var(--ad-blue-light); border: 1px solid rgba(37,99,235,0.25); margin-bottom: 16px; }
+    .decision-title { font-family: 'Instrument Serif', serif; font-size: clamp(20px, 2.5vw, 28px); font-style: italic; line-height: 1.2; color: var(--text); margin-bottom: 16px; }
+    .decision-body { font-size: 14px; line-height: 1.75; color: #999; }
+
+    /* ── SCREENS ── */
+    .screens-section { max-width: 900px; margin: 0 auto; padding: 0 40px 80px; }
+
+    /* ── OUTCOME ── */
+    .outcome-section { background: var(--surface); border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); padding: 100px 40px; }
+    .outcome-inner { max-width: 900px; margin: 0 auto; }
+    .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 56px 0; }
+    .stat-card { background: var(--bg); padding: 36px 28px; text-align: center; }
+    .stat-card:first-child { border-radius: 12px 0 0 12px; }
+    .stat-card:last-child { border-radius: 0 12px 12px 0; }
+    .stat-value { font-family: 'Instrument Serif', serif; font-size: clamp(32px, 4vw, 48px); line-height: 1; margin-bottom: 8px; display: block; }
+    .stat-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .stat-sub { font-size: 12px; color: #666; margin-top: 6px; }
+
+    /* ── NEXT ── */
+    .next-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; }
+    .next-card { background: var(--surface); padding: 32px; }
+    .next-card:first-child { border-radius: 12px 0 0 12px; }
+    .next-card:last-child { border-radius: 0 12px 12px 0; }
+    .next-icon { font-size: 22px; margin-bottom: 14px; }
+    .next-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .next-body { font-size: 13px; line-height: 1.65; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    .case-footer { max-width: 900px; margin: 0 auto; padding: 80px 40px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--stroke); gap: 32px; flex-wrap: wrap; }
+    .footer-credits { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .footer-credits strong { color: var(--text); }
+    .footer-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--ad-blue), #1d4ed8); color: #fff; font-size: 13px; font-weight: 600; padding: 14px 28px; border-radius: 99px; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+    .cta-btn:hover { opacity: 0.9; transform: scale(1.03); }
+    .ghost-btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--stroke); color: var(--muted); font-size: 13px; padding: 14px 28px; border-radius: 99px; text-decoration: none; transition: all 0.2s; }
+    .ghost-btn:hover { color: var(--text); border-color: #444; }
+
+    /* ── SCROLL REVEAL ── */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.8s cubic-bezier(0.25,0.1,0.25,1), transform 0.8s cubic-bezier(0.25,0.1,0.25,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 0 20px 60px; }
+      .hero-meta-item { min-width: 140px; padding: 16px 16px 16px 0; }
+      .overview-inner { grid-template-columns: 1fr; gap: 32px; }
+      .overview-band { padding: 60px 20px; }
+      .section { padding: 70px 20px; }
+      .challenge-grid { grid-template-columns: 1fr; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .pillar-card:first-child { border-radius: 12px 12px 0 0; }
+      .pillar-card:last-child { border-radius: 0 0 12px 12px; }
+      .stat-row { grid-template-columns: 1fr; }
+      .stat-card:first-child { border-radius: 12px 12px 0 0; }
+      .stat-card:last-child { border-radius: 0 0 12px 12px; }
+      .next-cards { grid-template-columns: 1fr; }
+      .next-card:first-child { border-radius: 12px 12px 0 0; }
+      .next-card:last-child { border-radius: 0 0 12px 12px; }
+      .screens-section { padding: 0 20px 60px; }
+      .outcome-section { padding: 70px 20px; }
+      .case-footer { flex-direction: column; align-items: flex-start; padding: 60px 20px; }
+      .process-step { grid-template-columns: 44px 1fr; gap: 16px; padding: 28px 20px; }
+      .funnel-step { min-width: 80px; padding: 14px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span data-i18n="nav.back">Back to portfolio</span>
+    </a>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button type="button" class="lang-switch-btn" data-lang="en" aria-label="English" title="English" onclick="__setLang('en')">
+          <svg viewBox="0 0 60 30" aria-hidden="true">
+            <rect width="60" height="30" fill="#00247d" />
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" />
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2" />
+            <path d="M30,0 L30,30 M0,15 L60,15" stroke="#fff" stroke-width="10" />
+            <path d="M30,0 L30,30 M0,15 L60,15" stroke="#cf142b" stroke-width="6" />
+          </svg>
+        </button>
+        <button type="button" class="lang-switch-btn" data-lang="de" aria-label="Deutsch" title="Deutsch" onclick="__setLang('de')">
+          <svg viewBox="0 0 5 3" aria-hidden="true">
+            <rect width="5" height="1" y="0" fill="#000000" />
+            <rect width="5" height="1" y="1" fill="#DD0000" />
+            <rect width="5" height="1" y="2" fill="#FFCE00" />
+          </svg>
+        </button>
+      </div>
+      <a href="https://aaron-douglas-official-site-production.up.railway.app/" target="_blank" rel="noopener" class="nav-site">
+        <span data-i18n="nav.visit">Visit live site</span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <p class="hero-eyebrow fade-up"><span class="accent-line"></span><span data-i18n="hero.eyebrow">Case Study · UX/UI & Web Design</span></p>
+    <div class="fade-up" style="margin-bottom:32px;">
+      <div style="display:inline-flex;align-items:center;justify-content:center;background:#0f1a2e;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:20px 36px;">
+        <img src="uploads/aarondouglas.png" alt="Aaron Douglas LLC logo" style="height:48px;width:auto;display:block;" />
+      </div>
+    </div>
+    <h1 class="hero-title fade-up">
+      Aaron Douglas<br/><span class="accent-text">LLC</span>
+    </h1>
+    <div class="hero-meta fade-up">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.client.label">Client</div>
+        <div class="hero-meta-value">Aaron Douglas LLC</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.year.label">Year</div>
+        <div class="hero-meta-value">2025</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.role.label">Role</div>
+        <div class="hero-meta-value" data-i18n="hero.role.value">UX/UI Designer</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.platform.label">Platform</div>
+        <div class="hero-meta-value">WordPress / WooCommerce</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.location.label">Location</div>
+        <div class="hero-meta-value">Chicago, IL</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.live.label">Live Site</div>
+        <div class="hero-meta-value"><a href="https://aaron-douglas-official-site-production.up.railway.app/" target="_blank" rel="noopener">aaron-douglas-official-site-production.up.railway.app</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <div class="overview-band">
+    <div class="overview-inner fade-up">
+      <p class="overview-lead" data-i18n="overview.lead">
+        Taking a broad, multi-disciplinary consulting offering and making it feel focused, credible, and easy to act on.
+      </p>
+      <div class="overview-body">
+        <p data-i18n="overview.p1">Aaron Douglas LLC is a Chicago-based consulting firm that helps educational institutions, nonprofits, and small businesses unlock new levels of impact — drawing on expertise across curriculum design, nonprofit management, software development, and digital marketing.</p>
+        <p data-i18n="overview.p2">I designed the site's UX and UI — the structure, the user flow, and the interface — translating a wide-ranging service business into a focused experience that guides three very different audiences toward one next step: booking a consultation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO IMAGE SLOT -->
+  <div style="max-width:900px;margin:0 auto;padding:80px 40px 0;">
+    <image-slot id="ad-hero" shape="rounded" radius="20" src="uploads/ad-hero.png" placeholder="Drop a site screenshot here" style="display:block;width:100%;aspect-ratio:16/9;"></image-slot>
+  </div>
+
+  <!-- THE CHALLENGE -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="challenge.eyebrow">The Challenge</span></p>
+    <h2 class="section-title" data-i18n="challenge.title">Three hard problems <span style="font-family:'Instrument Serif',serif;font-style:italic;">in one brief</span></h2>
+    <div class="section-body">
+      <p data-i18n="challenge.intro">Consulting websites have a recurring problem: the offering is broad and abstract, so they easily become vague, dense, and forgettable. Aaron Douglas LLC had three specific design challenges baked in from the start.</p>
+    </div>
+    <div class="challenge-grid">
+      <div class="challenge-card">
+        <div class="challenge-num">01</div>
+        <div class="challenge-title" data-i18n="challenge.1.title">Make a wide offering feel focused</div>
+        <div class="challenge-desc" data-i18n="challenge.1.desc">Strategy, branding, software, marketing, learning — left unstructured, that range reads as "we do everything," which builds no confidence. The design had to give it shape and a clear logic.</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-num">02</div>
+        <div class="challenge-title" data-i18n="challenge.2.title">Speak to three audiences from one site</div>
+        <div class="challenge-desc" data-i18n="challenge.2.desc">A learning institution, a small business, and a nonprofit arrive with different pressures and different language. The experience had to make each one feel directly addressed without fragmenting into three separate sites.</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-num">03</div>
+        <div class="challenge-title" data-i18n="challenge.3.title">Convert trust into action</div>
+        <div class="challenge-desc" data-i18n="challenge.3.desc">Consulting is a high-trust purchase — you're buying expertise you can't inspect in advance. The site had to establish credibility and then make the next step frictionless.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOALS -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="goals.eyebrow">Goals</span></p>
+    <h2 class="section-title" data-i18n="goals.title">What the design had to <span style="font-family:'Instrument Serif',serif;font-style:italic;">accomplish</span></h2>
+    <div class="goals-list">
+      <div class="goal-item">
+        <div class="goal-dot"></div>
+        <div class="goal-text" data-i18n="goals.1"><strong>Turn a broad offering into a clear, structured story</strong> — something a visitor can grasp in one scroll without getting lost in a service menu.</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-dot"></div>
+        <div class="goal-text" data-i18n="goals.2"><strong>Make each of the three audiences feel spoken to</strong> — learning institutions, small businesses, and nonprofits each addressed in their own language.</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-dot"></div>
+        <div class="goal-text" data-i18n="goals.3"><strong>Build credibility before asking for anything</strong> — social proof, an outcomes-focused About section, and a professional visual tone that earns trust early.</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-dot"></div>
+        <div class="goal-text" data-i18n="goals.4"><strong>Drive toward a single, low-friction primary action</strong> — booking a consultation, always within reach, always clearly worded.</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-dot"></div>
+        <div class="goal-text" data-i18n="goals.5"><strong>Deliver a bespoke feel within WordPress/WooCommerce</strong> — a considered, intentional design that doesn't read as off-the-shelf.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="process.eyebrow">Process</span></p>
+    <h2 class="section-title" data-i18n="process.title">Designing a <span style="font-family:'Instrument Serif',serif;font-style:italic;">conversion funnel</span>, not a brochure</h2>
+
+    <div class="pull-quote">
+      <p data-i18n="process.quote">"Framing each service as an outcome rather than a discipline turns an abstract menu into a story a prospect can see themselves in."</p>
+    </div>
+
+    <p style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;" data-i18n="process.funnel.label">Homepage narrative sequence</p>
+    <div class="funnel">
+      <div class="funnel-step"><div class="funnel-label" data-i18n="process.funnel.1.label">Hero</div><div class="funnel-sub" data-i18n="process.funnel.1.sub">Value prop</div></div>
+      <div class="funnel-step"><div class="funnel-label" data-i18n="process.funnel.2.label">Pillars</div><div class="funnel-sub" data-i18n="process.funnel.2.sub">Shape of offer</div></div>
+      <div class="funnel-step"><div class="funnel-label" data-i18n="process.funnel.3.label">Services</div><div class="funnel-sub" data-i18n="process.funnel.3.sub">Outcomes framing</div></div>
+      <div class="funnel-step"><div class="funnel-label" data-i18n="process.funnel.4.label">Audiences</div><div class="funnel-sub" data-i18n="process.funnel.4.sub">Self-identification</div></div>
+      <div class="funnel-step"><div class="funnel-label" data-i18n="process.funnel.5.label">Trust</div><div class="funnel-sub" data-i18n="process.funnel.5.sub">Social proof</div></div>
+      <div class="funnel-step"><div class="funnel-label" data-i18n="process.funnel.6.label">Convert</div><div class="funnel-sub" data-i18n="process.funnel.6.sub">Consultation CTA</div></div>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title" data-i18n="process.step1.title">Giving the offering a structure</div>
+          <div class="step-body" data-i18n="process.step1.body">Rather than listing services flatly, I organized them around three clear themes that map to what a client actually wants — Vision → Strategic Roadmapping, Connection → Brand & Outreach, Growth → Learning Management. Framing each service as an outcome turns an abstract menu into a story a prospect can see themselves in.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title" data-i18n="process.step2.title">Designing the page as a conversion funnel</div>
+          <div class="step-body" data-i18n="process.step2.body">I sequenced the homepage to move a visitor from interest to action: a clear value-proposition hero → the three high-level pillars → structured services → social proof → audience-specific sections → consultation booking. Each section answers the question the previous one raises.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title" data-i18n="process.step3.title">Segmenting for three audiences without fragmenting the site</div>
+          <div class="step-body" data-i18n="process.step3.body">I designed dedicated sections for Learning Institutions, Small Businesses, and Nonprofits — each with its own framing — so a visitor self-identifies and reads messaging aimed at their world. One site, three conversations, no dilution.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title" data-i18n="process.step4.title">Designing for trust</div>
+          <div class="step-body" data-i18n="process.step4.body">Because consulting is bought on confidence, I gave trust signals real prominence — testimonials, an outcomes-focused About section, and a clean professional visual language — so credibility is felt before the visitor is asked to commit.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">5</div>
+        <div>
+          <div class="step-title" data-i18n="process.step5.title">Removing friction from the primary action</div>
+          <div class="step-body" data-i18n="process.step5.body">The path to a consultation is short and always within reach. Persistent, clearly worded CTAs ("Get a Free Consultation," "Get a Quote") funnel toward a single booking step, so an interested visitor never has to hunt for how to start.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">6</div>
+        <div>
+          <div class="step-title" data-i18n="process.step6.title">Designing within WordPress/WooCommerce</div>
+          <div class="step-body" data-i18n="process.step6.body">Part of the work was making a bespoke, intentional design read as such within a CMS — composing layouts, hierarchy, and components that feel considered rather than templated. Designing for real platforms clients actually use is a skill in itself.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THREE PILLARS -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="pillars.eyebrow">The Three Value Pillars</span></p>
+    <h2 class="section-title" data-i18n="pillars.title">Giving the range a <span style="font-family:'Instrument Serif',serif;font-style:italic;">clear shape</span></h2>
+    <div class="section-body" style="margin-bottom:0;">
+      <p data-i18n="pillars.intro">Before a visitor reads a single service description, they need to understand the shape of what's on offer. These three pillars do that work at a glance.</p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon">⚡</div>
+        <div class="pillar-label" data-i18n="pillars.1.label">Pillar 01</div>
+        <div class="pillar-title" data-i18n="pillars.1.title">Accelerate & Innovate</div>
+        <div class="pillar-body" data-i18n="pillars.1.body">Strategic roadmapping and vision work — for organizations that need to move faster, think bigger, or find a clearer path forward.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🔗</div>
+        <div class="pillar-label" data-i18n="pillars.2.label">Pillar 02</div>
+        <div class="pillar-title" data-i18n="pillars.2.title">Digital Tooling</div>
+        <div class="pillar-body" data-i18n="pillars.2.body">Brand, marketing, and software — the connection layer that makes an organization visible and reachable to the people it's trying to serve.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">📈</div>
+        <div class="pillar-label" data-i18n="pillars.3.label">Pillar 03</div>
+        <div class="pillar-title" data-i18n="pillars.3.title">Growth & Learning</div>
+        <div class="pillar-body" data-i18n="pillars.3.body">Curriculum design and learning management — for institutions and organizations building the knowledge infrastructure for long-term impact.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY SECTIONS -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="decisions.eyebrow">Key Sections & Decisions</span></p>
+    <h2 class="section-title" data-i18n="decisions.title">Where the design <span style="font-family:'Instrument Serif',serif;font-style:italic;">does its work</span></h2>
+    <div class="decisions-grid">
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.1.tag">Hero</span>
+        <div class="decision-title" data-i18n="decisions.1.title">A confident opening that earns attention in one glance</div>
+        <div class="decision-body" data-i18n="decisions.1.body">"We Empower Businesses to Forge Their Own Paths" — a direct headline paired with a concise statement of who the firm helps and how, and an immediate consultation CTA. The hero's job is to make a broad firm feel purposeful before a visitor has time to feel confused.</div>
+      </div>
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.2.tag">Services</span>
+        <div class="decision-title" data-i18n="decisions.2.title">Services framed as outcomes, not disciplines</div>
+        <div class="decision-body" data-i18n="decisions.2.body">The Vision / Connection / Growth structure means a prospect reads benefits first, not jargon. A nonprofit director doesn't need to know the firm does "curriculum design" — they need to see that the firm helps organizations grow. The framing closes that gap.</div>
+      </div>
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.3.tag">Audiences</span>
+        <div class="decision-title" data-i18n="decisions.3.title">Dedicated sections for each audience type</div>
+        <div class="decision-body" data-i18n="decisions.3.body">Learning Institutions, Small Businesses, and Nonprofits each get a section with tailored messaging, so each visitor self-identifies and reads copy aimed at their world. This is what makes a generalist site feel personal — not three separate sites, but three moments of recognition inside one.</div>
+      </div>
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.4.tag">Trust</span>
+        <div class="decision-title" data-i18n="decisions.4.title">Credibility built before the ask</div>
+        <div class="decision-body" data-i18n="decisions.4.body">Testimonials and an outcomes-led About section are placed at the point in the scroll where a visitor is weighing whether to reach out. The sequence matters: establish that the firm has delivered for people like them before presenting the path to book a call.</div>
+      </div>
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.5.tag">Conversion</span>
+        <div class="decision-title" data-i18n="decisions.5.title">One action, always within reach</div>
+        <div class="decision-body" data-i18n="decisions.5.body">Consistent, friction-light CTAs throughout — "Get a Free Consultation," "Get a Quote" — funnel toward a single booking step. The goal isn't to present options; it's to make the next step so obvious that an interested visitor simply takes it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREENS -->
+  <div class="screens-section fade-up">
+    <image-slot id="ad-screens" shape="rounded" radius="16" placeholder="Drop additional site screenshots here" style="display:block;width:100%;aspect-ratio:16/7;"></image-slot>
+  </div>
+
+  <!-- OUTCOME -->
+  <section class="outcome-section">
+    <div class="outcome-inner">
+      <p class="section-eyebrow fade-up"><span class="accent-line"></span><span data-i18n="outcome.eyebrow">Outcome</span></p>
+      <h2 class="section-title fade-up" data-i18n="outcome.title">A live consulting site that <span style="font-family:'Instrument Serif',serif;font-style:italic;">works as hard as the brief</span></h2>
+      <div class="stat-row fade-up">
+        <div class="stat-card">
+          <span class="stat-value accent-text">3</span>
+          <div class="stat-label" data-i18n="outcome.stat.1.label">Audiences served</div>
+          <div class="stat-sub" data-i18n="outcome.stat.1.sub">One cohesive site</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" style="color:var(--text)">1</span>
+          <div class="stat-label" data-i18n="outcome.stat.2.label">Primary action</div>
+          <div class="stat-sub" data-i18n="outcome.stat.2.sub">Book a consultation</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" style="color:var(--text)">Live</span>
+          <div class="stat-label" data-i18n="outcome.stat.3.label">On WordPress</div>
+          <div class="stat-sub">aaron-douglas-official-site-production.up.railway.app</div>
+        </div>
+      </div>
+      <div class="section-body fade-up">
+        <p data-i18n="outcome.body">A complete UX/UI design for the Aaron Douglas LLC website — structure, flow, and interface — that turns a broad, multi-disciplinary consulting offering into a clear, conversion-focused experience. A site that addresses three distinct audiences from one cohesive design and guides each toward a single primary action, delivered live on WordPress/WooCommerce.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S NEXT -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="next.eyebrow">What I'd Explore Next</span></p>
+    <h2 class="section-title" data-i18n="next.title">Room to <span style="font-family:'Instrument Serif',serif;font-style:italic;">strengthen</span></h2>
+    <div class="next-cards">
+      <div class="next-card">
+        <div class="next-icon">📂</div>
+        <div class="next-title" data-i18n="next.1.title">Populate "Recent Work"</div>
+        <div class="next-body" data-i18n="next.1.body">The site flags a case-studies section as coming soon. Designing that proof layer — real outcomes, real clients — would meaningfully strengthen the trust story.</div>
+      </div>
+      <div class="next-card">
+        <div class="next-icon">🎯</div>
+        <div class="next-title" data-i18n="next.2.title">Audience-specific landing paths</div>
+        <div class="next-body" data-i18n="next.2.body">Dedicated pages per audience for paid campaigns, so messaging matches the ad that brought the visitor and conversion rates improve.</div>
+      </div>
+      <div class="next-card">
+        <div class="next-icon">🧪</div>
+        <div class="next-title" data-i18n="next.3.title">Conversion testing</div>
+        <div class="next-body" data-i18n="next.3.body">Experimenting with CTA placement, wording, and page sequencing to learn what most consistently drives consultation bookings.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="case-footer fade-up">
+    <div class="footer-credits">
+      <strong>Aaron Douglas LLC — Chicago, IL</strong><br/>
+      <span data-i18n="footer.credits">UX/UI design by <strong>Shinbu Abdul-Muqit Fuseini</strong></span><br/>
+      <span data-i18n="footer.live">Live at <a href="https://aaron-douglas-official-site-production.up.railway.app/" target="_blank" rel="noopener" style="color:inherit;">aaron-douglas-official-site-production.up.railway.app</a></span>
+    </div>
+    <div class="footer-btns">
+      <a href="https://aaron-douglas-official-site-production.up.railway.app/" target="_blank" rel="noopener" class="cta-btn">
+        <span data-i18n="footer.cta">Visit live site</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="index.html" class="ghost-btn" data-i18n="footer.back">Back to portfolio</a>
+    </div>
+  </div>
+
+  <!-- LANGUAGE DATA + RUNTIME (shared key/pattern with index.html's switcher) -->
+  <script>
+    window.I18N_DE = {
+      "nav.back": "Zurück zum Portfolio",
+      "nav.visit": "Live-Seite besuchen",
+      "hero.eyebrow": "Case Study · UX/UI & Webdesign",
+      "hero.client.label": "Kunde",
+      "hero.year.label": "Jahr",
+      "hero.role.label": "Rolle",
+      "hero.role.value": "UX/UI-Designer",
+      "hero.platform.label": "Plattform",
+      "hero.location.label": "Standort",
+      "hero.live.label": "Live-Seite",
+      "overview.lead": "Ein breites, multidisziplinäres Beratungsangebot nehmen und es fokussiert, glaubwürdig und leicht umsetzbar wirken lassen.",
+      "overview.p1": "Aaron Douglas LLC ist eine Beratungsfirma mit Sitz in Chicago, die Bildungseinrichtungen, gemeinnützigen Organisationen und kleinen Unternehmen hilft, neue Wirkungsebenen zu erschließen — mit Expertise in Lehrplanentwicklung, Non-Profit-Management, Softwareentwicklung und digitalem Marketing.",
+      "overview.p2": "Ich habe die UX und UI der Website gestaltet — die Struktur, den Nutzerfluss und die Oberfläche — und ein breit gefächertes Dienstleistungsgeschäft in ein fokussiertes Erlebnis übersetzt, das drei sehr unterschiedliche Zielgruppen zu einem gemeinsamen nächsten Schritt führt: der Buchung eines Beratungsgesprächs.",
+      "challenge.eyebrow": "Die Herausforderung",
+      "challenge.title": "Drei harte Probleme <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">in einem Briefing</span>",
+      "challenge.intro": "Beratungs-Websites haben ein wiederkehrendes Problem: Das Angebot ist breit und abstrakt, wodurch es leicht vage, überladen und vergesslich wirkt. Bei Aaron Douglas LLC waren von Anfang an drei konkrete Design-Herausforderungen angelegt.",
+      "challenge.1.title": "Ein breites Angebot fokussiert wirken lassen",
+      "challenge.1.desc": "Strategie, Branding, Software, Marketing, Lernen — unstrukturiert liest sich diese Bandbreite als „wir machen alles“, was kein Vertrauen aufbaut. Das Design musste dem Ganzen Form und eine klare Logik geben.",
+      "challenge.2.title": "Drei Zielgruppen von einer Website aus ansprechen",
+      "challenge.2.desc": "Eine Bildungseinrichtung, ein kleines Unternehmen und eine gemeinnützige Organisation kommen mit unterschiedlichen Anliegen und unterschiedlicher Sprache. Das Erlebnis musste jede Gruppe direkt ansprechen, ohne in drei getrennte Websites zu zerfallen.",
+      "challenge.3.title": "Vertrauen in Handeln verwandeln",
+      "challenge.3.desc": "Beratung ist ein Kauf mit hohem Vertrauensbedarf — man kauft Expertise, die man vorab nicht prüfen kann. Die Website musste Glaubwürdigkeit aufbauen und den nächsten Schritt dann reibungslos gestalten.",
+      "goals.eyebrow": "Ziele",
+      "goals.title": "Was das Design <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">leisten musste</span>",
+      "goals.1": "<strong>Ein breites Angebot in eine klare, strukturierte Geschichte verwandeln</strong> — etwas, das Besuchende in einem Scroll erfassen können, ohne sich in einer Leistungsliste zu verlieren.",
+      "goals.2": "<strong>Alle drei Zielgruppen persönlich angesprochen fühlen lassen</strong> — Bildungseinrichtungen, kleine Unternehmen und gemeinnützige Organisationen, jeweils in ihrer eigenen Sprache angesprochen.",
+      "goals.3": "<strong>Glaubwürdigkeit aufbauen, bevor überhaupt etwas verlangt wird</strong> — Social Proof, ein ergebnisorientierter Über-uns-Bereich und ein professioneller visueller Ton, der früh Vertrauen schafft.",
+      "goals.4": "<strong>Auf eine einzige, reibungsarme Haupthandlung hinführen</strong> — die Buchung eines Beratungsgesprächs, immer erreichbar, immer klar formuliert.",
+      "goals.5": "<strong>Ein maßgeschneidertes Gefühl innerhalb von WordPress/WooCommerce liefern</strong> — ein durchdachtes, bewusstes Design, das nicht von der Stange wirkt.",
+      "process.eyebrow": "Prozess",
+      "process.title": "Einen <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">Conversion-Trichter</span> gestalten, keine Broschüre",
+      "process.quote": "„Jeden Service als Ergebnis statt als Disziplin zu framen, macht aus einem abstrakten Menü eine Geschichte, in der sich ein Interessent selbst wiedererkennt.“",
+      "process.funnel.label": "Narrative Abfolge der Startseite",
+      "process.funnel.1.label": "Hero",
+      "process.funnel.1.sub": "Werteversprechen",
+      "process.funnel.2.label": "Säulen",
+      "process.funnel.2.sub": "Form des Angebots",
+      "process.funnel.3.label": "Leistungen",
+      "process.funnel.3.sub": "Ergebnis-Framing",
+      "process.funnel.4.label": "Zielgruppen",
+      "process.funnel.4.sub": "Selbstidentifikation",
+      "process.funnel.5.label": "Vertrauen",
+      "process.funnel.5.sub": "Social Proof",
+      "process.funnel.6.label": "Konversion",
+      "process.funnel.6.sub": "Beratungs-CTA",
+      "process.step1.title": "Dem Angebot eine Struktur geben",
+      "process.step1.body": "Statt Leistungen einfach aufzulisten, habe ich sie um drei klare Themen herum organisiert, die dem entsprechen, was ein Kunde wirklich will — Vision → Strategische Roadmap, Verbindung → Marke & Reichweite, Wachstum → Lernmanagement. Jeden Service als Ergebnis zu framen, macht aus einem abstrakten Menü eine Geschichte, in der sich ein Interessent selbst wiedererkennt.",
+      "process.step2.title": "Die Seite als Conversion-Trichter gestalten",
+      "process.step2.body": "Ich habe die Startseite so aufgebaut, dass sie Besuchende vom Interesse zur Handlung führt: ein klarer Hero mit Werteversprechen → die drei übergeordneten Säulen → strukturierte Leistungen → Social Proof → zielgruppenspezifische Abschnitte → Beratungsbuchung. Jeder Abschnitt beantwortet die Frage, die der vorherige aufwirft.",
+      "process.step3.title": "Drei Zielgruppen ansprechen, ohne die Website zu zersplittern",
+      "process.step3.body": "Ich habe eigene Abschnitte für Bildungseinrichtungen, kleine Unternehmen und gemeinnützige Organisationen gestaltet — jeweils mit eigenem Framing —, sodass sich Besuchende selbst wiedererkennen und Botschaften lesen, die auf ihre Welt zugeschnitten sind. Eine Website, drei Gespräche, keine Verwässerung.",
+      "process.step4.title": "Für Vertrauen gestalten",
+      "process.step4.body": "Da Beratung aus Vertrauen heraus gekauft wird, habe ich Vertrauenssignalen echte Präsenz gegeben — Testimonials, einen ergebnisorientierten Über-uns-Bereich und eine klare, professionelle visuelle Sprache —, sodass Glaubwürdigkeit spürbar ist, bevor Besuchende um eine Entscheidung gebeten werden.",
+      "process.step5.title": "Reibung aus der Haupthandlung entfernen",
+      "process.step5.body": "Der Weg zu einem Beratungsgespräch ist kurz und immer erreichbar. Durchgängige, klar formulierte CTAs („Kostenlose Beratung erhalten“, „Angebot einholen“) führen zu einem einzigen Buchungsschritt, sodass interessierte Besuchende nie suchen müssen, wie sie starten können.",
+      "process.step6.title": "Gestalten innerhalb von WordPress/WooCommerce",
+      "process.step6.body": "Ein Teil der Arbeit bestand darin, ein maßgeschneidertes, bewusstes Design innerhalb eines CMS auch als solches erkennbar zu machen — Layouts, Hierarchien und Komponenten so zu komponieren, dass sie durchdacht statt vorlagenhaft wirken. Für reale Plattformen zu gestalten, die Kund:innen tatsächlich nutzen, ist selbst eine eigene Fähigkeit.",
+      "pillars.eyebrow": "Die drei Wertsäulen",
+      "pillars.title": "Der Bandbreite eine <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">klare Form</span> geben",
+      "pillars.intro": "Bevor Besuchende auch nur eine Leistungsbeschreibung lesen, müssen sie verstehen, welche Form das Angebot hat. Diese drei Säulen leisten das auf einen Blick.",
+      "pillars.1.label": "Säule 01",
+      "pillars.1.title": "Beschleunigen & Innovieren",
+      "pillars.1.body": "Strategische Roadmaps und Visionsarbeit — für Organisationen, die schneller vorankommen, größer denken oder einen klareren Weg finden müssen.",
+      "pillars.2.label": "Säule 02",
+      "pillars.2.title": "Digitale Werkzeuge",
+      "pillars.2.body": "Marke, Marketing und Software — die Verbindungsebene, die eine Organisation für die Menschen sichtbar und erreichbar macht, denen sie dienen möchte.",
+      "pillars.3.label": "Säule 03",
+      "pillars.3.title": "Wachstum & Lernen",
+      "pillars.3.body": "Lehrplanentwicklung und Lernmanagement — für Institutionen und Organisationen, die die Wissensinfrastruktur für langfristige Wirkung aufbauen.",
+      "decisions.eyebrow": "Zentrale Abschnitte & Entscheidungen",
+      "decisions.title": "Wo das Design <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">seine Wirkung entfaltet</span>",
+      "decisions.1.tag": "Hero",
+      "decisions.1.title": "Ein selbstbewusster Einstieg, der auf einen Blick überzeugt",
+      "decisions.1.body": "„We Empower Businesses to Forge Their Own Paths“ — eine direkte Headline, gepaart mit einer prägnanten Aussage darüber, wem die Firma wie hilft, und einem sofortigen Beratungs-CTA. Der Hero-Bereich hat die Aufgabe, eine breit aufgestellte Firma zielgerichtet wirken zu lassen, bevor Besuchende Zeit haben, sich verloren zu fühlen.",
+      "decisions.2.tag": "Leistungen",
+      "decisions.2.title": "Leistungen als Ergebnisse statt als Disziplinen dargestellt",
+      "decisions.2.body": "Die Struktur Vision / Verbindung / Wachstum sorgt dafür, dass Interessierte zuerst Nutzen statt Fachjargon lesen. Eine Leitung einer gemeinnützigen Organisation muss nicht wissen, dass die Firma „Lehrplanentwicklung“ macht — sie muss sehen, dass die Firma Organisationen beim Wachstum hilft. Das Framing schließt diese Lücke.",
+      "decisions.3.tag": "Zielgruppen",
+      "decisions.3.title": "Eigene Abschnitte für jeden Zielgruppentyp",
+      "decisions.3.body": "Bildungseinrichtungen, kleine Unternehmen und gemeinnützige Organisationen erhalten jeweils einen Abschnitt mit maßgeschneiderter Botschaft, sodass sich Besuchende selbst wiedererkennen und Texte lesen, die auf ihre Welt zugeschnitten sind. Genau das macht eine generalistische Website persönlich — keine drei getrennten Websites, sondern drei Momente des Wiedererkennens innerhalb einer.",
+      "decisions.4.tag": "Vertrauen",
+      "decisions.4.title": "Glaubwürdigkeit aufgebaut, bevor gefragt wird",
+      "decisions.4.body": "Testimonials und ein ergebnisorientierter Über-uns-Bereich sind genau an dem Punkt im Scroll platziert, an dem Besuchende abwägen, ob sie Kontakt aufnehmen. Die Reihenfolge zählt: erst zeigen, dass die Firma bereits für Menschen wie sie geliefert hat, bevor der Weg zur Terminbuchung präsentiert wird.",
+      "decisions.5.tag": "Conversion",
+      "decisions.5.title": "Eine Handlung, immer in Reichweite",
+      "decisions.5.body": "Durchgängige, reibungsarme CTAs — „Kostenlose Beratung erhalten“, „Angebot einholen“ — führen zu einem einzigen Buchungsschritt. Ziel ist nicht, Optionen zu präsentieren, sondern den nächsten Schritt so offensichtlich zu machen, dass interessierte Besuchende ihn einfach gehen.",
+      "outcome.eyebrow": "Ergebnis",
+      "outcome.title": "Eine live geschaltete Beratungswebsite, die <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">genauso hart arbeitet wie das Briefing</span>",
+      "outcome.stat.1.label": "Bediente Zielgruppen",
+      "outcome.stat.1.sub": "Eine kohärente Website",
+      "outcome.stat.2.label": "Haupthandlung",
+      "outcome.stat.2.sub": "Beratung buchen",
+      "outcome.stat.3.label": "Auf WordPress",
+      "outcome.body": "Ein vollständiges UX/UI-Design für die Website von Aaron Douglas LLC — Struktur, Ablauf und Oberfläche —, das ein breites, multidisziplinäres Beratungsangebot in ein klares, konversionsorientiertes Erlebnis verwandelt. Eine Website, die drei unterschiedliche Zielgruppen aus einem stimmigen Design heraus anspricht und jede davon zu einer einzigen Haupthandlung führt, live umgesetzt auf WordPress/WooCommerce.",
+      "next.eyebrow": "Was ich als Nächstes erkunden würde",
+      "next.title": "Raum zum <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">Stärken</span>",
+      "next.1.title": "„Aktuelle Projekte“ befüllen",
+      "next.1.body": "Die Website kennzeichnet einen Fallstudien-Bereich als „in Kürze verfügbar“. Diese Beweisebene zu gestalten — echte Ergebnisse, echte Kund:innen — würde die Vertrauensgeschichte spürbar stärken.",
+      "next.2.title": "Zielgruppenspezifische Landingpages",
+      "next.2.body": "Eigene Seiten pro Zielgruppe für bezahlte Kampagnen, sodass die Botschaft zur jeweiligen Anzeige passt, die die Besuchenden hierher gebracht hat, und die Conversion-Rate steigt.",
+      "next.3.title": "Conversion-Tests",
+      "next.3.body": "Experimentieren mit CTA-Platzierung, Formulierung und Seitenabfolge, um herauszufinden, was am zuverlässigsten zu Beratungsbuchungen führt.",
+      "footer.credits": "UX/UI-Design von <strong>Shinbu Abdul-Muqit Fuseini</strong>",
+      "footer.live": "Live unter <a href=\"https://aaron-douglas-official-site-production.up.railway.app/\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit;\">aaron-douglas-official-site-production.up.railway.app</a>",
+      "footer.cta": "Live-Seite besuchen",
+      "footer.back": "Zurück zum Portfolio"
+    };
+
+    (function () {
+      var LANG_KEY = 'portfolio-lang';
+      function getLang() { try { return localStorage.getItem(LANG_KEY) || 'en'; } catch (e) { return 'en'; } }
+
+      var originals = null;
+      function captureOriginals() {
+        originals = {};
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          originals[el.getAttribute('data-i18n')] = el.innerHTML;
+        });
+      }
+
+      function applyLang(lang) {
+        document.documentElement.lang = lang;
+        if (!originals) captureOriginals();
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n');
+          if (lang === 'de' && window.I18N_DE && window.I18N_DE[key] != null) {
+            el.innerHTML = window.I18N_DE[key];
+          } else {
+            el.innerHTML = originals[key];
+          }
+        });
+        document.querySelectorAll('.lang-switch-btn').forEach(function (b) {
+          b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+        });
+      }
+
+      window.__setLang = function (lang) {
+        try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+        applyLang(lang);
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        applyLang(getLang());
+      });
+    })();
+  </script>
+
+  <script>
+    const els = document.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '-40px' });
+    els.forEach((el) => obs.observe(el));
+    document.querySelectorAll('.hero .fade-up').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 200 + i * 150);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MaritalSax — Case Study · Shinbu Abdul-Muqit Fuseini</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --surface2: #1a1a1a;
+      --text: #f5f5f5;
+      --muted: #888;
+      --stroke: #222;
+      --grad-1: #89AACC;
+      --grad-2: #4E85BF;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    body::-webkit-scrollbar { width: 6px; }
+    body::-webkit-scrollbar-track { background: var(--bg); }
+    body::-webkit-scrollbar-thumb { background: var(--stroke); border-radius: 3px; }
+
+    /* ── UTILITIES ── */
+    .accent-text {
+      background: linear-gradient(90deg, var(--grad-1), var(--grad-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .accent-line {
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--grad-1), var(--grad-2));
+      vertical-align: middle;
+      margin-right: 12px;
+    }
+    .font-display { font-family: 'Instrument Serif', serif; }
+    .italic { font-style: italic; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
+      backdrop-filter: blur(0px);
+    }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--text); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+    .nav-site {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      border: 1px solid var(--stroke);
+      border-radius: 99px;
+      padding: 8px 18px;
+      transition: all 0.2s;
+    }
+    .nav-site:hover { color: var(--text); border-color: #444; }
+
+    /* ── LANGUAGE SWITCHER ── */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--stroke);
+      border-radius: 999px;
+      padding: 6px;
+      flex-shrink: 0;
+    }
+    .lang-switch-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      opacity: 0.5;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .lang-switch-btn:hover { transform: scale(1.1); opacity: 0.85; }
+    .lang-switch-btn[aria-pressed="true"] {
+      opacity: 1;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.8);
+    }
+    .lang-switch-btn svg { width: 100%; height: 100%; }
+    @media (max-width: 640px) {
+      .nav-site span { display: none; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 30%, rgba(137,170,204,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(78,133,191,0.05) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .hero-title {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(56px, 9vw, 120px);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      position: relative;
+      margin-bottom: 40px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border-top: 1px solid var(--stroke);
+      padding-top: 32px;
+      position: relative;
+    }
+    .hero-meta-item {
+      flex: 1;
+      min-width: 160px;
+      padding: 20px 32px 20px 0;
+      border-right: 1px solid var(--stroke);
+    }
+    .hero-meta-item:last-child { border-right: none; }
+    .hero-meta-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .hero-meta-value {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── OVERVIEW BAND ── */
+    .overview-band {
+      background: var(--surface);
+      border-top: 1px solid var(--stroke);
+      border-bottom: 1px solid var(--stroke);
+      padding: 80px 40px;
+    }
+    .overview-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .overview-lead {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.35;
+      color: var(--text);
+    }
+    .overview-body {
+      font-size: 15px;
+      line-height: 1.75;
+      color: #aaa;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 100px 40px;
+    }
+    .section + .section {
+      border-top: 1px solid var(--stroke);
+    }
+    .section-eyebrow {
+      display: flex;
+      align-items: center;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .section-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.1;
+      margin-bottom: 40px;
+    }
+    .section-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #aaa;
+    }
+    .section-body p { margin-bottom: 20px; }
+    .section-body p:last-child { margin-bottom: 0; }
+
+    /* ── PROBLEM CARDS ── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 48px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .problem-card {
+      background: var(--surface);
+      padding: 36px;
+      position: relative;
+    }
+    .problem-num {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 48px;
+      line-height: 1;
+      color: var(--stroke);
+      margin-bottom: 16px;
+    }
+    .problem-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .problem-desc {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* ── ROLE LIST ── */
+    .role-list {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .role-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 24px 28px;
+      background: var(--surface);
+      border-radius: 0;
+      transition: background 0.2s;
+    }
+    .role-item:first-child { border-radius: 12px 12px 0 0; }
+    .role-item:last-child { border-radius: 0 0 12px 12px; }
+    .role-item:hover { background: var(--surface2); }
+    .role-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .role-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #bbb;
+    }
+    .role-text strong { color: var(--text); font-weight: 600; }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      border-left: 2px solid;
+      border-image: linear-gradient(to bottom, var(--grad-1), var(--grad-2)) 1;
+      padding: 24px 36px;
+      margin: 48px 0;
+      background: var(--surface);
+      border-radius: 0 12px 12px 0;
+    }
+    .pull-quote p {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(18px, 2.5vw, 24px);
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    /* ── PROCESS STEPS ── */
+    .process-steps {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .process-step {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 24px;
+      padding: 36px;
+      background: var(--surface);
+      align-items: start;
+    }
+    .process-step:first-child { border-radius: 12px 12px 0 0; }
+    .process-step:last-child { border-radius: 0 0 12px 12px; }
+    .step-num {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 36px;
+      line-height: 1;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+    .step-content-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .step-content-body {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ── FUNNEL ── */
+    .funnel {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+    .funnel-step {
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+      padding: 20px 12px;
+      background: var(--surface);
+      position: relative;
+    }
+    .funnel-step::after {
+      content: '→';
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 16px;
+      z-index: 1;
+    }
+    .funnel-step:last-child::after { display: none; }
+    .funnel-step:first-child { border-radius: 10px 0 0 10px; }
+    .funnel-step:last-child { border-radius: 0 10px 10px 0; }
+    .funnel-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    /* ── DESIGN DECISIONS ── */
+    .decision-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 48px;
+    }
+    .decision-item {
+      padding: 40px;
+      background: var(--surface);
+    }
+    .decision-item:first-child { border-radius: 12px 12px 0 0; }
+    .decision-item:last-child { border-radius: 0 0 12px 12px; }
+    .decision-tag {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 99px;
+      border: 1px solid var(--stroke);
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .decision-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-style: italic;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .decision-body {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #999;
+    }
+
+    /* ── RESULTS ── */
+    .results-section {
+      background: var(--surface);
+      border-top: 1px solid var(--stroke);
+      border-bottom: 1px solid var(--stroke);
+      padding: 100px 40px;
+    }
+    .results-inner { max-width: 900px; margin: 0 auto; }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin: 56px 0;
+    }
+    .stat-card {
+      background: var(--bg);
+      padding: 36px 28px;
+      text-align: center;
+    }
+    .stat-card:first-child { border-radius: 12px 0 0 12px; }
+    .stat-card:last-child { border-radius: 0 12px 12px 0; }
+    .stat-value {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .stat-growth {
+      font-size: 12px;
+      font-weight: 600;
+      color: #4ade80;
+      margin-top: 6px;
+    }
+
+    /* ── CHART ── */
+    .chart-wrap {
+      background: #131920;
+      border-radius: 20px;
+      padding: 48px;
+      margin: 56px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .chart-header { margin-bottom: 40px; }
+    .chart-client {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #6ea8d0;
+      margin-bottom: 8px;
+    }
+    .chart-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(22px, 3vw, 32px);
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .chart-sub {
+      font-size: 13px;
+      color: #6b7280;
+    }
+    .chart-legend {
+      position: absolute;
+      top: 48px;
+      right: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .chart-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .chart-area {
+      display: flex;
+      align-items: flex-end;
+      gap: 64px;
+      padding-top: 32px;
+      position: relative;
+    }
+    .chart-area::before {
+      content: '';
+      position: absolute;
+      top: 32px; bottom: 0; left: 0; right: 0;
+      background:
+        linear-gradient(transparent calc(100% - 1px), rgba(255,255,255,0.06) calc(100% - 1px)) 0 0 / 100% 25% repeat-y,
+        linear-gradient(transparent calc(100% - 1px), rgba(255,255,255,0.06) calc(100% - 1px)) 0 0 / 100% 50% repeat-y;
+      pointer-events: none;
+    }
+    .chart-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+    }
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      height: 200px;
+      position: relative;
+    }
+    .chart-bar-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+    }
+    .chart-bar-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #4ade80;
+      white-space: nowrap;
+    }
+    .chart-bar-value {
+      font-family: 'Instrument Serif', serif;
+      font-size: 28px;
+      color: #fff;
+      font-weight: 400;
+    }
+    .chart-bar {
+      width: 64px;
+      border-radius: 6px 6px 0 0;
+      transition: opacity 0.2s;
+    }
+    .chart-bar:hover { opacity: 0.85; }
+    .bar-teal { background: linear-gradient(to top, #2d9f85, #6bcfb8); }
+    .bar-gold { background: linear-gradient(to top, #c48c1e, #f5c842); }
+    .chart-group-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #d1d5db;
+    }
+    .chart-footnote {
+      font-size: 11px;
+      color: #4b5563;
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Dashboard screenshots */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .dashboard-card {
+      background: var(--surface2);
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .dashboard-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .dashboard-caption {
+      padding: 14px 18px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--stroke);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .dashboard-caption strong { color: var(--text); font-size: 13px; }
+    .dashboard-caption .badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: #4ade80;
+      background: rgba(74,222,128,0.1);
+      border-radius: 99px;
+      padding: 3px 10px;
+    }
+    @media (max-width: 640px) {
+      .dashboard-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── TABLE ── */
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 32px 0;
+      font-size: 14px;
+    }
+    .results-table th {
+      text-align: left;
+      padding: 12px 20px;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--stroke);
+    }
+    .results-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: #aaa;
+    }
+    .results-table td strong { color: var(--text); }
+    .results-table td .green { color: #4ade80; font-weight: 600; }
+
+    /* ── REFLECTION ── */
+    .reflection-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      margin-top: 48px;
+    }
+    .reflection-card {
+      background: var(--surface);
+      padding: 36px;
+    }
+    .reflection-card:first-child { border-radius: 12px 0 0 12px; }
+    .reflection-card:last-child { border-radius: 0 12px 12px 0; }
+    .reflection-icon {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+    .reflection-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .reflection-body {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    .case-footer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--stroke);
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .footer-credits { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .footer-credits strong { color: var(--text); }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+      color: #0a0a0a;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.9; transform: scale(1.03); }
+
+    /* ── SCROLL REVEAL ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.25,0.1,0.25,1), transform 0.8s cubic-bezier(0.25,0.1,0.25,1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 0 20px 60px; }
+      .hero-meta-item { min-width: 140px; padding: 16px 16px 16px 0; }
+      .overview-inner { grid-template-columns: 1fr; gap: 32px; }
+      .overview-band { padding: 60px 20px; }
+      .section { padding: 70px 20px; }
+      .problem-grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+      .stat-card:first-child { border-radius: 12px 0 0 0; }
+      .stat-card:nth-child(2) { border-radius: 0 12px 0 0; }
+      .stat-card:nth-child(3) { border-radius: 0 0 0 12px; }
+      .stat-card:last-child { border-radius: 0 0 12px 0; }
+      .reflection-cards { grid-template-columns: 1fr; }
+      .reflection-card:first-child { border-radius: 12px 12px 0 0; }
+      .reflection-card:last-child { border-radius: 0 0 12px 12px; }
+      .chart-legend { position: static; margin-top: 12px; flex-direction: row; flex-wrap: wrap; }
+      .chart-area { gap: 32px; }
+      .chart-bar { width: 44px; }
+      .chart-wrap { padding: 28px 20px; }
+      .results-section { padding: 70px 20px; }
+      .case-footer { flex-direction: column; align-items: flex-start; padding: 60px 20px; }
+      .funnel-step { min-width: 80px; padding: 14px 8px; }
+      .process-step { grid-template-columns: 44px 1fr; gap: 16px; padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span data-i18n="nav.back">Back to portfolio</span>
+    </a>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button type="button" class="lang-switch-btn" data-lang="en" aria-label="English" title="English" onclick="__setLang('en')">
+          <svg viewBox="0 0 60 30" aria-hidden="true">
+            <rect width="60" height="30" fill="#00247d" />
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" />
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2" />
+            <path d="M30,0 L30,30 M0,15 L60,15" stroke="#fff" stroke-width="10" />
+            <path d="M30,0 L30,30 M0,15 L60,15" stroke="#cf142b" stroke-width="6" />
+          </svg>
+        </button>
+        <button type="button" class="lang-switch-btn" data-lang="de" aria-label="Deutsch" title="Deutsch" onclick="__setLang('de')">
+          <svg viewBox="0 0 5 3" aria-hidden="true">
+            <rect width="5" height="1" y="0" fill="#000000" />
+            <rect width="5" height="1" y="1" fill="#DD0000" />
+            <rect width="5" height="1" y="2" fill="#FFCE00" />
+          </svg>
+        </button>
+      </div>
+      <a href="https://mckinneymusicllc.com/" target="_blank" rel="noopener" class="nav-site">
+        <span data-i18n="nav.visit">Visit live site</span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <p class="hero-eyebrow fade-up"><span class="accent-line"></span><span data-i18n="hero.eyebrow">Case Study · Web Design &amp; Brand</span></p>
+    <h1 class="hero-title fade-up">
+      Marital<span class="accent-text">Sax</span>
+    </h1>
+    <div class="hero-meta fade-up">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.client.label">Client</div>
+        <div class="hero-meta-value">McKinney Music LLC</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.year.label">Year</div>
+        <div class="hero-meta-value">2024</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.role.label">Role</div>
+        <div class="hero-meta-value" data-i18n="hero.role.value">UX/UI · Brand · SEO</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.platform.label">Platform</div>
+        <div class="hero-meta-value">WordPress</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.live.label">Live Site</div>
+        <div class="hero-meta-value"><a href="https://mckinneymusicllc.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(255,255,255,0.2)">mckinneymusicllc.com</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW BAND -->
+  <div class="overview-band">
+    <div class="overview-inner fade-up">
+      <p class="overview-lead font-display italic" data-i18n="overview.lead">
+        Turning a genuinely unique performance duo into a digital experience that earns trust and converts bookings — fast.
+      </p>
+      <div class="overview-body">
+        <p data-i18n="overview.p1">MaritalSax is Talon and Len'I McKinney — a husband-and-wife saxophone duo who bill themselves as the world's first of their kind, with 52+ years of combined experience across 1,000+ events across Chicagoland.</p>
+        <p data-i18n="overview.p2">Their distinctiveness was both the opportunity and the challenge. Couples and corporate planners book on emotional confidence and fast proof of quality. My job was to design a site that earns that trust in seconds, converts visitors into consultations, and surfaces the duo in local search.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="problem.eyebrow">The Problem</span></p>
+    <h2 class="section-title" data-i18n="problem.title">Four design <span class="font-display italic">problems</span> to solve</h2>
+    <div class="section-body">
+      <p data-i18n="problem.intro">Event entertainment is a crowded, trust-driven market, and most competitors look the same — generic stock imagery, a contact form, and a list of services. A booker scanning a dozen vendor sites makes a gut decision fast.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-num">01</div>
+        <div class="problem-title" data-i18n="problem.1.title">Communicate a unique identity instantly</div>
+        <div class="problem-desc" data-i18n="problem.1.desc">A husband-and-wife sax duo is a genuine differentiator — but only if the site makes that emotional hook land in the first screen, not three scrolls down.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">02</div>
+        <div class="problem-title" data-i18n="problem.2.title">Build trust faster than a competitor can</div>
+        <div class="problem-desc" data-i18n="problem.2.desc">Bookers have been burned before. The site needed to front-load proof: real performance footage, social proof, and concrete experience numbers.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">03</div>
+        <div class="problem-title" data-i18n="problem.3.title">Reduce friction from interest to booking</div>
+        <div class="problem-desc" data-i18n="problem.3.desc">The path from "this looks great" to "I've started a booking" had to be obvious and low-effort, with clear expectations at every step.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">04</div>
+        <div class="problem-title" data-i18n="problem.4.title">Get found locally</div>
+        <div class="problem-desc" data-i18n="problem.4.desc">None of the above matters if planners searching for a "Chicago saxophone duo" or "wedding saxophonist" never reach the page in the first place.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MY ROLE -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="role.eyebrow">My Role</span></p>
+    <h2 class="section-title" data-i18n="role.title">End-to-end <span class="font-display italic">ownership</span></h2>
+    <div class="section-body">
+      <p data-i18n="role.intro">This was a full-scope project — not a handoff. Every decision, from brand to search visibility, ran through one designer.</p>
+    </div>
+    <div class="role-list">
+      <div class="role-item">
+        <div class="role-dot"></div>
+        <div class="role-text" data-i18n="role.1"><strong>End-to-end web design</strong> — every page designed from a blank canvas, including layout, hierarchy, and component design.</div>
+      </div>
+      <div class="role-item">
+        <div class="role-dot"></div>
+        <div class="role-text" data-i18n="role.2"><strong>Custom UI &amp; CSS</strong> — extensive custom CSS and bespoke color work on top of WordPress; off-the-shelf components were redesigned, not reused.</div>
+      </div>
+      <div class="role-item">
+        <div class="role-dot"></div>
+        <div class="role-text" data-i18n="role.3"><strong>Brand identity</strong> — designed the primary logo and a secondary animated brand mark / watermark used as a motion signature across the experience.</div>
+      </div>
+      <div class="role-item">
+        <div class="role-dot"></div>
+        <div class="role-text" data-i18n="role.4"><strong>Hero video</strong> — compiled and edited the hero performance reel myself, pacing footage to land the emotional payoff within seconds of landing.</div>
+      </div>
+      <div class="role-item">
+        <div class="role-dot"></div>
+        <div class="role-text" data-i18n="role.5"><strong>Interactive performance map</strong> — built a custom Leaflet map plotting 22+ Chicagoland cities; a credibility device and a local-SEO signal simultaneously.</div>
+      </div>
+      <div class="role-item">
+        <div class="role-dot"></div>
+        <div class="role-text" data-i18n="role.6"><strong>Conversion design</strong> — structured the booking journey and CTA hierarchy around a clear three-step flow with friction removed at every point.</div>
+      </div>
+      <div class="role-item">
+        <div class="role-dot"></div>
+        <div class="role-text" data-i18n="role.7"><strong>SEO &amp; content</strong> — rewrote all on-page copy for local search intent and added descriptive, keyword-aware metadata to every image, video, and logo on the site.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="process.eyebrow">Process</span></p>
+    <h2 class="section-title" data-i18n="process.title">Thinking before <span class="font-display italic">designing</span></h2>
+
+    <div class="pull-quote">
+      <p data-i18n="process.quote">"Couples buy emotion and a story; planners buy reliability and a stress-free process. The page needed to serve both without diluting either."</p>
+    </div>
+
+    <div class="section-body" style="margin-bottom:40px;">
+      <p data-i18n="process.intro">The two audiences — engaged couples and corporate/event planners — buy for different reasons. That insight shaped the page's rhythm: emotional, sensory sections alternating with reassurance sections.</p>
+    </div>
+
+    <p style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;" data-i18n="process.funnel.label">Homepage narrative funnel</p>
+    <div class="funnel">
+      <div class="funnel-step"><div class="funnel-label" data-i18n="process.funnel.1">Hook</div></div>
+      <div class="funnel-step"><div class="funnel-label" data-i18n="process.funnel.2">Differentiate</div></div>
+      <div class="funnel-step"><div class="funnel-label" data-i18n="process.funnel.3">Reassure</div></div>
+      <div class="funnel-step"><div class="funnel-label" data-i18n="process.funnel.4">Prove</div></div>
+      <div class="funnel-step"><div class="funnel-label" data-i18n="process.funnel.5">Act</div></div>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-content-title" data-i18n="process.step1.title">Understanding the brand and the buyer</div>
+          <div class="step-content-body" data-i18n="process.step1.body">I mapped both audience types — couples and corporate planners — against their buying motivations. Couples buy emotion and story; planners buy reliability and a stress-free handoff. Every section was written for both without compromising either.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-content-title" data-i18n="process.step2.title">Information architecture</div>
+          <div class="step-content-body" data-i18n="process.step2.body">I sequenced the homepage as a narrative funnel rather than a brochure: Hook → Differentiate → Reassure → Prove → Act. Emotional and sensory sections alternate with trust and proof sections, keeping both audience types engaged through the scroll.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-content-title" data-i18n="process.step3.title">Visual direction</div>
+          <div class="step-content-body" data-i18n="process.step3.body">The aesthetic target was "upscale live music" — elegant, warm, and confident without being stuffy. I built a custom color palette and applied it through hand-written CSS, so type, spacing, and color felt intentional and cohesive across every section rather than templated.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-content-title" data-i18n="process.step4.title">Working within (and against) WordPress</div>
+          <div class="step-content-body" data-i18n="process.step4.body">WordPress was the delivery platform — a real-world constraint. A meaningful part of the craft was redesigning default components and writing custom CSS to make the site feel bespoke rather than off-the-shelf, exactly the kind of pragmatic problem-solving production work demands.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY DESIGN DECISIONS -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="decisions.eyebrow">Key Design Decisions</span></p>
+    <h2 class="section-title" data-i18n="decisions.title">Decisions that <span class="font-display italic">moved the needle</span></h2>
+    <div class="decision-grid">
+
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.1.tag">Hero</span>
+        <div class="decision-title" data-i18n="decisions.1.title">Video as the emotional hook</div>
+        <div class="decision-body" data-i18n="decisions.1.body">I led with a performance reel I edited myself rather than a static image. Live music is a sensory product — a hero video lets a visitor hear and feel the chemistry in seconds, which a photograph and headline never could. The edit was paced deliberately to land that emotional payoff fast, paired with positioning copy that names the differentiator outright.</div>
+      </div>
+
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.2.tag">Brand</span>
+        <div class="decision-title" data-i18n="decisions.2.title">A brand identity built for motion</div>
+        <div class="decision-body" data-i18n="decisions.2.body">I designed the primary logo and a secondary animated brand mark / watermark. Having a motion version of the identity meant the brand could live consistently across video content and the site as a recurring signature, reinforcing recognition rather than appearing only once in the header.</div>
+      </div>
+
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.3.tag">UX Feature</span>
+        <div class="decision-title" data-i18n="decisions.3.title">The interactive Chicagoland performance map</div>
+        <div class="decision-body" data-i18n="decisions.3.body">Rather than claiming the duo plays all over Chicago, I built an interactive Leaflet map plotting 22+ real performance locations — from the Gold Coast and Hyde Park to Naperville and Lake Forest. It converts an abstract credibility claim into something concrete and explorable. For a planner deciding whether the duo covers their venue's area, it answers the question interactively and doubles as social proof. It also surfaces real place names as on-page content for local SEO.</div>
+      </div>
+
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.4.tag">Trust</span>
+        <div class="decision-title" data-i18n="decisions.4.title">Layered trust architecture</div>
+        <div class="decision-body" data-i18n="decisions.4.body">Credibility is distributed throughout the page rather than dumped in one block: concrete framing (52+ years combined, 1,000+ events), testimonials at multiple scroll points, a full list of signature performance types so a visitor immediately sees their event covered, and "team player" language aimed at planners who need reliability above all else.</div>
+      </div>
+
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.5.tag">Conversion</span>
+        <div class="decision-title" data-i18n="decisions.5.title">A frictionless, transparent booking flow</div>
+        <div class="decision-body" data-i18n="decisions.5.body">The booking journey is presented as a simple, demystified three-step process — <strong style="color:var(--text)">Get a Quote → Book with a Deposit → Plan Your Event</strong> — with clear expectations at each stage, including the 20% deposit and what planning support looks like. Reducing uncertainty in the process is itself a conversion lever: people commit more easily when they can see the whole path.</div>
+      </div>
+
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.6.tag">SEO</span>
+        <div class="decision-title" data-i18n="decisions.6.title">Search visibility as a design responsibility</div>
+        <div class="decision-body" data-i18n="decisions.6.body">I rewrote every block of copy to match how real bookers actually search — leading with phrases like "Chicago saxophone duo," "wedding saxophonist," and specific event-type and neighborhood language. Every image, video, and logo was given descriptive, keyword-aware alt text, captions, and titles. The interactive map also feeds search engines a dense, authentic set of local geographic signals by surfacing real Chicago-area place names as on-page content.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <section class="results-section">
+    <div class="results-inner">
+      <p class="section-eyebrow fade-up"><span class="accent-line"></span><span data-i18n="results.eyebrow">Results</span></p>
+      <h2 class="section-title fade-up" data-i18n="results.title">Numbers that <span class="font-display italic">accelerated</span></h2>
+
+      <div class="section-body fade-up" style="max-width:660px;">
+        <p data-i18n="results.intro">In the week following the redesign and SEO work going live, the site showed clear and accelerating week-over-week growth — measured through the site's own analytics across rolling 7-day windows.</p>
+      </div>
+
+      <div class="stat-row fade-up">
+        <div class="stat-card">
+          <span class="stat-value accent-text">137</span>
+          <div class="stat-label" data-i18n="results.stat.pageviews">Page views</div>
+          <div class="stat-growth" data-i18n="results.stat.growth180">↑ 180% WoW</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value accent-text">70</span>
+          <div class="stat-label" data-i18n="results.stat.visitors">Unique visitors</div>
+          <div class="stat-growth" data-i18n="results.stat.growth141">↑ 141% WoW</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" style="color:var(--text)">52+</span>
+          <div class="stat-label" data-i18n="results.stat.years">Years combined exp.</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" style="color:var(--text)">22+</span>
+          <div class="stat-label" data-i18n="results.stat.cities">Cities on the map</div>
+        </div>
+      </div>
+
+      <!-- CHART -->
+      <div class="chart-wrap fade-up">
+        <div class="chart-legend">
+          <div class="chart-legend-item">
+            <div class="legend-dot" style="background:#6bcfb8;"></div>
+            <span data-i18n="results.chart.legend1">May 6 – 12</span>
+          </div>
+          <div class="chart-legend-item">
+            <div class="legend-dot" style="background:#f5c842;"></div>
+            <span data-i18n="results.chart.legend2">May 7 – 13</span>
+          </div>
+        </div>
+        <div class="chart-header">
+          <div class="chart-client">MaritalSax · McKinney Music LLC</div>
+          <div class="chart-title" data-i18n="results.chart.title">Traffic growth after redesign &amp; SEO</div>
+          <div class="chart-sub" data-i18n="results.chart.sub">Rolling 7-day windows · site analytics · May 2026</div>
+        </div>
+        <div class="chart-area">
+          <!-- Page views group -->
+          <div class="chart-group">
+            <div class="chart-bars">
+              <!-- 80 views: 80/137 ≈ 58% of 200px = 116px -->
+              <div class="chart-bar-wrap" style="justify-content:flex-end;height:200px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+                <div class="chart-bar-label">↑ 70%</div>
+                <div class="chart-bar-value">80</div>
+                <div class="chart-bar bar-teal" style="height:116px;"></div>
+              </div>
+              <!-- 137 views: 137/137 = 100% = 200px -->
+              <div class="chart-bar-wrap" style="justify-content:flex-end;height:200px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+                <div class="chart-bar-label">↑ 180%</div>
+                <div class="chart-bar-value">137</div>
+                <div class="chart-bar bar-gold" style="height:200px;"></div>
+              </div>
+            </div>
+            <div class="chart-group-label" data-i18n="results.chart.pageviews">Page views</div>
+          </div>
+
+          <!-- Unique visitors group -->
+          <div class="chart-group">
+            <div class="chart-bars">
+              <!-- 37 visitors: 37/137 ≈ 27% of 200px = 54px -->
+              <div class="chart-bar-wrap" style="justify-content:flex-end;height:200px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+                <div class="chart-bar-label">↑ 54%</div>
+                <div class="chart-bar-value">37</div>
+                <div class="chart-bar bar-teal" style="height:54px;"></div>
+              </div>
+              <!-- 70 visitors: 70/137 ≈ 51% of 200px = 102px -->
+              <div class="chart-bar-wrap" style="justify-content:flex-end;height:200px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+                <div class="chart-bar-label">↑ 141%</div>
+                <div class="chart-bar-value">70</div>
+                <div class="chart-bar bar-gold" style="height:102px;"></div>
+              </div>
+            </div>
+            <div class="chart-group-label" data-i18n="results.chart.visitors">Unique visitors</div>
+          </div>
+        </div>
+        <div class="chart-footnote" data-i18n="results.chart.footnote">Bars show absolute counts per rolling 7-day window. ↑ = growth vs. the previous 7 days (platform-reported).</div>
+      </div>
+
+      <!-- Results table -->
+      <table class="results-table fade-up">
+        <thead>
+          <tr>
+            <th data-i18n="results.table.window">7-day window</th>
+            <th data-i18n="results.table.pageviews">Page views</th>
+            <th data-i18n="results.table.visitors">Unique visitors</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-i18n="results.table.row1.window">May 6 – 12, 2026</td>
+            <td><strong>80</strong> <span class="green" data-i18n="results.table.row1.pv">↑ 70% WoW</span></td>
+            <td><strong>37</strong> <span class="green" data-i18n="results.table.row1.uv">↑ 54% WoW</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="results.table.row2.window">May 7 – 13, 2026</td>
+            <td><strong>137</strong> <span class="green" data-i18n="results.table.row2.pv">↑ 180% WoW</span></td>
+            <td><strong>70</strong> <span class="green" data-i18n="results.table.row2.uv">↑ 141% WoW</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="dashboard-grid fade-up">
+        <div class="dashboard-card">
+          <img src="uploads/dashboard-may6-12.png" alt="WordPress stats dashboard showing 80 page views and 37 unique visitors for May 6–12, 2026, with 70% and 54% week-over-week growth" />
+          <div class="dashboard-caption">
+            <div data-i18n="results.dash1.caption">
+              <strong>May 6 – 12, 2026</strong><br/>
+              80 views · 37 visitors
+            </div>
+            <span class="badge" data-i18n="results.dash1.badge">↑ 70% views</span>
+          </div>
+        </div>
+        <div class="dashboard-card">
+          <img src="uploads/dashboard-may7-13.png" alt="WordPress stats dashboard showing 137 page views and 70 unique visitors for May 7–13, 2026, with 180% and 141% week-over-week growth" />
+          <div class="dashboard-caption">
+            <div data-i18n="results.dash2.caption">
+              <strong>May 7 – 13, 2026</strong><br/>
+              137 views · 70 visitors
+            </div>
+            <span class="badge" data-i18n="results.dash2.badge">↑ 180% views</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pull-quote fade-up" style="margin-top:40px;">
+        <p data-i18n="results.quote">"Both views and visitors nearly doubled from one rolling week to the next, and the rate of growth increased rather than tapering off — the compounding pattern you'd expect as newly optimized pages start surfacing for local, intent-driven search."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFLECTION -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="reflection.eyebrow">Reflection</span></p>
+    <h2 class="section-title" data-i18n="reflection.title">What this project <span class="font-display italic">taught me</span></h2>
+    <div class="reflection-cards">
+      <div class="reflection-card">
+        <div class="reflection-icon">⚙️</div>
+        <div class="reflection-title" data-i18n="reflection.1.title">Real constraints are a portfolio strength</div>
+        <div class="reflection-body" data-i18n="reflection.1.body">Designing for WordPress — rather than a blank Figma-to-code pipeline — shows you can ship bespoke quality inside the systems clients actually use. That's production design.</div>
+      </div>
+      <div class="reflection-card">
+        <div class="reflection-icon">🎬</div>
+        <div class="reflection-title" data-i18n="reflection.2.title">Motion earns the first impression</div>
+        <div class="reflection-body" data-i18n="reflection.2.body">In a sensory market, leading with an edited video instead of a static hero was the highest-leverage decision on the page. Live music has to be felt to be sold.</div>
+      </div>
+      <div class="reflection-card">
+        <div class="reflection-icon">📍</div>
+        <div class="reflection-title" data-i18n="reflection.3.title">Specificity builds trust</div>
+        <div class="reflection-body" data-i18n="reflection.3.body">The performance map turned a generic claim into something concrete and explorable. Showing beats telling — one feature doing double duty as a UX device and an SEO signal.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="case-footer fade-up">
+    <div class="footer-credits">
+      <strong>MaritalSax — McKinney Music LLC</strong><br/>
+      <span data-i18n="footer.credits">Design, brand, UI, video edit &amp; SEO by <strong>Shinbu Abdul-Muqit Fuseini</strong></span><br/>
+      <span data-i18n="footer.performers">Performers / client: Talon and Len'I McKinney</span>
+    </div>
+    <a href="https://mckinneymusicllc.com/" target="_blank" rel="noopener" class="cta-btn">
+      <span data-i18n="footer.cta">View the live site</span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- LANGUAGE DATA + RUNTIME (shared key/pattern with index.html's switcher) -->
+  <script>
+    window.I18N_DE = {
+      "nav.back": "Zurück zum Portfolio",
+      "nav.visit": "Live-Seite besuchen",
+      "hero.eyebrow": "Case Study · Webdesign & Branding",
+      "hero.client.label": "Kunde",
+      "hero.year.label": "Jahr",
+      "hero.role.label": "Rolle",
+      "hero.role.value": "UX/UI · Branding · SEO",
+      "hero.platform.label": "Plattform",
+      "hero.live.label": "Live-Seite",
+      "overview.lead": "Ein wirklich einzigartiges Auftritts-Duo in ein digitales Erlebnis verwandeln, das schnell Vertrauen aufbaut und Buchungen bringt.",
+      "overview.p1": "MaritalSax sind Talon und Len'I McKinney — ein Ehepaar-Saxophon-Duo, das sich selbst als weltweit erstes seiner Art bezeichnet, mit über 52 Jahren gemeinsamer Erfahrung und mehr als 1.000 Auftritten in der Region Chicago.",
+      "overview.p2": "Ihre Einzigartigkeit war zugleich Chance und Herausforderung. Paare und Firmenplaner:innen buchen aus emotionalem Vertrauen und dem schnellen Beweis von Qualität heraus. Meine Aufgabe war es, eine Website zu gestalten, die dieses Vertrauen innerhalb von Sekunden aufbaut, Besucher:innen in Beratungsgespräche verwandelt und das Duo in der lokalen Suche sichtbar macht.",
+      "problem.eyebrow": "Das Problem",
+      "problem.title": "Vier Design-<span class=\"font-display italic\">Probleme</span> zu lösen",
+      "problem.intro": "Event-Entertainment ist ein überfüllter, vertrauensgetriebener Markt, in dem die meisten Wettbewerber gleich aussehen — generische Stockfotos, ein Kontaktformular und eine Liste von Leistungen. Wer ein Dutzend Anbieter-Websites durchscrollt, entscheidet aus dem Bauch heraus und schnell.",
+      "problem.1.title": "Eine einzigartige Identität sofort vermitteln",
+      "problem.1.desc": "Ein Ehepaar-Saxophon-Duo ist ein echtes Alleinstellungsmerkmal — aber nur, wenn die Website diesen emotionalen Aufhänger schon im ersten Bildschirm trifft, nicht erst nach drei Scrolls.",
+      "problem.2.title": "Schneller Vertrauen aufbauen als die Konkurrenz",
+      "problem.2.desc": "Buchende wurden schon einmal enttäuscht. Die Website musste von Anfang an Beweise liefern: echtes Auftrittsmaterial, Social Proof und konkrete Erfahrungswerte.",
+      "problem.3.title": "Reibung vom Interesse bis zur Buchung reduzieren",
+      "problem.3.desc": "Der Weg von „das sieht großartig aus“ bis „ich habe eine Buchung gestartet“ musste offensichtlich und mühelos sein, mit klaren Erwartungen bei jedem Schritt.",
+      "problem.4.title": "Lokal gefunden werden",
+      "problem.4.desc": "All das spielt keine Rolle, wenn Planende, die nach „Chicago saxophone duo“ oder „wedding saxophonist“ suchen, die Seite gar nicht erst finden.",
+      "role.eyebrow": "Meine Rolle",
+      "role.title": "Verantwortung <span class=\"font-display italic\">von Anfang bis Ende</span>",
+      "role.intro": "Dies war ein Projekt mit vollem Leistungsumfang, keine reine Übergabe. Jede Entscheidung — von der Marke bis zur Suchsichtbarkeit — lag bei mir.",
+      "role.1": "<strong>Web-Design von Anfang bis Ende</strong> — jede Seite von Grund auf gestaltet, einschließlich Layout, Hierarchie und Komponenten-Design.",
+      "role.2": "<strong>Individuelles UI & CSS</strong> — umfangreiches, maßgeschneidertes CSS und eigene Farbgestaltung auf Basis von WordPress; Standardkomponenten wurden neu gestaltet statt einfach übernommen.",
+      "role.3": "<strong>Markenidentität</strong> — Gestaltung des Hauptlogos sowie eines animierten Zweitmarkenzeichens / Wasserzeichens, das als bewegtes Signature-Element durch das gesamte Erlebnis führt.",
+      "role.4": "<strong>Hero-Video</strong> — das Auftritts-Showreel im Hero-Bereich selbst zusammengestellt und geschnitten, mit einem Tempo, das die emotionale Wirkung innerhalb weniger Sekunden entfaltet.",
+      "role.5": "<strong>Interaktive Auftrittskarte</strong> — eine eigene Leaflet-Karte mit über 22 Städten der Region Chicago entwickelt; gleichzeitig ein Glaubwürdigkeits-Element und ein lokales SEO-Signal.",
+      "role.6": "<strong>Conversion-Design</strong> — die Buchungsstrecke und CTA-Hierarchie um einen klaren Drei-Schritte-Ablauf herum strukturiert, bei dem an jedem Punkt Reibung beseitigt wurde.",
+      "role.7": "<strong>SEO & Content</strong> — sämtliche Seitentexte für lokale Suchintentionen neu geschrieben und jedem Bild, Video und Logo auf der Website beschreibende, keyword-bewusste Metadaten hinzugefügt.",
+      "process.eyebrow": "Prozess",
+      "process.title": "Denken vor dem <span class=\"font-display italic\">Gestalten</span>",
+      "process.quote": "„Paare kaufen Emotion und eine Geschichte; Planende kaufen Verlässlichkeit und einen stressfreien Prozess. Die Seite musste beiden gerecht werden, ohne eines von beidem zu verwässern.“",
+      "process.intro": "Die beiden Zielgruppen — verlobte Paare und Firmen-/Event-Planende — kaufen aus unterschiedlichen Gründen. Diese Erkenntnis prägte den Rhythmus der Seite: emotionale, sinnliche Abschnitte wechseln sich mit vertrauensbildenden Abschnitten ab.",
+      "process.funnel.label": "Narrativer Trichter der Startseite",
+      "process.funnel.1": "Aufhänger",
+      "process.funnel.2": "Abheben",
+      "process.funnel.3": "Beruhigen",
+      "process.funnel.4": "Beweisen",
+      "process.funnel.5": "Handeln",
+      "process.step1.title": "Marke und Käufer verstehen",
+      "process.step1.body": "Ich habe beide Zielgruppentypen — Paare und Firmenplaner:innen — ihren Kaufmotivationen gegenübergestellt. Paare kaufen Emotion und Geschichte, Planende kaufen Verlässlichkeit und eine stressfreie Übergabe. Jeder Abschnitt wurde für beide geschrieben, ohne bei einem der beiden Abstriche zu machen.",
+      "process.step2.title": "Informationsarchitektur",
+      "process.step2.body": "Ich habe die Startseite als narrativen Trichter statt als Broschüre aufgebaut: Aufhänger → Abheben → Beruhigen → Beweisen → Handeln. Emotionale, sinnliche Abschnitte wechseln sich mit Vertrauens- und Beweis-Abschnitten ab, damit beide Zielgruppen beim Scrollen bei der Stange bleiben.",
+      "process.step3.title": "Visuelle Ausrichtung",
+      "process.step3.body": "Das ästhetische Ziel war „gehobene Live-Musik“ — elegant, warm und selbstbewusst, ohne steif zu wirken. Ich habe eine eigene Farbpalette entwickelt und über handgeschriebenes CSS umgesetzt, damit Typografie, Abstände und Farbe in jedem Abschnitt bewusst und stimmig wirken statt nach Vorlage.",
+      "process.step4.title": "Arbeiten mit (und gegen) WordPress",
+      "process.step4.body": "WordPress war die Ausgabeplattform — eine reale Einschränkung. Ein wesentlicher Teil der handwerklichen Arbeit bestand darin, Standardkomponenten neu zu gestalten und eigenes CSS zu schreiben, damit sich die Website maßgeschneidert statt von der Stange anfühlt — genau die Art von pragmatischer Problemlösung, die Produktionsarbeit verlangt.",
+      "decisions.eyebrow": "Zentrale Design-Entscheidungen",
+      "decisions.title": "Entscheidungen, die <span class=\"font-display italic\">den Unterschied gemacht haben</span>",
+      "decisions.1.tag": "Hero",
+      "decisions.1.title": "Video als emotionaler Aufhänger",
+      "decisions.1.body": "Ich bin mit einem selbst geschnittenen Auftritts-Reel statt mit einem statischen Bild eingestiegen. Live-Musik ist ein sinnliches Produkt — ein Hero-Video lässt Besuchende die Chemie innerhalb von Sekunden hören und spüren, was ein Foto mit Headline nie könnte. Der Schnitt wurde bewusst so getaktet, dass die emotionale Wirkung schnell einsetzt, kombiniert mit Positionierungstext, der das Alleinstellungsmerkmal direkt benennt.",
+      "decisions.2.tag": "Marke",
+      "decisions.2.title": "Eine für Bewegtbild gebaute Markenidentität",
+      "decisions.2.body": "Ich habe das Hauptlogo sowie ein animiertes Zweitmarkenzeichen / Wasserzeichen gestaltet. Eine bewegte Version der Identität sorgt dafür, dass die Marke konsistent über Videoinhalte und die Website hinweg als wiederkehrendes Signature-Element auftritt, statt nur einmal im Header zu erscheinen.",
+      "decisions.3.tag": "UX-Feature",
+      "decisions.3.title": "Die interaktive Auftrittskarte für die Region Chicago",
+      "decisions.3.body": "Statt einfach zu behaupten, das Duo trete überall in Chicago auf, habe ich eine interaktive Leaflet-Karte mit über 22 realen Auftrittsorten gebaut — von Gold Coast und Hyde Park bis Naperville und Lake Forest. Sie macht aus einer abstrakten Glaubwürdigkeitsaussage etwas Konkretes und Erkundbares. Für Planende, die entscheiden möchten, ob das Duo ihre Veranstaltungsregion abdeckt, beantwortet sie diese Frage interaktiv und dient gleichzeitig als Social Proof. Außerdem liefert sie echte Ortsnamen als Seiteninhalt für lokales SEO.",
+      "decisions.4.tag": "Vertrauen",
+      "decisions.4.title": "Mehrschichtige Vertrauensarchitektur",
+      "decisions.4.body": "Glaubwürdigkeit verteilt sich über die gesamte Seite, statt in einem Block gebündelt zu sein: konkrete Einordnung (über 52 Jahre gemeinsame Erfahrung, über 1.000 Auftritte), Testimonials an mehreren Scroll-Punkten, eine vollständige Liste der Auftrittsarten, damit Besuchende sofort sehen, dass ihr Event abgedeckt ist, sowie „Team-Player“-Sprache für Planende, denen Verlässlichkeit über alles geht.",
+      "decisions.5.tag": "Conversion",
+      "decisions.5.title": "Ein reibungsloser, transparenter Buchungsablauf",
+      "decisions.5.body": "Die Buchungsstrecke wird als einfacher, entmystifizierter Drei-Schritte-Prozess dargestellt — <strong style=\"color:var(--text)\">Angebot einholen → Mit Anzahlung buchen → Event planen</strong> — mit klaren Erwartungen bei jedem Schritt, einschließlich der 20 %-Anzahlung und der Planungsunterstützung. Weniger Unsicherheit im Prozess ist selbst ein Conversion-Hebel: Menschen committen sich leichter, wenn sie den gesamten Weg sehen können.",
+      "decisions.6.tag": "SEO",
+      "decisions.6.title": "Suchsichtbarkeit als Design-Verantwortung",
+      "decisions.6.body": "Ich habe jeden Textblock so umgeschrieben, dass er widerspiegelt, wie reale Buchende tatsächlich suchen — mit Formulierungen wie „Chicago saxophone duo“, „wedding saxophonist“ sowie spezifischer Event-Art- und Stadtteil-Sprache. Jedes Bild, Video und Logo erhielt beschreibende, keyword-bewusste Alt-Texte, Bildunterschriften und Titel. Die interaktive Karte liefert Suchmaschinen zusätzlich eine dichte, authentische Menge lokaler geografischer Signale, indem sie echte Ortsnamen aus der Region Chicago als Seiteninhalt zeigt.",
+      "results.eyebrow": "Ergebnisse",
+      "results.title": "Zahlen, die <span class=\"font-display italic\">sich beschleunigten</span>",
+      "results.intro": "In der Woche nach dem Livegang des Redesigns und der SEO-Arbeit zeigte die Website ein deutliches und sich beschleunigendes Wachstum von Woche zu Woche — gemessen über die eigene Analytics-Auswertung der Seite in rollierenden 7-Tage-Fenstern.",
+      "results.stat.pageviews": "Seitenaufrufe",
+      "results.stat.growth180": "↑ 180 % ggü. Vorwoche",
+      "results.stat.visitors": "Eindeutige Besucher",
+      "results.stat.growth141": "↑ 141 % ggü. Vorwoche",
+      "results.stat.years": "Jahre gemeinsame Erfahrung",
+      "results.stat.cities": "Städte auf der Karte",
+      "results.chart.legend1": "6.–12. Mai",
+      "results.chart.legend2": "7.–13. Mai",
+      "results.chart.title": "Traffic-Wachstum nach Redesign & SEO",
+      "results.chart.sub": "Rollierende 7-Tage-Fenster · Website-Analytics · Mai 2026",
+      "results.chart.pageviews": "Seitenaufrufe",
+      "results.chart.visitors": "Eindeutige Besucher",
+      "results.chart.footnote": "Balken zeigen absolute Werte pro rollierendem 7-Tage-Fenster. ↑ = Wachstum gegenüber den vorherigen 7 Tagen (von der Plattform gemeldet).",
+      "results.table.window": "7-Tage-Fenster",
+      "results.table.pageviews": "Seitenaufrufe",
+      "results.table.visitors": "Eindeutige Besucher",
+      "results.table.row1.window": "6.–12. Mai 2026",
+      "results.table.row1.pv": "↑ 70 % ggü. Vorwoche",
+      "results.table.row1.uv": "↑ 54 % ggü. Vorwoche",
+      "results.table.row2.window": "7.–13. Mai 2026",
+      "results.table.row2.pv": "↑ 180 % ggü. Vorwoche",
+      "results.table.row2.uv": "↑ 141 % ggü. Vorwoche",
+      "results.dash1.caption": "<strong>6.–12. Mai 2026</strong><br/>80 Aufrufe · 37 Besucher",
+      "results.dash1.badge": "↑ 70 % Aufrufe",
+      "results.dash2.caption": "<strong>7.–13. Mai 2026</strong><br/>137 Aufrufe · 70 Besucher",
+      "results.dash2.badge": "↑ 180 % Aufrufe",
+      "results.quote": "„Sowohl Aufrufe als auch Besucher haben sich von einer rollierenden Woche zur nächsten fast verdoppelt, und die Wachstumsrate stieg an, statt sich abzuschwächen — genau das Muster, das man erwarten würde, wenn frisch optimierte Seiten beginnen, bei lokalen, intentionsgetriebenen Suchanfragen sichtbar zu werden.“",
+      "reflection.eyebrow": "Reflexion",
+      "reflection.title": "Was mir dieses Projekt <span class=\"font-display italic\">beigebracht hat</span>",
+      "reflection.1.title": "Echte Rahmenbedingungen sind eine Portfolio-Stärke",
+      "reflection.1.body": "Für WordPress zu gestalten — statt für eine leere Figma-zu-Code-Pipeline — zeigt, dass man maßgeschneiderte Qualität auch innerhalb der Systeme liefern kann, die Kund:innen tatsächlich nutzen. Das ist Produktionsdesign.",
+      "reflection.2.title": "Bewegtbild gewinnt den ersten Eindruck",
+      "reflection.2.body": "In einem sinnlichen Markt war der Einstieg mit einem geschnittenen Video statt einem statischen Hero die Entscheidung mit der größten Wirkung auf der Seite. Live-Musik muss gefühlt werden, um verkauft zu werden.",
+      "reflection.3.title": "Konkretheit schafft Vertrauen",
+      "reflection.3.body": "Die Auftrittskarte machte aus einer generischen Behauptung etwas Konkretes und Erkundbares. Zeigen schlägt Erzählen — ein Feature, das gleichzeitig als UX-Element und SEO-Signal dient.",
+      "footer.credits": "Design, Branding, UI, Videoschnitt & SEO von <strong>Shinbu Abdul-Muqit Fuseini</strong>",
+      "footer.performers": "Auftretende / Kunde: Talon und Len'I McKinney",
+      "footer.cta": "Zur Live-Seite"
+    };
+
+    (function () {
+      var LANG_KEY = 'portfolio-lang';
+      function getLang() { try { return localStorage.getItem(LANG_KEY) || 'en'; } catch (e) { return 'en'; } }
+
+      var originals = null;
+      function captureOriginals() {
+        originals = {};
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          originals[el.getAttribute('data-i18n')] = el.innerHTML;
+        });
+      }
+
+      function applyLang(lang) {
+        document.documentElement.lang = lang;
+        if (!originals) captureOriginals();
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n');
+          if (lang === 'de' && window.I18N_DE && window.I18N_DE[key] != null) {
+            el.innerHTML = window.I18N_DE[key];
+          } else {
+            el.innerHTML = originals[key];
+          }
+        });
+        document.querySelectorAll('.lang-switch-btn').forEach(function (b) {
+          b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+        });
+      }
+
+      window.__setLang = function (lang) {
+        try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+        applyLang(lang);
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        applyLang(getLang());
+      });
+    })();
+  </script>
+
+  <script>
+    // Scroll reveal
+    const els = document.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '-40px' });
+    els.forEach((el) => obs.observe(el));
+
+    // Hero fades in immediately
+    document.querySelectorAll('.hero .fade-up').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 200 + i * 150);
+    });
+  </script>
+</body>
+</html>

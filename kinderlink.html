@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KinderLink — Case Study · Shinbu Abdul-Muqit Fuseini</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <script src="image-slot.js"></script>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --surface2: #1a1a1a;
+      --text: #f5f5f5;
+      --muted: #888;
+      --stroke: #222;
+      /* KinderLink brand accents */
+      --kl-purple: #7C3AED;
+      --kl-purple-light: #9F5FF1;
+      --kl-orange: #F97316;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    body::-webkit-scrollbar { width: 6px; }
+    body::-webkit-scrollbar-track { background: var(--bg); }
+    body::-webkit-scrollbar-thumb { background: var(--stroke); border-radius: 3px; }
+
+    /* ── UTILITIES ── */
+    .accent-text {
+      background: linear-gradient(90deg, var(--kl-purple), var(--kl-purple-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .accent-line {
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--kl-purple), var(--kl-purple-light));
+      vertical-align: middle;
+      margin-right: 12px;
+    }
+    .font-display { font-family: 'Instrument Serif', serif; }
+    .italic { font-style: italic; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
+      backdrop-filter: blur(0px);
+    }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--text); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+    .nav-site {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      border: 1px solid var(--stroke);
+      border-radius: 99px;
+      padding: 8px 18px;
+      transition: all 0.2s;
+    }
+    .nav-site:hover { color: var(--text); border-color: #444; }
+
+    /* ── LANGUAGE SWITCHER ── */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--stroke);
+      border-radius: 999px;
+      padding: 6px;
+      flex-shrink: 0;
+    }
+    .lang-switch-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      opacity: 0.5;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .lang-switch-btn:hover { transform: scale(1.1); opacity: 0.85; }
+    .lang-switch-btn[aria-pressed="true"] {
+      opacity: 1;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.8);
+    }
+    .lang-switch-btn svg { width: 100%; height: 100%; }
+    @media (max-width: 640px) {
+      .nav-site span { display: none; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 30%, rgba(124,58,237,0.09) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(159,95,241,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 80% 70%, rgba(249,115,22,0.04) 0%, transparent 55%);
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .hero-title {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(56px, 9vw, 120px);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      position: relative;
+      margin-bottom: 40px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border-top: 1px solid var(--stroke);
+      padding-top: 32px;
+      position: relative;
+    }
+    .hero-meta-item {
+      flex: 1;
+      min-width: 160px;
+      padding: 20px 32px 20px 0;
+      border-right: 1px solid var(--stroke);
+    }
+    .hero-meta-item:last-child { border-right: none; }
+    .hero-meta-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .hero-meta-value {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── OVERVIEW BAND ── */
+    .overview-band {
+      background: var(--surface);
+      border-top: 1px solid var(--stroke);
+      border-bottom: 1px solid var(--stroke);
+      padding: 80px 40px;
+    }
+    .overview-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .overview-lead {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.35;
+      color: var(--text);
+    }
+    .overview-body {
+      font-size: 15px;
+      line-height: 1.75;
+      color: #aaa;
+    }
+    .overview-body p { margin-bottom: 18px; }
+    .overview-body p:last-child { margin-bottom: 0; }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 100px 40px;
+    }
+    .section + .section {
+      border-top: 1px solid var(--stroke);
+    }
+    .section-eyebrow {
+      display: flex;
+      align-items: center;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .section-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.1;
+      margin-bottom: 40px;
+    }
+    .section-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #aaa;
+    }
+    .section-body p { margin-bottom: 20px; }
+    .section-body p:last-child { margin-bottom: 0; }
+
+    /* ── CHALLENGE CARDS (3-column numbered) ── */
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      margin-top: 48px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .challenge-card {
+      background: var(--surface);
+      padding: 36px;
+      position: relative;
+      border-top: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .challenge-card:hover {
+      border-top-color: var(--kl-purple);
+    }
+    .challenge-num {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 48px;
+      line-height: 1;
+      color: var(--stroke);
+      margin-bottom: 16px;
+    }
+    .challenge-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .challenge-desc {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* ── ROLE CARDS (2x2 grid) ── */
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 48px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .role-card {
+      background: var(--surface);
+      padding: 36px;
+      border-left: 3px solid var(--kl-purple);
+      position: relative;
+      transition: background 0.2s;
+    }
+    .role-card:hover { background: var(--surface2); }
+    .role-card-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .role-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--kl-purple), var(--kl-purple-light));
+      flex-shrink: 0;
+    }
+    .role-card-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .role-card-list li {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #aaa;
+      padding-left: 16px;
+      position: relative;
+    }
+    .role-card-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(124,58,237,0.5);
+    }
+
+    /* ── PROCESS STEPS ── */
+    .process-steps {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .process-step {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 24px;
+      padding: 36px;
+      background: var(--surface);
+      align-items: start;
+    }
+    .process-step:first-child { border-radius: 12px 12px 0 0; }
+    .process-step:last-child { border-radius: 0 0 12px 12px; }
+    .step-num {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 36px;
+      line-height: 1;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+    .step-content-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .step-content-body {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .step-content-body strong { color: var(--text); }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      border-left: 2px solid var(--kl-purple);
+      padding: 24px 36px;
+      margin: 48px 0;
+      background: var(--surface);
+      border-radius: 0 12px 12px 0;
+    }
+    .pull-quote p {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(18px, 2.5vw, 24px);
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    /* ── KEY SCREENS / DECISION GRID ── */
+    .decision-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 48px;
+    }
+    .decision-item {
+      padding: 40px;
+      background: var(--surface);
+    }
+    .decision-item:first-child { border-radius: 12px 12px 0 0; }
+    .decision-item:last-child { border-radius: 0 0 12px 12px; }
+    .decision-tag {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 99px;
+      border: 1px solid rgba(124,58,237,0.4);
+      color: var(--kl-purple-light);
+      background: rgba(124,58,237,0.08);
+      margin-bottom: 16px;
+    }
+    .decision-tag.orange {
+      border-color: rgba(249,115,22,0.4);
+      color: var(--kl-orange);
+      background: rgba(249,115,22,0.08);
+    }
+    .decision-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-style: italic;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .decision-body {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #999;
+    }
+    .decision-body strong { color: var(--text); }
+
+    /* ── IMAGE PLACEHOLDER SECTION ── */
+    .image-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      border-top: 1px solid var(--stroke);
+    }
+    .image-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .image-section-label {
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .figma-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124,58,237,0.12);
+      border: 1px solid rgba(124,58,237,0.35);
+      color: var(--kl-purple-light);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .figma-btn:hover {
+      background: rgba(124,58,237,0.2);
+      border-color: var(--kl-purple);
+      color: #fff;
+    }
+
+    /* ── OUTCOME / RESULTS ── */
+    .results-section {
+      background: var(--surface);
+      border-top: 1px solid var(--stroke);
+      border-bottom: 1px solid var(--stroke);
+      padding: 100px 40px;
+    }
+    .results-inner { max-width: 900px; margin: 0 auto; }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin: 56px 0;
+    }
+    .stat-card {
+      background: var(--bg);
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .stat-card:first-child { border-radius: 12px 0 0 12px; }
+    .stat-card:last-child { border-radius: 0 12px 12px 0; }
+    .stat-value {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .stat-label {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 160px;
+      margin: 0 auto;
+    }
+
+    /* ── STATUS NOTE ── */
+    .status-note {
+      background: rgba(124,58,237,0.07);
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-top: 40px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .status-note-icon {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--kl-purple);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .status-note p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #aaa;
+    }
+    .status-note p strong { color: var(--text); }
+
+    /* ── REFLECTION / NEXT CARDS ── */
+    .next-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      margin-top: 48px;
+    }
+    .next-card {
+      background: var(--surface);
+      padding: 36px;
+    }
+    .next-card:first-child { border-radius: 12px 0 0 12px; }
+    .next-card:last-child { border-radius: 0 12px 12px 0; }
+    .next-card-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--kl-purple-light);
+      margin-bottom: 14px;
+    }
+    .next-card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .next-card-body {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    .case-footer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--stroke);
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .footer-credits { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .footer-credits strong { color: var(--text); }
+    .footer-btns {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--kl-purple), var(--kl-purple-light));
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.9; transform: scale(1.03); }
+    .cta-btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid var(--stroke);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 14px 28px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .cta-btn-ghost:hover { color: var(--text); border-color: #444; }
+
+    /* ── SCROLL REVEAL ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.25,0.1,0.25,1), transform 0.8s cubic-bezier(0.25,0.1,0.25,1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 0 20px 60px; }
+      .hero-meta-item { min-width: 140px; padding: 16px 16px 16px 0; }
+      .overview-inner { grid-template-columns: 1fr; gap: 32px; }
+      .overview-band { padding: 60px 20px; }
+      .section { padding: 70px 20px; }
+      .image-section { padding: 50px 20px; }
+      .challenge-grid { grid-template-columns: 1fr; }
+      .role-grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr; }
+      .stat-card:first-child { border-radius: 12px 12px 0 0; }
+      .stat-card:last-child { border-radius: 0 0 12px 12px; }
+      .next-cards { grid-template-columns: 1fr; }
+      .next-card:first-child { border-radius: 12px 12px 0 0; }
+      .next-card:last-child { border-radius: 0 0 12px 12px; }
+      .process-step { grid-template-columns: 44px 1fr; gap: 16px; padding: 28px 20px; }
+      .results-section { padding: 70px 20px; }
+      .case-footer { flex-direction: column; align-items: flex-start; padding: 60px 20px; }
+      .image-section-header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span data-i18n="nav.back">Back to portfolio</span>
+    </a>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button type="button" class="lang-switch-btn" data-lang="en" aria-label="English" title="English" onclick="__setLang('en')">
+          <svg viewBox="0 0 60 30" aria-hidden="true">
+            <rect width="60" height="30" fill="#00247d" />
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" />
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2" />
+            <path d="M30,0 L30,30 M0,15 L60,15" stroke="#fff" stroke-width="10" />
+            <path d="M30,0 L30,30 M0,15 L60,15" stroke="#cf142b" stroke-width="6" />
+          </svg>
+        </button>
+        <button type="button" class="lang-switch-btn" data-lang="de" aria-label="Deutsch" title="Deutsch" onclick="__setLang('de')">
+          <svg viewBox="0 0 5 3" aria-hidden="true">
+            <rect width="5" height="1" y="0" fill="#000000" />
+            <rect width="5" height="1" y="1" fill="#DD0000" />
+            <rect width="5" height="1" y="2" fill="#FFCE00" />
+          </svg>
+        </button>
+      </div>
+      <a href="https://www.figma.com/design/NsQFVMlU5cyfluZXC1JOjj/Kinderlink?node-id=220-3" target="_blank" rel="noopener" class="nav-site">
+        <span data-i18n="nav.figma">View Figma designs</span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <p class="hero-eyebrow fade-up"><span class="accent-line"></span><span data-i18n="hero.eyebrow">Case Study · UX/UI &amp; Frontend Design</span></p>
+    <h1 class="hero-title fade-up">
+      Kinder<span class="accent-text">Link</span>
+    </h1>
+    <div class="hero-meta fade-up">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.product.label">Product</div>
+        <div class="hero-meta-value">KinderLink</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.year.label">Year</div>
+        <div class="hero-meta-value">2025</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.role.label">Role</div>
+        <div class="hero-meta-value" data-i18n="hero.role.value">UX/UI &amp; Frontend Designer</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.platform.label">Platform</div>
+        <div class="hero-meta-value">iOS &amp; Android · Flutter</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.status.label">Status</div>
+        <div class="hero-meta-value" data-i18n="hero.status.value">Frontend complete · Backend in dev</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW BAND -->
+  <div class="overview-band">
+    <div class="overview-inner fade-up">
+      <p class="overview-lead font-display italic" data-i18n="overview.lead">
+        One product. Four roles. Two emotional registers. Built to feel like it belongs to each person who opens it.
+      </p>
+      <div class="overview-body">
+        <p data-i18n="overview.p1">KinderLink is a mobile application built for childcare centers and family-services organizations — a single platform that serves parents, staff and teachers, administrators, and business owners, each with their own focused experience.</p>
+        <p data-i18n="overview.p2">What makes KinderLink genuinely hard is that it can't just be one app split into tabs. A parent picking up their child and a caseworker documenting a family visit have nothing in common emotionally or operationally. The product has to feel right for both — at the same time, from the same codebase.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE CHALLENGE -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="challenge.eyebrow">The Challenge</span></p>
+    <h2 class="section-title" data-i18n="challenge.title">Three design <span class="font-display italic">tensions</span> to resolve</h2>
+    <div class="section-body">
+      <p data-i18n="challenge.intro">Most multi-role apps collapse under their own complexity — they try to serve everyone and end up serving no one well. KinderLink required a different approach from the first wireframe.</p>
+    </div>
+    <div class="challenge-grid">
+      <div class="challenge-card">
+        <div class="challenge-num">01</div>
+        <div class="challenge-title" data-i18n="challenge.1.title">Serve four roles in one app without bloat</div>
+        <div class="challenge-desc" data-i18n="challenge.1.desc">Parents, staff, admins, and business owners each have distinct tasks, permissions, and priorities. The challenge was designing an experience that feels tailored to each role without shipping four separate apps — or one confusing super-app.</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-num">02</div>
+        <div class="challenge-title" data-i18n="challenge.2.title">Hold two very different emotional registers</div>
+        <div class="challenge-desc" data-i18n="challenge.2.desc">A parent checking in their child expects warmth, reassurance, and simplicity. A caseworker documenting a court-mandated visit needs precision, formality, and auditability. Both live in the same app. The visual and interaction language had to flex between registers without feeling inconsistent.</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-num">03</div>
+        <div class="challenge-title" data-i18n="challenge.3.title">Make complex multi-person workflows feel simple</div>
+        <div class="challenge-desc" data-i18n="challenge.3.desc">Visitation scheduling, attendance tracking, report generation, approval chains — these are genuinely complex multi-step, multi-actor workflows. Designing them to feel obvious and low-friction was the hardest UX problem in the product.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USERS & ROLES -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="roles.eyebrow">Users &amp; Roles</span></p>
+    <h2 class="section-title" data-i18n="roles.title">Four roles, four <span class="font-display italic">focused experiences</span></h2>
+    <div class="section-body">
+      <p data-i18n="roles.intro">Rather than designing one interface and gating features by role, I designed each role's experience as a distinct surface — same design system, different information architecture, different emotional register.</p>
+    </div>
+    <div class="role-grid">
+      <div class="role-card">
+        <div class="role-card-name">
+          <div class="role-dot"></div>
+          <span data-i18n="roles.parents.name">Parents</span>
+        </div>
+        <ul class="role-card-list">
+          <li data-i18n="roles.parents.1">Dashboard showing their child's daily status at a glance</li>
+          <li data-i18n="roles.parents.2">Check-in and check-out flows with QR or PIN confirmation</li>
+          <li data-i18n="roles.parents.3">Real-time attendance and pickup notifications</li>
+          <li data-i18n="roles.parents.4">Messaging with staff and teachers</li>
+          <li data-i18n="roles.parents.5">Visitation scheduling for co-parenting or supervised visits</li>
+          <li data-i18n="roles.parents.6">Access to their child's reports and activity logs</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-card-name">
+          <div class="role-dot"></div>
+          <span data-i18n="roles.staff.name">Staff &amp; Teachers</span>
+        </div>
+        <ul class="role-card-list">
+          <li data-i18n="roles.staff.1">Classroom attendance log with quick mark-present/absent controls</li>
+          <li data-i18n="roles.staff.2">Daily activity and incident documentation</li>
+          <li data-i18n="roles.staff.3">Messaging thread with parents and admins</li>
+          <li data-i18n="roles.staff.4">Visitation approval queue — flag, approve, or escalate</li>
+          <li data-i18n="roles.staff.5">Case report entry: both empty-state prompts and filled-state review</li>
+          <li data-i18n="roles.staff.6">Notification management for pickups and schedule changes</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-card-name">
+          <div class="role-dot"></div>
+          <span data-i18n="roles.admins.name">Admins</span>
+        </div>
+        <ul class="role-card-list">
+          <li data-i18n="roles.admins.1">Organization-wide attendance dashboard across classrooms</li>
+          <li data-i18n="roles.admins.2">Full visitation schedule and approval oversight</li>
+          <li data-i18n="roles.admins.3">Staff management and role assignment</li>
+          <li data-i18n="roles.admins.4">Reports and analytics: enrollment, attendance trends, incidents</li>
+          <li data-i18n="roles.admins.5">Document and compliance management</li>
+          <li data-i18n="roles.admins.6">Cross-role messaging and broadcast announcements</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-card-name">
+          <div class="role-dot"></div>
+          <span data-i18n="roles.owners.name">Business Owners</span>
+        </div>
+        <ul class="role-card-list">
+          <li data-i18n="roles.owners.1">High-level analytics: enrollment rates, capacity utilization, revenue trends</li>
+          <li data-i18n="roles.owners.2">Multi-location or multi-room overview dashboard</li>
+          <li data-i18n="roles.owners.3">Staff performance and compliance reporting</li>
+          <li data-i18n="roles.owners.4">Financial summaries and billing status</li>
+          <li data-i18n="roles.owners.5">Strategic view of case management workload</li>
+          <li data-i18n="roles.owners.6">System-level settings and permissions management</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="process.eyebrow">Process &amp; Approach</span></p>
+    <h2 class="section-title" data-i18n="process.title">Thinking before <span class="font-display italic">designing</span></h2>
+
+    <div class="pull-quote">
+      <p data-i18n="process.quote">"You can't design for four roles by imagining four users. You have to design for four contexts — because context is what changes what people need from a screen."</p>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-content-title" data-i18n="process.step1.title">Mapping roles to needs</div>
+          <div class="step-content-body" data-i18n="process.step1.body">I started by mapping each role's core job-to-be-done — not features, but the moment when a user's day goes right because the app helped. For parents: their child is safe and they know it. For staff: they can focus on kids, not paperwork. For admins: nothing falls through the cracks. For owners: the business is healthy and compliant. These goal statements became the design north star for each role.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-content-title" data-i18n="process.step2.title">Designing the dual emotional register</div>
+          <div class="step-content-body" data-i18n="process.step2.body">The parent and caseworker registers demanded different design vocabularies. For parent-facing screens: rounded forms, warmer tones, reassuring microcopy, low information density. For case management and admin screens: precision layout, structured data, clinical clarity. I established this distinction early in the design system so components could flex without inconsistency — same tokens, different application.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-content-title" data-i18n="process.step3.title">Taming the hardest flow: visitation scheduling &amp; approval</div>
+          <div class="step-content-body" data-i18n="process.step3.body">The visitation workflow is KinderLink's most complex: a parent requests a visit, a caseworker or admin reviews and approves (or flags), a schedule is confirmed, and all parties get notified. Getting this wrong meant either anxiety for parents or liability for the organization. I mapped every state — pending, approved, flagged, rescheduled, completed — and designed each one as a first-class screen rather than a branching afterthought.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-content-title" data-i18n="process.step4.title">Designing empty and filled states as first-class screens</div>
+          <div class="step-content-body" data-i18n="process.step4.body">Case reports have two modes that are both important: the empty prompt that guides a first entry, and the filled review that must be scannable for anyone auditing later. I treated these as distinct design problems. Empty states include structured prompts and required-field guidance. Filled states use clear typographic hierarchy and status indicators to support quick review without requiring re-entry.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">5</div>
+        <div>
+          <div class="step-content-title" data-i18n="process.step5.title">Building a design system for scale</div>
+          <div class="step-content-body" data-i18n="process.step5.body">KinderLink needed a design system that could express both emotional registers without maintaining two separate component libraries. I built a unified system in Figma with contextual token variants — the same button component, for example, renders with different border-radius and color treatment depending on whether it appears in a parent-facing or case-management context. This made handoff clean and engineering implementation consistent.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">6</div>
+        <div>
+          <div class="step-content-title" data-i18n="process.step6.title">Designing for handoff</div>
+          <div class="step-content-body" data-i18n="process.step6.body">Because the backend is in active development by a separate engineering team, handoff quality was critical. Every screen in Figma is annotated with interaction notes, state variants (default, loading, error, empty, filled), and component specs. I documented spacing tokens, color semantics, and motion guidance so the engineering team could build without ambiguity — and without me in the room.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY SCREENS -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="decisions.eyebrow">Key Screens &amp; Decisions</span></p>
+    <h2 class="section-title" data-i18n="decisions.title">Decisions that <span class="font-display italic">shaped the product</span></h2>
+    <div class="decision-grid">
+
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.1.tag">Role Dashboards</span>
+        <div class="decision-title" data-i18n="decisions.1.title">One app, four front doors</div>
+        <div class="decision-body" data-i18n="decisions.1.body">Each role lands on a dashboard designed specifically for their context. A parent's dashboard leads with their child's current status and today's schedule. A business owner's dashboard leads with an analytics summary. Rather than showing every role the same home screen with different tabs, I gave each role a different opening frame — the same nav chrome, completely different content hierarchy. This reduced cognitive overhead from the first tap.</div>
+      </div>
+
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.2.tag">Attendance</span>
+        <div class="decision-title" data-i18n="decisions.2.title">Attendance logs built for speed under pressure</div>
+        <div class="decision-body" data-i18n="decisions.2.body">Staff take attendance in the middle of an active classroom. The attendance log needed to support batch marking — mark-all-present with one tap, then exceptions — rather than a per-child confirmation flow. I also built status chips (present, absent, late, early pickup) as large touch targets with clear color coding, so a staff member can update records accurately with a glance, even when distracted.</div>
+      </div>
+
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.3.tag">Analytics</span>
+        <div class="decision-title" data-i18n="decisions.3.title">Reports that answer questions without navigation</div>
+        <div class="decision-body" data-i18n="decisions.3.body">Admin and owner reports are often consulted under time pressure — a licensing review, a board meeting, a compliance audit. I designed the reports and analytics screens around answerable questions, not data tables: "What was attendance this week?" "Which children had incidents this month?" Each report surface leads with the answer, then offers the detail. Charts use clear labeling and accessible color choices so findings are readable without interpretation.</div>
+      </div>
+
+      <div class="decision-item">
+        <span class="decision-tag orange" data-i18n="decisions.4.tag">Visitation</span>
+        <div class="decision-title" data-i18n="decisions.4.title">New Visitation, Approvals &amp; Visit Details as a three-act flow</div>
+        <div class="decision-body" data-i18n="decisions.4.body">I designed the visitation workflow as a three-act sequence: <strong>New Visitation</strong> (request creation — structured form with required fields, contact association, and scheduling), <strong>Approvals</strong> (reviewer queue — sortable by status, with quick-approve and flag actions without leaving the list), and <strong>Visit Details</strong> (the record of a completed visit, including notes, duration, outcome, and any escalation flags). Treating these as a coherent three-screen flow rather than separate features made the approval chain feel navigable.</div>
+      </div>
+
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.5.tag">Case Reports</span>
+        <div class="decision-title" data-i18n="decisions.5.title">Empty and filled states as distinct design surfaces</div>
+        <div class="decision-body" data-i18n="decisions.5.body">A case report in its empty state is a guidance document — it should prompt good documentation, catch omissions, and surface required fields clearly. A case report in its filled state is a legal record — it should be scannable, unambiguous, and organized for review. I designed both explicitly. The empty state uses progressive disclosure with section-by-section prompts. The filled state uses a clean read-only layout with status stamps and a clear audit trail header.</div>
+      </div>
+
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="decisions.6.tag">Messaging</span>
+        <div class="decision-title" data-i18n="decisions.6.title">Messaging scoped to context, not inbox</div>
+        <div class="decision-body" data-i18n="decisions.6.body">Rather than a single unified inbox across all roles, KinderLink's messaging is contextually scoped. A parent's messages appear within their child's profile context. A staff member's messages are filtered by classroom or case. This scoping reduces noise dramatically — you see the conversation you need for the task you're doing, not a river of all messages across every context. It also simplifies notification design: messages surface in the right place, at the right moment.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- IMAGE PLACEHOLDER SECTION -->
+  <div class="image-section fade-up">
+    <div class="image-section-header">
+      <span class="image-section-label" data-i18n="image.label">Screen previews</span>
+      <a href="https://www.figma.com/design/NsQFVMlU5cyfluZXC1JOjj/Kinderlink?node-id=220-3" target="_blank" rel="noopener" class="figma-btn">
+        <span data-i18n="image.figma">View in Figma</span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <img src="uploads/kinderlink-hero.png" alt="KinderLink app screens — New Visitation form, role-based admin dashboard, and caseworker visitation approvals" style="display:block;width:100%;height:auto;border-radius:20px;margin:40px 0;" />
+  </div>
+
+  <!-- OUTCOME -->
+  <section class="results-section">
+    <div class="results-inner">
+      <p class="section-eyebrow fade-up"><span class="accent-line"></span><span data-i18n="outcome.eyebrow">Outcome</span></p>
+      <h2 class="section-title fade-up" data-i18n="outcome.title">What was <span class="font-display italic">built</span></h2>
+
+      <div class="stat-row fade-up">
+        <div class="stat-card">
+          <span class="stat-value accent-text">4</span>
+          <span class="stat-value" style="font-family:'Instrument Serif',serif;font-size:clamp(22px,2.5vw,32px);color:var(--text);display:block;margin-bottom:8px;margin-top:-6px;" data-i18n="outcome.stat1.value2">Roles</span>
+          <div class="stat-label" data-i18n="outcome.stat1.label">Designed as distinct, focused experiences</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" style="font-size:clamp(22px,3vw,36px);color:var(--text);" data-i18n="outcome.stat2.value1">Full</span>
+          <span class="stat-value" style="font-family:'Instrument Serif',serif;font-size:clamp(18px,2.5vw,28px);color:var(--text);display:block;margin-bottom:8px;margin-top:-6px;" data-i18n="outcome.stat2.value2">UI/UX</span>
+          <div class="stat-label" data-i18n="outcome.stat2.label">Complete build-ready design system in Figma</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value accent-text">2</span>
+          <span class="stat-value" style="font-family:'Instrument Serif',serif;font-size:clamp(22px,2.5vw,32px);color:var(--text);display:block;margin-bottom:8px;margin-top:-6px;" data-i18n="outcome.stat3.value2">Domains</span>
+          <div class="stat-label" data-i18n="outcome.stat3.label">Childcare ops + family-services case management</div>
+        </div>
+      </div>
+
+      <div class="section-body fade-up">
+        <p data-i18n="outcome.p1">KinderLink's frontend design is complete — every role dashboard, every key screen, every empty and filled state, every interaction variant. The design system in Figma is build-ready: components are annotated, tokens are documented, and handoff specs are attached to every frame.</p>
+        <p data-i18n="outcome.p2">The project demonstrates what it looks like to design for genuine complexity without defaulting to complexity. Four distinct roles. Two emotional registers. Dozens of multi-step workflows. All of it resolved into an app that, for each person who opens it, feels like it was made for them.</p>
+        <p data-i18n="outcome.p3">Designing KinderLink also sharpened my ability to think in systems under product constraints. When every design decision affects four roles and two registers simultaneously, you have to hold more context than a typical single-audience product demands — and you have to build a design system that can carry that weight without becoming rigid.</p>
+      </div>
+
+      <div class="status-note fade-up">
+        <div class="status-note-icon"></div>
+        <p data-i18n="outcome.status"><strong>Status note:</strong> I designed the full frontend and UX/UI; the backend is in active development by the engineering team. The Figma file linked above reflects the complete, build-ready design handoff.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S NEXT -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="next.eyebrow">What's Next</span></p>
+    <h2 class="section-title" data-i18n="next.title">After the <span class="font-display italic">build</span></h2>
+    <div class="section-body" style="margin-bottom:0;">
+      <p data-i18n="next.intro">Once the backend reaches a testable state, three design phases are queued.</p>
+    </div>
+    <div class="next-cards">
+      <div class="next-card">
+        <div class="next-card-label" data-i18n="next.a.label">Phase A</div>
+        <div class="next-card-title" data-i18n="next.a.title">Usability testing</div>
+        <div class="next-card-body" data-i18n="next.a.body">Structured task-based sessions with representatives from each role — parents, staff, admins, and owners — to validate navigation assumptions and surface friction in real use. Particular focus on the visitation and case report flows, which carry the most workflow complexity.</div>
+      </div>
+      <div class="next-card">
+        <div class="next-card-label" data-i18n="next.b.label">Phase B</div>
+        <div class="next-card-title" data-i18n="next.b.title">Accessibility passes</div>
+        <div class="next-card-body" data-i18n="next.b.body">A systematic accessibility audit across all four role experiences: color contrast ratios, touch target sizing, screen reader compatibility for case report fields, and focus management through multi-step forms. Given the case management context, accessibility isn't optional — it's a compliance expectation.</div>
+      </div>
+      <div class="next-card">
+        <div class="next-card-label" data-i18n="next.c.label">Phase C</div>
+        <div class="next-card-title" data-i18n="next.c.title">Notification design</div>
+        <div class="next-card-body" data-i18n="next.c.body">Notifications are a first-class design surface in a product this operationally dense. Each role has different urgency thresholds and different notification preferences. Designing the notification taxonomy — what triggers a push, what stays in-app, what requires acknowledgment — is a distinct design workstream deferred to post-backend.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="case-footer fade-up">
+    <div class="footer-credits">
+      <strong>KinderLink</strong><br/>
+      <span data-i18n="footer.credits">UX/UI &amp; Frontend Design by <strong>Shinbu Abdul-Muqit Fuseini</strong></span><br/>
+      iOS &amp; Android · Flutter · 2025
+    </div>
+    <div class="footer-btns">
+      <a href="https://www.figma.com/design/NsQFVMlU5cyfluZXC1JOjj/Kinderlink?node-id=220-3" target="_blank" rel="noopener" class="cta-btn">
+        <span data-i18n="footer.cta.figma">View Figma designs</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="index.html" class="cta-btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span data-i18n="footer.cta.back">Back to portfolio</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- LANGUAGE DATA + RUNTIME (shared key/pattern with index.html's switcher) -->
+  <script>
+    window.I18N_DE = {
+      "nav.back": "Zurück zum Portfolio",
+      "nav.figma": "Figma-Designs ansehen",
+      "hero.eyebrow": "Case Study · UX/UI &amp; Frontend-Design",
+      "hero.product.label": "Produkt",
+      "hero.year.label": "Jahr",
+      "hero.role.label": "Rolle",
+      "hero.role.value": "UX/UI- &amp; Frontend-Designer",
+      "hero.platform.label": "Plattform",
+      "hero.status.label": "Status",
+      "hero.status.value": "Frontend fertig · Backend in Entwicklung",
+      "overview.lead": "Ein Produkt. Vier Rollen. Zwei emotionale Register. Gestaltet, damit es sich für jede Person, die es öffnet, wie das eigene anfühlt.",
+      "overview.p1": "KinderLink ist eine mobile Anwendung für Kindertagesstätten und Organisationen im Bereich Familienhilfe — eine einzige Plattform, die Eltern, Betreuungskräfte und Lehrkräfte, Verwaltung und Geschäftsinhaber:innen bedient, jeweils mit einer eigenen, fokussierten Erfahrung.",
+      "overview.p2": "Was KinderLink wirklich schwierig macht: Es kann nicht einfach eine App sein, die in Tabs aufgeteilt ist. Ein Elternteil, das sein Kind abholt, und eine Fallbetreuerin, die einen Familienbesuch dokumentiert, haben emotional wie operativ nichts gemeinsam. Das Produkt muss sich für beide richtig anfühlen — gleichzeitig, aus derselben Codebasis.",
+      "challenge.eyebrow": "Die Herausforderung",
+      "challenge.title": "Drei gestalterische <span class=\"font-display italic\">Spannungsfelder</span> zu lösen",
+      "challenge.intro": "Die meisten Apps mit mehreren Rollen brechen unter ihrer eigenen Komplexität zusammen — sie versuchen, allen gerecht zu werden, und werden am Ende niemandem wirklich gerecht. KinderLink verlangte von der ersten Skizze an einen anderen Ansatz.",
+      "challenge.1.title": "Vier Rollen in einer App bedienen, ohne aufzublähen",
+      "challenge.1.desc": "Eltern, Betreuungskräfte, Verwaltung und Geschäftsinhaber:innen haben jeweils eigene Aufgaben, Berechtigungen und Prioritäten. Die Herausforderung bestand darin, eine Erfahrung zu gestalten, die sich für jede Rolle passgenau anfühlt — ohne vier separate Apps oder eine verwirrende Super-App zu bauen.",
+      "challenge.2.title": "Zwei sehr unterschiedliche emotionale Register zugleich bedienen",
+      "challenge.2.desc": "Ein Elternteil, das sein Kind einchecken lässt, erwartet Wärme, Beruhigung und Einfachheit. Eine Fallbetreuerin, die einen gerichtlich angeordneten Besuch dokumentiert, braucht Präzision, Formalität und lückenlose Nachvollziehbarkeit. Beides lebt in derselben App. Die visuelle und interaktive Sprache musste zwischen den Registern wechseln können, ohne inkonsistent zu wirken.",
+      "challenge.3.title": "Komplexe, mehrpersonige Arbeitsabläufe einfach wirken lassen",
+      "challenge.3.desc": "Terminplanung für Besuche, Anwesenheitserfassung, Berichtserstellung, Freigabeketten — das sind echte, mehrstufige Arbeitsabläufe mit mehreren Beteiligten. Sie so zu gestalten, dass sie selbstverständlich und reibungslos wirken, war das schwierigste UX-Problem im gesamten Produkt.",
+      "roles.eyebrow": "Nutzer:innen &amp; Rollen",
+      "roles.title": "Vier Rollen, vier <span class=\"font-display italic\">fokussierte Erfahrungen</span>",
+      "roles.intro": "Statt eine einzige Oberfläche zu gestalten und Funktionen je nach Rolle freizuschalten, habe ich die Erfahrung jeder Rolle als eigenständige Ebene entworfen — dasselbe Designsystem, aber unterschiedliche Informationsarchitektur und unterschiedliches emotionales Register.",
+      "roles.parents.name": "Eltern",
+      "roles.parents.1": "Dashboard mit dem Tagesstatus ihres Kindes auf einen Blick",
+      "roles.parents.2": "Check-in- und Check-out-Abläufe mit QR-Code- oder PIN-Bestätigung",
+      "roles.parents.3": "Anwesenheits- und Abholbenachrichtigungen in Echtzeit",
+      "roles.parents.4": "Nachrichtenaustausch mit Betreuungskräften und Lehrkräften",
+      "roles.parents.5": "Terminplanung für Besuche bei gemeinsamem Sorgerecht oder begleitetem Umgang",
+      "roles.parents.6": "Zugriff auf die Berichte und Aktivitätsprotokolle ihres Kindes",
+      "roles.staff.name": "Betreuungskräfte &amp; Lehrkräfte",
+      "roles.staff.1": "Anwesenheitsliste der Gruppe mit schnellen Anwesend/Abwesend-Reglern",
+      "roles.staff.2": "Tägliche Aktivitäts- und Vorfallsdokumentation",
+      "roles.staff.3": "Nachrichtenverlauf mit Eltern und Verwaltung",
+      "roles.staff.4": "Freigabewarteschlange für Besuche — markieren, genehmigen oder eskalieren",
+      "roles.staff.5": "Erfassung von Fallberichten: sowohl leere Eingabemasken als auch die Durchsicht ausgefüllter Berichte",
+      "roles.staff.6": "Benachrichtigungsverwaltung für Abholungen und Terminänderungen",
+      "roles.admins.name": "Verwaltung",
+      "roles.admins.1": "Organisationsweites Anwesenheits-Dashboard über alle Gruppen hinweg",
+      "roles.admins.2": "Vollständiger Besuchsplan mit Freigabeaufsicht",
+      "roles.admins.3": "Personalverwaltung und Rollenzuweisung",
+      "roles.admins.4": "Berichte und Analysen: Anmeldungen, Anwesenheitstrends, Vorfälle",
+      "roles.admins.5": "Dokumenten- und Compliance-Verwaltung",
+      "roles.admins.6": "Rollenübergreifende Nachrichten und Rundschreiben",
+      "roles.owners.name": "Geschäftsinhaber:innen",
+      "roles.owners.1": "Übergeordnete Analysen: Anmeldequoten, Kapazitätsauslastung, Umsatzentwicklung",
+      "roles.owners.2": "Übersichts-Dashboard für mehrere Standorte oder Gruppen",
+      "roles.owners.3": "Berichte zu Mitarbeiterleistung und Compliance",
+      "roles.owners.4": "Finanzübersichten und Abrechnungsstatus",
+      "roles.owners.5": "Strategischer Blick auf die Fallmanagement-Auslastung",
+      "roles.owners.6": "Systemweite Einstellungen- und Berechtigungsverwaltung",
+      "process.eyebrow": "Prozess &amp; Vorgehen",
+      "process.title": "Denken vor dem <span class=\"font-display italic\">Gestalten</span>",
+      "process.quote": "„Man kann nicht für vier Rollen gestalten, indem man sich vier Nutzer:innen vorstellt. Man muss für vier Kontexte gestalten — denn der Kontext bestimmt, was Menschen von einem Bildschirm brauchen.“",
+      "process.step1.title": "Rollen auf Bedürfnisse abbilden",
+      "process.step1.body": "Ich habe zunächst die zentrale Aufgabe jeder Rolle erfasst — nicht Funktionen, sondern den Moment, in dem der Tag einer Person gelingt, weil die App geholfen hat. Für Eltern: Ihr Kind ist sicher, und sie wissen es. Für Betreuungskräfte: Sie können sich auf die Kinder konzentrieren, nicht auf Papierkram. Für die Verwaltung: Nichts geht unter. Für Inhaber:innen: Das Geschäft ist gesund und regelkonform. Diese Zielaussagen wurden zum gestalterischen Leitstern für jede Rolle.",
+      "process.step2.title": "Das doppelte emotionale Register gestalten",
+      "process.step2.body": "Das Register für Eltern und das für Fallbetreuer:innen verlangten unterschiedliche Gestaltungssprachen. Für elternseitige Bildschirme: abgerundete Formulare, wärmere Farbtöne, beruhigende Mikrotexte, niedrige Informationsdichte. Für Fallmanagement- und Verwaltungsbildschirme: präzises Layout, strukturierte Daten, klinische Klarheit. Ich habe diese Unterscheidung früh im Designsystem verankert, damit Komponenten flexibel bleiben, ohne inkonsistent zu wirken — gleiche Tokens, unterschiedliche Anwendung.",
+      "process.step3.title": "Den schwierigsten Ablauf zähmen: Besuchsplanung &amp; Freigabe",
+      "process.step3.body": "Der Besuchsablauf ist der komplexeste Prozess in KinderLink: Ein Elternteil beantragt einen Besuch, eine Fallbetreuerin oder die Verwaltung prüft und genehmigt (oder markiert ihn), ein Termin wird bestätigt, und alle Beteiligten werden benachrichtigt. Hier Fehler zu machen, hätte entweder Ängste bei Eltern oder Haftungsrisiken für die Organisation bedeutet. Ich habe jeden Zustand kartiert — ausstehend, genehmigt, markiert, verschoben, abgeschlossen — und jeden als vollwertigen Bildschirm gestaltet, statt als nachträglich angehängten Sonderfall.",
+      "process.step4.title": "Leere und ausgefüllte Zustände als vollwertige Bildschirme gestalten",
+      "process.step4.body": "Fallberichte haben zwei gleichermaßen wichtige Modi: die leere Eingabemaske, die eine erste Erfassung anleitet, und die ausgefüllte Ansicht, die für spätere Prüfungen leicht überblickbar sein muss. Ich habe beides als eigenständige Gestaltungsaufgaben behandelt. Leere Zustände enthalten strukturierte Hinweise und Anleitungen zu Pflichtfeldern. Ausgefüllte Zustände nutzen eine klare typografische Hierarchie und Statusanzeigen, damit eine schnelle Durchsicht ohne erneute Eingabe möglich ist.",
+      "process.step5.title": "Ein Designsystem für Skalierung aufbauen",
+      "process.step5.body": "KinderLink brauchte ein Designsystem, das beide emotionalen Register ausdrücken kann, ohne zwei getrennte Komponentenbibliotheken zu pflegen. Ich habe in Figma ein einheitliches System mit kontextabhängigen Token-Varianten gebaut — dieselbe Button-Komponente etwa erscheint mit unterschiedlichem Eckenradius und unterschiedlicher Farbgebung, je nachdem, ob sie in einem elternseitigen oder einem Fallmanagement-Kontext auftritt. Das machte die Übergabe sauber und die technische Umsetzung konsistent.",
+      "process.step6.title": "Für die Übergabe gestalten",
+      "process.step6.body": "Da das Backend von einem separaten Entwicklungsteam aktiv weiterentwickelt wird, war die Qualität der Übergabe entscheidend. Jeder Bildschirm in Figma ist mit Interaktionshinweisen, Zustandsvarianten (Standard, Ladezustand, Fehler, leer, ausgefüllt) und Komponentenspezifikationen versehen. Ich habe Abstands-Tokens, Farbsemantik und Bewegungsrichtlinien dokumentiert, damit das Entwicklungsteam ohne Unklarheiten bauen kann — auch ohne mich im Raum.",
+      "decisions.eyebrow": "Zentrale Bildschirme &amp; Entscheidungen",
+      "decisions.title": "Entscheidungen, die <span class=\"font-display italic\">das Produkt geprägt haben</span>",
+      "decisions.1.tag": "Rollen-Dashboards",
+      "decisions.1.title": "Eine App, vier Eingangstüren",
+      "decisions.1.body": "Jede Rolle landet auf einem Dashboard, das speziell für ihren Kontext gestaltet ist. Das Dashboard eines Elternteils führt mit dem aktuellen Status des Kindes und dem heutigen Zeitplan. Das Dashboard eines Geschäftsinhabers führt mit einer Analyseübersicht. Statt jeder Rolle denselben Startbildschirm mit unterschiedlichen Tabs zu zeigen, habe ich jeder Rolle einen eigenen Einstiegsrahmen gegeben — gleiches Navigations-Grundgerüst, völlig unterschiedliche Inhaltshierarchie. Das reduziert die kognitive Last vom ersten Tippen an.",
+      "decisions.2.tag": "Anwesenheit",
+      "decisions.2.title": "Anwesenheitslisten für Tempo unter Druck gebaut",
+      "decisions.2.body": "Betreuungskräfte erfassen die Anwesenheit mitten im laufenden Gruppenalltag. Die Anwesenheitsliste musste Sammelmarkierung unterstützen — alle mit einem Tippen als anwesend markieren, danach Ausnahmen — statt eines Bestätigungsablaufs pro Kind. Ich habe außerdem Status-Chips (anwesend, abwesend, verspätet, vorzeitige Abholung) als große Touch-Ziele mit klarer Farbcodierung gestaltet, damit eine Betreuungskraft Einträge auch abgelenkt auf einen Blick korrekt aktualisieren kann.",
+      "decisions.3.tag": "Analysen",
+      "decisions.3.title": "Berichte, die Fragen beantworten, ohne zu navigieren",
+      "decisions.3.body": "Berichte für Verwaltung und Geschäftsinhaber:innen werden oft unter Zeitdruck konsultiert — eine Zulassungsprüfung, eine Vorstandssitzung, ein Compliance-Audit. Ich habe die Berichts- und Analysebildschirme um beantwortbare Fragen herum gestaltet, nicht um Datentabellen: „Wie war die Anwesenheit diese Woche?“, „Bei welchen Kindern gab es diesen Monat Vorfälle?“ Jede Berichtsansicht führt mit der Antwort und bietet danach die Details. Diagramme nutzen klare Beschriftungen und barrierefreie Farbwahl, damit Ergebnisse ohne Interpretation lesbar sind.",
+      "decisions.4.tag": "Besuche",
+      "decisions.4.title": "Neuer Besuch, Freigaben &amp; Besuchsdetails als dreiteiliger Ablauf",
+      "decisions.4.body": "Ich habe den Besuchsablauf als dreiteilige Sequenz gestaltet: <strong>Neuer Besuch</strong> (Antragstellung — strukturiertes Formular mit Pflichtfeldern, Kontaktzuordnung und Terminplanung), <strong>Freigaben</strong> (Prüfwarteschlange — nach Status sortierbar, mit Schnellgenehmigung und Markierungsfunktion, ohne die Liste zu verlassen) und <strong>Besuchsdetails</strong> (die Aufzeichnung eines abgeschlossenen Besuchs, einschließlich Notizen, Dauer, Ergebnis und etwaiger Eskalationsmarkierungen). Diese drei Bildschirme als zusammenhängenden Ablauf statt als getrennte Funktionen zu behandeln, machte die Freigabekette nachvollziehbar.",
+      "decisions.5.tag": "Fallberichte",
+      "decisions.5.title": "Leere und ausgefüllte Zustände als eigenständige Gestaltungsflächen",
+      "decisions.5.body": "Ein Fallbericht im leeren Zustand ist ein Leitfaden — er soll gute Dokumentation anregen, Lücken auffangen und Pflichtfelder klar sichtbar machen. Ein Fallbericht im ausgefüllten Zustand ist ein rechtsrelevantes Dokument — er soll überschaubar, eindeutig und für die Durchsicht geordnet sein. Ich habe beides ausdrücklich gestaltet. Der leere Zustand nutzt schrittweise Offenlegung mit abschnittsweisen Hinweisen. Der ausgefüllte Zustand nutzt ein klares, schreibgeschütztes Layout mit Statusvermerken und einer eindeutigen Kopfzeile für die Nachvollziehbarkeit.",
+      "decisions.6.tag": "Nachrichten",
+      "decisions.6.title": "Nachrichten nach Kontext statt nach Posteingang strukturiert",
+      "decisions.6.body": "Statt eines einzigen gemeinsamen Posteingangs für alle Rollen ist die Nachrichtenfunktion von KinderLink kontextuell abgegrenzt. Die Nachrichten eines Elternteils erscheinen im Profilkontext des jeweiligen Kindes. Die Nachrichten einer Betreuungskraft werden nach Gruppe oder Fall gefiltert. Diese Eingrenzung reduziert den Störfaktor deutlich — man sieht das Gespräch, das man für die jeweilige Aufgabe braucht, nicht einen Strom aller Nachrichten aus jedem Kontext. Das vereinfacht auch das Benachrichtigungsdesign: Nachrichten erscheinen am richtigen Ort, im richtigen Moment.",
+      "image.label": "Bildschirm-Vorschauen",
+      "image.figma": "In Figma ansehen",
+      "outcome.eyebrow": "Ergebnis",
+      "outcome.title": "Was <span class=\"font-display italic\">entstanden ist</span>",
+      "outcome.stat1.value2": "Rollen",
+      "outcome.stat1.label": "Als eigenständige, fokussierte Erfahrungen gestaltet",
+      "outcome.stat2.value1": "Komplett",
+      "outcome.stat2.value2": "UI/UX",
+      "outcome.stat2.label": "Vollständiges, umsetzungsreifes Designsystem in Figma",
+      "outcome.stat3.value2": "Bereiche",
+      "outcome.stat3.label": "Kindertagesbetreuung + Fallmanagement in der Familienhilfe",
+      "outcome.p1": "Das Frontend-Design von KinderLink ist vollständig — jedes Rollen-Dashboard, jeder zentrale Bildschirm, jeder leere und ausgefüllte Zustand, jede Interaktionsvariante. Das Designsystem in Figma ist umsetzungsreif: Komponenten sind kommentiert, Tokens dokumentiert, und jedem Frame sind Übergabespezifikationen beigefügt.",
+      "outcome.p2": "Das Projekt zeigt, wie es aussieht, echte Komplexität zu gestalten, ohne selbst komplex zu werden. Vier eigenständige Rollen. Zwei emotionale Register. Dutzende mehrstufige Arbeitsabläufe. All das gelöst in einer App, die sich für jede Person, die sie öffnet, wie für sie gemacht anfühlt.",
+      "outcome.p3": "Die Arbeit an KinderLink hat auch meine Fähigkeit geschärft, unter Produktbeschränkungen in Systemen zu denken. Wenn jede Designentscheidung vier Rollen und zwei Register gleichzeitig betrifft, muss man mehr Kontext im Kopf behalten, als ein typisches Produkt für ein einzelnes Publikum verlangt — und man muss ein Designsystem bauen, das dieses Gewicht trägt, ohne starr zu werden.",
+      "outcome.status": "<strong>Statushinweis:</strong> Ich habe das gesamte Frontend sowie UX/UI gestaltet; das Backend befindet sich in aktiver Entwicklung durch das Engineering-Team. Die oben verlinkte Figma-Datei zeigt die vollständige, umsetzungsreife Design-Übergabe.",
+      "next.eyebrow": "Was als Nächstes kommt",
+      "next.title": "Nach dem <span class=\"font-display italic\">Bau</span>",
+      "next.intro": "Sobald das Backend einen testbaren Stand erreicht, stehen drei Design-Phasen an.",
+      "next.a.label": "Phase A",
+      "next.a.title": "Usability-Tests",
+      "next.a.body": "Strukturierte, aufgabenbasierte Sitzungen mit Vertreter:innen jeder Rolle — Eltern, Betreuungskräfte, Verwaltung und Inhaber:innen —, um Navigationsannahmen zu prüfen und Reibungspunkte in der echten Nutzung aufzudecken. Besonderer Fokus auf die Besuchs- und Fallbericht-Abläufe, die die größte Ablaufkomplexität tragen.",
+      "next.b.label": "Phase B",
+      "next.b.title": "Barrierefreiheits-Prüfungen",
+      "next.b.body": "Eine systematische Barrierefreiheitsprüfung über alle vier Rollenerfahrungen hinweg: Farbkontrastverhältnisse, Größe der Touch-Ziele, Screenreader-Kompatibilität für Fallbericht-Felder und Fokusführung durch mehrstufige Formulare. Angesichts des Fallmanagement-Kontexts ist Barrierefreiheit keine Option — sie ist eine Compliance-Erwartung.",
+      "next.c.label": "Phase C",
+      "next.c.title": "Benachrichtigungsdesign",
+      "next.c.body": "Benachrichtigungen sind in einem operativ so dichten Produkt eine vollwertige Gestaltungsfläche. Jede Rolle hat unterschiedliche Dringlichkeitsschwellen und unterschiedliche Benachrichtigungspräferenzen. Die Benachrichtigungstaxonomie zu gestalten — was eine Push-Nachricht auslöst, was in der App bleibt, was eine Bestätigung erfordert — ist ein eigener Design-Workstream, der auf die Zeit nach dem Backend verschoben ist.",
+      "footer.credits": "UX/UI- &amp; Frontend-Design von <strong>Shinbu Abdul-Muqit Fuseini</strong>",
+      "footer.cta.figma": "Figma-Designs ansehen",
+      "footer.cta.back": "Zurück zum Portfolio"
+    };
+
+    (function () {
+      var LANG_KEY = 'portfolio-lang';
+      function getLang() { try { return localStorage.getItem(LANG_KEY) || 'en'; } catch (e) { return 'en'; } }
+
+      var originals = null;
+      function captureOriginals() {
+        originals = {};
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          originals[el.getAttribute('data-i18n')] = el.innerHTML;
+        });
+      }
+
+      function applyLang(lang) {
+        document.documentElement.lang = lang;
+        if (!originals) captureOriginals();
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n');
+          if (lang === 'de' && window.I18N_DE && window.I18N_DE[key] != null) {
+            el.innerHTML = window.I18N_DE[key];
+          } else {
+            el.innerHTML = originals[key];
+          }
+        });
+        document.querySelectorAll('.lang-switch-btn').forEach(function (b) {
+          b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+        });
+      }
+
+      window.__setLang = function (lang) {
+        try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+        applyLang(lang);
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        applyLang(getLang());
+      });
+    })();
+  </script>
+
+  <script>
+    // Scroll reveal — same IntersectionObserver pattern as maritalsax
+    const els = document.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '-40px' });
+    els.forEach((el) => obs.observe(el));
+
+    // Hero fades in immediately on load
+    document.querySelectorAll('.hero .fade-up').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 200 + i * 150);
+    });
+  </script>
+</body>
+</html>
