@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Big Reveal! — Case Study · Shinbu Abdul-Muqit Fuseini</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --surface2: #1a1a1a;
+      --text: #f5f5f5;
+      --muted: #888;
+      --stroke: #222;
+      --rv-pink: #FF6B9D;
+      --rv-pink-light: #FF8FB1;
+      --rv-sunset: #FF8C5A;
+      --rv-blue: #7BB7E8;
+      --rv-green: #9BB876;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.6; }
+    body::-webkit-scrollbar { width: 6px; }
+    body::-webkit-scrollbar-track { background: var(--bg); }
+    body::-webkit-scrollbar-thumb { background: var(--stroke); border-radius: 3px; }
+
+    .accent-text {
+      background: linear-gradient(90deg, var(--rv-pink), var(--rv-sunset));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .accent-line {
+      display: inline-block; width: 40px; height: 1px;
+      background: linear-gradient(90deg, var(--rv-pink), var(--rv-sunset));
+      vertical-align: middle; margin-right: 12px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 40px; display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+    }
+    .nav-back { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--text); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+
+    /* ── LANGUAGE SWITCHER ── */
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+    .lang-switch {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--stroke);
+      border-radius: 999px; padding: 6px; flex-shrink: 0;
+    }
+    .lang-switch-btn {
+      width: 24px; height: 24px; border-radius: 50%; overflow: hidden;
+      border: 0; padding: 0; cursor: pointer; display: flex; opacity: 0.5;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .lang-switch-btn:hover { transform: scale(1.1); opacity: 0.85; }
+    .lang-switch-btn[aria-pressed="true"] { opacity: 1; box-shadow: 0 0 0 2px rgba(255,255,255,0.8); }
+    .lang-switch-btn svg { width: 100%; height: 100%; }
+
+    /* ── HERO ── */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 40px 80px; position: relative; overflow: hidden; }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 65% 25%, rgba(255,107,157,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 20% 75%, rgba(255,140,90,0.08) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+    }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; position: relative; }
+    .hero-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(44px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.02em; position: relative; margin-bottom: 28px; }
+    .hero-subtitle { font-size: 15px; line-height: 1.7; color: #bbb; max-width: 560px; margin-bottom: 40px; position: relative; }
+    .hero-meta { display: flex; flex-wrap: wrap; border-top: 1px solid var(--stroke); padding-top: 32px; position: relative; }
+    .hero-meta-item { flex: 1; min-width: 150px; padding: 20px 32px 20px 0; border-right: 1px solid var(--stroke); }
+    .hero-meta-item:last-child { border-right: none; }
+    .hero-meta-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .hero-meta-value { font-size: 14px; color: var(--text); font-weight: 500; }
+
+    /* ── OVERVIEW BAND ── */
+    .overview-band { background: var(--surface); border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); padding: 80px 40px; }
+    .overview-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .overview-lead { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(20px, 2.5vw, 28px); line-height: 1.4; color: var(--text); }
+    .overview-body { font-size: 15px; line-height: 1.75; color: #aaa; }
+    .overview-body p { margin-bottom: 16px; }
+    .overview-body p:last-child { margin-bottom: 0; }
+
+    /* ── SECTION ── */
+    .section { max-width: 900px; margin: 0 auto; padding: 100px 40px; }
+    .section + .section { border-top: 1px solid var(--stroke); }
+    .section-eyebrow { display: flex; align-items: center; font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; }
+    .section-title { font-family: 'Instrument Serif', serif; font-size: clamp(32px, 4vw, 52px); line-height: 1.1; margin-bottom: 40px; }
+    .section-body { font-size: 15px; line-height: 1.8; color: #aaa; }
+    .section-body p { margin-bottom: 20px; }
+    .section-body p:last-child { margin-bottom: 0; }
+
+    /* ── CHALLENGE CARDS ── */
+    .challenge-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-top: 48px; border-radius: 16px; overflow: hidden; }
+    .challenge-card { background: var(--surface); padding: 36px; border-top: 2px solid transparent; transition: border-color 0.2s; }
+    .challenge-card:hover { border-top-color: var(--rv-pink); }
+    .challenge-num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 48px; line-height: 1; color: var(--stroke); margin-bottom: 16px; }
+    .challenge-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .challenge-desc { font-size: 13px; line-height: 1.65; color: var(--muted); }
+
+    /* ── ROLE / GOALS LIST ── */
+    .goals-list { margin-top: 40px; display: flex; flex-direction: column; gap: 2px; }
+    .goal-item { display: flex; align-items: flex-start; gap: 20px; padding: 24px 28px; background: var(--surface); transition: background 0.2s; }
+    .goal-item:first-child { border-radius: 12px 12px 0 0; }
+    .goal-item:last-child { border-radius: 0 0 12px 12px; }
+    .goal-item:hover { background: var(--surface2); }
+    .goal-dot { width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, var(--rv-pink-light), var(--rv-pink)); flex-shrink: 0; margin-top: 6px; }
+    .goal-text { font-size: 14px; line-height: 1.6; color: #bbb; }
+    .goal-text strong { color: var(--text); font-weight: 600; }
+
+    /* ── PILLARS (reused for Users & Roles) ── */
+    .pillars-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-top: 48px; }
+    .pillar-card { background: var(--surface); padding: 36px; position: relative; overflow: hidden; }
+    .pillar-card:first-child { border-radius: 12px 0 0 12px; }
+    .pillar-card:last-child { border-radius: 0 12px 12px 0; }
+    .pillar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--rv-pink-light), var(--rv-sunset)); opacity: 0; transition: opacity 0.2s; }
+    .pillar-card:hover::before { opacity: 1; }
+    .pillar-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--rv-pink-light); margin-bottom: 8px; font-weight: 600; }
+    .pillar-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; color: var(--text); margin-bottom: 10px; }
+    .pillar-body { font-size: 13px; line-height: 1.65; color: var(--muted); }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote { border-left: 2px solid var(--rv-pink); padding: 24px 36px; margin: 48px 0; background: var(--surface); border-radius: 0 12px 12px 0; }
+    .pull-quote p { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(18px, 2.5vw, 24px); line-height: 1.45; color: var(--text); }
+
+    /* ── PROCESS ── */
+    .process-steps { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; }
+    .process-step { display: grid; grid-template-columns: 60px 1fr; gap: 24px; padding: 36px; background: var(--surface); align-items: start; }
+    .process-step:first-child { border-radius: 12px 12px 0 0; }
+    .process-step:last-child { border-radius: 0 0 12px 12px; }
+    .step-num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 36px; line-height: 1; color: var(--muted); padding-top: 2px; }
+    .step-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .step-body { font-size: 13px; line-height: 1.7; color: var(--muted); }
+
+    /* ── DESIGN SYSTEM ── */
+    .themes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
+    .theme-card { background: var(--surface); border-radius: 14px; padding: 20px; }
+    .theme-swatches { display: flex; gap: 6px; margin-bottom: 14px; }
+    .theme-swatch { flex: 1; height: 44px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08); }
+    .theme-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .theme-hexes { font-size: 10px; color: var(--muted); line-height: 1.6; font-family: 'SFMono-Regular', Menlo, monospace; }
+    .system-row { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--stroke); }
+    .system-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rv-pink-light); font-weight: 600; margin-bottom: 14px; }
+    .system-body { font-size: 14px; line-height: 1.75; color: #999; }
+    .type-sample { display: flex; gap: 48px; align-items: baseline; margin-top: 20px; flex-wrap: wrap; }
+    .type-sample-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .type-fraunces { font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 42px; color: var(--text); }
+    .type-inter { font-family: 'Inter', sans-serif; font-size: 15px; color: #ccc; max-width: 340px; line-height: 1.65; }
+
+    /* ── KEY FEATURES / DECISIONS ── */
+    .decisions-grid { display: flex; flex-direction: column; gap: 2px; margin-top: 48px; }
+    .decision-item { padding: 40px; background: var(--surface); }
+    .decision-item:first-child { border-radius: 12px 12px 0 0; }
+    .decision-item:last-child { border-radius: 0 0 12px 12px; }
+    .decision-tag { display: inline-block; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; background: rgba(255,107,157,0.1); color: var(--rv-pink-light); border: 1px solid rgba(255,107,157,0.25); margin-bottom: 16px; }
+    .decision-title { font-family: 'Instrument Serif', serif; font-size: clamp(20px, 2.5vw, 28px); font-style: italic; line-height: 1.2; color: var(--text); margin-bottom: 16px; }
+    .decision-body { font-size: 14px; line-height: 1.75; color: #999; }
+    .decision-media { margin-top: 24px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+    .decision-media img { width: 100%; display: block; }
+
+    /* ── SCREENS ── */
+    .screens-section { max-width: 900px; margin: 0 auto; padding: 0 40px 80px; }
+
+    /* ── OUTCOME ── */
+    .outcome-section { background: var(--surface); border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); padding: 100px 40px; }
+    .outcome-inner { max-width: 900px; margin: 0 auto; }
+
+    /* ── NEXT (4 cards, 2x2) ── */
+    .next-cards-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 48px; border-radius: 12px; overflow: hidden; }
+    .next-card { background: var(--surface); padding: 32px; }
+    .next-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .next-body { font-size: 13px; line-height: 1.65; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    .case-footer { max-width: 900px; margin: 0 auto; padding: 80px 40px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--stroke); gap: 32px; flex-wrap: wrap; }
+    .footer-credits { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .footer-credits strong { color: var(--text); }
+    .ghost-btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--stroke); color: var(--muted); font-size: 13px; padding: 14px 28px; border-radius: 99px; text-decoration: none; transition: all 0.2s; }
+    .ghost-btn:hover { color: var(--text); border-color: #444; }
+
+    /* ── SCROLL REVEAL ── */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.8s cubic-bezier(0.25,0.1,0.25,1), transform 0.8s cubic-bezier(0.25,0.1,0.25,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 0 20px 60px; }
+      .hero-meta-item { min-width: 140px; padding: 16px 16px 16px 0; }
+      .overview-inner { grid-template-columns: 1fr; gap: 32px; }
+      .overview-band { padding: 60px 20px; }
+      .section { padding: 70px 20px; }
+      .challenge-grid { grid-template-columns: 1fr !important; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .pillar-card:first-child { border-radius: 12px 12px 0 0; }
+      .pillar-card:last-child { border-radius: 0 0 12px 12px; }
+      .themes-grid { grid-template-columns: repeat(2, 1fr); }
+      .next-cards-4 { grid-template-columns: 1fr; }
+      .screens-section { padding: 0 20px 60px; }
+      .outcome-section { padding: 70px 20px; }
+      .case-footer { flex-direction: column; align-items: flex-start; padding: 60px 20px; }
+      .process-step { grid-template-columns: 44px 1fr; gap: 16px; padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span data-i18n="nav.back">Back to portfolio</span>
+    </a>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button type="button" class="lang-switch-btn" data-lang="en" aria-label="English" title="English" onclick="__setLang('en')">
+          <svg viewBox="0 0 60 30" aria-hidden="true">
+            <rect width="60" height="30" fill="#00247d" />
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" />
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2" />
+            <path d="M30,0 L30,30 M0,15 L60,15" stroke="#fff" stroke-width="10" />
+            <path d="M30,0 L30,30 M0,15 L60,15" stroke="#cf142b" stroke-width="6" />
+          </svg>
+        </button>
+        <button type="button" class="lang-switch-btn" data-lang="de" aria-label="Deutsch" title="Deutsch" onclick="__setLang('de')">
+          <svg viewBox="0 0 5 3" aria-hidden="true">
+            <rect width="5" height="1" y="0" fill="#000000" />
+            <rect width="5" height="1" y="1" fill="#DD0000" />
+            <rect width="5" height="1" y="2" fill="#FFCE00" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <p class="hero-eyebrow fade-up"><span class="accent-line"></span><span data-i18n="hero.eyebrow">Case Study · Product Design &amp; Development</span></p>
+    <div class="fade-up" style="margin-bottom:32px;">
+      <div style="display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,#2a1d22,#241b1e);border:1px solid rgba(255,107,157,0.25);border-radius:16px;padding:10px 24px 10px 10px;">
+        <img src="uploads/thebigreveal-logo.png" alt="Reveal! logo" style="width:36px;height:36px;border-radius:9px;display:block;" />
+        <span style="font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:20px;color:#FFAFC4;">Reveal!</span>
+      </div>
+    </div>
+    <h1 class="hero-title fade-up">
+      The Big<br/><span class="accent-text" style="font-family:'Fraunces',serif;font-weight:700;">Reveal!</span>
+    </h1>
+    <p class="hero-subtitle fade-up" data-i18n="hero.subtitle">A community-based platform for celebrating gender reveals and baby showers together — wherever everyone is.</p>
+    <div class="hero-meta fade-up">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.product.label">Product</div>
+        <div class="hero-meta-value">The Big Reveal!</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.role.label">Role</div>
+        <div class="hero-meta-value" data-i18n="hero.role.value">Founder · Developer · UX/UI Designer</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.platform.label">Platform</div>
+        <div class="hero-meta-value">Web (Next.js) + App (React Native / Expo)</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.status.label">Status</div>
+        <div class="hero-meta-value" data-i18n="hero.status.value">In development — web built, mobile in progress</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.tools.label">Tools</div>
+        <div class="hero-meta-value">Figma · Google Stitch</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <div class="overview-band">
+    <div class="overview-inner fade-up">
+      <p class="overview-lead" data-i18n="overview.lead">
+        Turning two of the most joyful moments in early parenthood into one shared digital celebration everyone can be part of.
+      </p>
+      <div class="overview-body">
+        <p data-i18n="overview.p1">Reveal! turns two of the most joyful moments in early parenthood — the gender reveal and the baby shower — into a shared digital celebration that everyone can be part of, wherever they are. Instead of a single-purpose novelty app, it's built around private community spaces: a parent creates a space for their celebration, invites family and friends, and everything happens inside it — a countdown to the big day, a gift registry, guessing games, a livestreamed reveal moment, shower planning, and a place to keep the memories.</p>
+        <p data-i18n="overview.p2">I designed the product's UX and UI end to end — the community architecture, the user flows, every core feature's interface, and the "Celestial Joy" design system that gives the whole thing its warm, celebratory feel across both web and mobile.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO SCREENSHOT -->
+  <div style="max-width:900px;margin:0 auto;padding:80px 40px 0;">
+    <img src="uploads/thebigreveal-hero.png" alt="Reveal! landing page, community home, and games hub" style="display:block;width:100%;height:auto;border-radius:20px;border:1px solid var(--stroke);" />
+  </div>
+
+  <!-- THE CHALLENGE -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="challenge.eyebrow">The Challenge</span></p>
+    <h2 class="section-title" data-i18n="challenge.title">Five hard problems <span style="font-family:'Instrument Serif',serif;font-style:italic;">behind one joyful moment</span></h2>
+    <div class="section-body">
+      <p data-i18n="challenge.intro">Reveal! is emotionally simple but structurally complex. It has to feel like pure joy while quietly coordinating real-time, multi-person, cross-device experiences.</p>
+    </div>
+    <div class="challenge-grid" style="grid-template-columns:1fr 1fr;">
+      <div class="challenge-card">
+        <div class="challenge-num">01</div>
+        <div class="challenge-title" data-i18n="challenge.1.title">Design for a peak emotional moment</div>
+        <div class="challenge-desc" data-i18n="challenge.1.desc">A gender reveal is a once-in-a-lifetime, high-emotion event. The product can't feel merely functional — the reveal itself has to land as a moment of delight and surprise, and the whole experience has to carry warmth throughout.</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-num">02</div>
+        <div class="challenge-title" data-i18n="challenge.2.title">Make a multi-feature product feel effortless</div>
+        <div class="challenge-desc" data-i18n="challenge.2.desc">Registry, games, livestream, countdown, planning, memories — that's a lot of surface area. Left unstructured it becomes an overwhelming Swiss-army-app. The community model had to make all of it feel like one coherent, easy place.</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-num">03</div>
+        <div class="challenge-title" data-i18n="challenge.3.title">Include people who can't be in the room</div>
+        <div class="challenge-desc" data-i18n="challenge.3.desc">Family is often scattered across the country or the world. The design had to make remote guests feel just as present as those physically there — live, or on their own time.</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-num">04</div>
+        <div class="challenge-title" data-i18n="challenge.4.title">Coordinate real-time interactions gracefully</div>
+        <div class="challenge-desc" data-i18n="challenge.4.desc">Live vote tallies, a synchronized reveal, a livestream with chat — real-time features are where interfaces get messy. They had to feel calm, clear, and reliable.</div>
+      </div>
+      <div class="challenge-card" style="grid-column:1 / -1;">
+        <div class="challenge-num">05</div>
+        <div class="challenge-title" data-i18n="challenge.5.title">Let every family make the space their own</div>
+        <div class="challenge-desc" data-i18n="challenge.5.desc">No two celebrations are the same, so the design needed built-in personalization without letting users create something ugly or broken.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MY ROLE -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="role.eyebrow">My Role</span></p>
+    <h2 class="section-title" data-i18n="role.title">Founder, <span style="font-family:'Instrument Serif',serif;font-style:italic;">builder</span>, designer</h2>
+    <div class="goals-list">
+      <div class="goal-item">
+        <div class="goal-dot"></div>
+        <div class="goal-text" data-i18n="role.1"><strong>Product &amp; UX design</strong> — defining the community-based architecture and how all the features fit inside it.</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-dot"></div>
+        <div class="goal-text" data-i18n="role.2"><strong>User flows</strong> — the parent (owner) journey from creating a space to the reveal, and the guest journey from email invite to participating.</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-dot"></div>
+        <div class="goal-text" data-i18n="role.3"><strong>UI design</strong> — interface for every core feature across web and mobile.</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-dot"></div>
+        <div class="goal-text" data-i18n="role.4"><strong>Design system</strong> — created "Celestial Joy," a themeable system spanning both platforms.</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-dot"></div>
+        <div class="goal-text" data-i18n="role.5"><strong>Founder role</strong> — after hosting two baby showers and gender reveal parties for friends, it clicked that an app could make it easy to organize a gender reveal party.</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-dot"></div>
+        <div class="goal-text" data-i18n="role.6"><strong>Product strategy &amp; prototyping</strong> — with more research and time, I strategically designed and prototyped the app.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USERS & ROLES -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="users.eyebrow">Users &amp; Roles</span></p>
+    <h2 class="section-title" data-i18n="users.title">Three roles, <span style="font-family:'Instrument Serif',serif;font-style:italic;">one community</span></h2>
+    <div class="section-body">
+      <p data-i18n="users.intro">Everything in Reveal! lives inside a Community — a private celebration space — with three roles designed around how people actually participate.</p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-label" data-i18n="users.1.label">Role 01</div>
+        <div class="pillar-title">Owner</div>
+        <div class="pillar-body" data-i18n="users.1.body">The parents or organizer — create the community (name, baby nickname, due date, theme), invite people, and run the celebration.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-label" data-i18n="users.2.label">Role 02</div>
+        <div class="pillar-title">Co-Host</div>
+        <div class="pillar-body" data-i18n="users.2.body">Helpers — friends or family who help plan the baby shower and coordinate behind the scenes.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-label" data-i18n="users.3.label">Role 03</div>
+        <div class="pillar-title">Guest</div>
+        <div class="pillar-body" data-i18n="users.3.body">Invited participants who join via email, take part in games, contribute to the registry, and attend the reveal — in person or streamed.</div>
+      </div>
+    </div>
+    <div class="section-body" style="margin-top:32px;">
+      <p data-i18n="users.outro">A single person can belong to multiple communities — a parent in their own space, a guest in three friends' spaces — so the design had to make switching between spaces and understanding "where am I and what's my role here" effortless.</p>
+    </div>
+    <div class="decision-media" style="margin-top:32px;">
+      <img src="uploads/thebigreveal-dashboard.png" alt="Your celebrations dashboard, listing every community a person belongs to with an OWNER badge on each" />
+    </div>
+  </div>
+
+  <!-- PROCESS -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="process.eyebrow">Process &amp; Approach</span></p>
+    <h2 class="section-title" data-i18n="process.title">Building the <span style="font-family:'Instrument Serif',serif;font-style:italic;">emotional architecture</span></h2>
+
+    <div class="pull-quote">
+      <p data-i18n="process.quote">"This single decision — Community as the home base — is what keeps a feature-rich product feeling like one calm place instead of a cluttered toolbox."</p>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title" data-i18n="process.step1.title">Community as the organizing idea</div>
+          <div class="step-body" data-i18n="process.step1.body">Rather than a feature grid, I built the entire product around the Community as the home base. A parent creates a space and everything — countdown, registry, games, stream, planning, memories — lives inside it, scoped to the people invited.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title" data-i18n="process.step2.title">Designing the reveal as the emotional peak</div>
+          <div class="step-body" data-i18n="process.step2.body">The reveal moment got dedicated attention as the product's climax: a synchronized reveal where everyone experiences it together, amplified with confetti and (on mobile) haptic feedback. The surrounding flow — the countdown building anticipation, the games locking at reveal time, the winners announced at the moment of truth — was all designed to build toward and pay off that peak.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title" data-i18n="process.step3.title">Bringing remote guests into the room</div>
+          <div class="step-body" data-i18n="process.step3.body">Because family is often far away, I designed the livestream experience so remote guests feel present — watching live, joining the moment, and for anyone who genuinely can't make it, a record-and-watch-later option so they never miss it entirely. Inclusion of distant loved ones was treated as a first-class design goal, not an afterthought.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title" data-i18n="process.step4.title">Making real-time feel calm</div>
+          <div class="step-body" data-i18n="process.step4.body">For the interactive features — live gender-guessing with running tallies, results locked until reveal time, livestream chat — I focused on clarity under motion: clear states for "voting open," "locked," and "revealed," so a fast-moving, real-time experience still feels legible and trustworthy.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">5</div>
+        <div>
+          <div class="step-title" data-i18n="process.step5.title">A registry that prevents awkwardness</div>
+          <div class="step-body" data-i18n="process.step5.body">The gift registry was designed around a real social problem: duplicate gifts and coordination. Items can be added from shopping platforms, and guests can reserve or mark items as purchased so no one doubles up, with group gifting for bigger items and a cash-fund option. Clear status badges (Available / Reserved / Purchased) keep everyone coordinated without anyone having to talk logistics.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">6</div>
+        <div>
+          <div class="step-title" data-i18n="process.step6.title">Personalization without chaos</div>
+          <div class="step-body" data-i18n="process.step6.body">Every family gets to make their space feel like theirs through switchable themes, designed as a controlled system so the space always looks beautiful no matter which theme a parent picks.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN SYSTEM -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="designsystem.eyebrow">The Design System</span></p>
+    <h2 class="section-title" data-i18n="designsystem.title">A system called <span style="font-family:'Instrument Serif',serif;font-style:italic;">"Celestial Joy"</span></h2>
+    <div class="section-body">
+      <p data-i18n="designsystem.intro">Because Reveal! spans web and mobile and lets users theme their own spaces, consistency had to be systematic. I created Celestial Joy — a warm, celebratory design language built to scale across platforms and themes.</p>
+    </div>
+
+    <div class="system-row" style="margin-top:40px;padding-top:0;border-top:none;">
+      <div class="system-label" data-i18n="designsystem.themes.label">Themeable color system</div>
+      <div class="system-body" data-i18n="designsystem.themes.body">Four user-switchable themes, each a coordinated primary / accent / background set, so a family personalizes their space while the design stays cohesive and legible.</div>
+      <div class="themes-grid">
+        <div class="theme-card">
+          <div class="theme-swatches">
+            <div class="theme-swatch" style="background:#FF8FB1;"></div>
+            <div class="theme-swatch" style="background:#FF6B9D;"></div>
+            <div class="theme-swatch" style="background:#FFF5F8;"></div>
+          </div>
+          <div class="theme-name">Pink Dream</div>
+          <div class="theme-hexes">#FF8FB1 · #FF6B9D · #FFF5F8</div>
+        </div>
+        <div class="theme-card">
+          <div class="theme-swatches">
+            <div class="theme-swatch" style="background:#7BB7E8;"></div>
+            <div class="theme-swatch" style="background:#5A9BD4;"></div>
+            <div class="theme-swatch" style="background:#F0F7FC;"></div>
+          </div>
+          <div class="theme-name">Blue Sky</div>
+          <div class="theme-hexes">#7BB7E8 · #5A9BD4 · #F0F7FC</div>
+        </div>
+        <div class="theme-card">
+          <div class="theme-swatches">
+            <div class="theme-swatch" style="background:#C9D9A8;"></div>
+            <div class="theme-swatch" style="background:#9BB876;"></div>
+            <div class="theme-swatch" style="background:#FAFBF5;"></div>
+          </div>
+          <div class="theme-name">Neutral Meadow</div>
+          <div class="theme-hexes">#C9D9A8 · #9BB876 · #FAFBF5</div>
+        </div>
+        <div class="theme-card">
+          <div class="theme-swatches">
+            <div class="theme-swatch" style="background:#FFB088;"></div>
+            <div class="theme-swatch" style="background:#FF8C5A;"></div>
+            <div class="theme-swatch" style="background:#FFF8F2;"></div>
+          </div>
+          <div class="theme-name">Sunset</div>
+          <div class="theme-hexes">#FFB088 · #FF8C5A · #FFF8F2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="system-row">
+      <div class="system-label" data-i18n="designsystem.type.label">Typography</div>
+      <div class="system-body" data-i18n="designsystem.type.body">A pairing of Fraunces (an expressive serif) for headings and Inter for body — warmth and personality in the display type, clarity and neutrality in the reading type.</div>
+      <div class="type-sample">
+        <div>
+          <div class="type-sample-label">Fraunces</div>
+          <div class="type-fraunces">Reveal!</div>
+        </div>
+        <div>
+          <div class="type-sample-label">Inter</div>
+          <div class="type-inter">The quick countdown builds anticipation for every celebration.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="system-row">
+      <div class="system-label" data-i18n="designsystem.visual.label">Visual language</div>
+      <div class="system-body" data-i18n="designsystem.visual.body">Soft pastel gradients, generous rounded corners (16–32px on cards, full-pill buttons), soft low-opacity shadows, floating balloon and confetti illustrations, and sparkle micro-interactions — a system engineered to feel joyful and tactile while staying clean and usable.</div>
+    </div>
+
+    <div class="section-body" style="margin-top:40px;">
+      <p data-i18n="designsystem.closing">Designing the theming as a token-based system — rather than one-off screens — is what lets personalization and consistency coexist: the thing that most distinguishes a systematic designer from a screen-by-screen one.</p>
+    </div>
+  </div>
+
+  <!-- KEY FEATURES & DECISIONS -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="features.eyebrow">Key Features &amp; Decisions</span></p>
+    <h2 class="section-title" data-i18n="features.title">Eight features, <span style="font-family:'Instrument Serif',serif;font-style:italic;">one calm place</span></h2>
+    <div class="decisions-grid">
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="features.1.tag">Community</span>
+        <div class="decision-title" data-i18n="features.1.title">Community spaces &amp; invitations</div>
+        <div class="decision-body" data-i18n="features.1.body">The home base. Create a space, invite via email, join with one tap — scoped so each community shows only its own content, with clear role awareness.</div>
+        <div class="decision-media"><img src="uploads/thebigreveal-features.png" alt="Community home screen listing every feature: Gift registry, Games & guesses, Message wall, Livestream, Plan the shower, Members, Settings" /></div>
+      </div>
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="features.2.tag">Anticipation</span>
+        <div class="decision-title" data-i18n="features.2.title">Countdown to the reveal</div>
+        <div class="decision-body" data-i18n="features.2.body">An anticipation-builder on the community home, counting down to the big day and giving the space a live, event-driven heartbeat.</div>
+        <div class="decision-media"><img src="uploads/thebigreveal-community.png" alt="Community home page with a live countdown to the reveal, Add gender, Reveal now, and Play the games actions" /></div>
+      </div>
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="features.3.tag">Games</span>
+        <div class="decision-title" data-i18n="features.3.title">Gender-guessing games</div>
+        <div class="decision-body" data-i18n="features.3.body">Guests guess the gender; votes tally in real time; results lock at reveal time and winners are announced at the moment of truth — turning passive waiting into shared participation.</div>
+        <div class="decision-media"><img src="uploads/thebigreveal-games.png" alt="Games & guesses hub: Pink or Blue?, Guess the baby stats, Wishes for baby, Name suggestions" /></div>
+      </div>
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="features.4.tag">Climax</span>
+        <div class="decision-title" data-i18n="features.4.title">The synchronized reveal</div>
+        <div class="decision-body" data-i18n="features.4.body">The emotional climax — a shared reveal moment with confetti and haptics, designed so everyone experiences it together.</div>
+        <div class="decision-media"><img src="uploads/thebigreveal-reveal.png" alt="The reveal moment screen, picking a reveal animation such as balloon pop, smoke cannon, fireworks, cake slice, scratch-off card, or dry ice glass" /></div>
+      </div>
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="features.5.tag">Livestream</span>
+        <div class="decision-title" data-i18n="features.5.title">Livestream (live + watch-later)</div>
+        <div class="decision-body" data-i18n="features.5.body">A streamed reveal so remote guests are part of the moment, with recording so no one who couldn't attend misses it.</div>
+      </div>
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="features.6.tag">Registry</span>
+        <div class="decision-title" data-i18n="features.6.title">Gift registry</div>
+        <div class="decision-body" data-i18n="features.6.body">Add items from shopping platforms; reserve / mark purchased to avoid duplicates; group gifting for bigger items and a cash-fund option; clear status badges throughout.</div>
+      </div>
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="features.7.tag">Planning</span>
+        <div class="decision-title" data-i18n="features.7.title">Baby shower planning hub</div>
+        <div class="decision-body" data-i18n="features.7.body">A coordination space for co-hosts and friends to plan the shower together.</div>
+      </div>
+      <div class="decision-item">
+        <span class="decision-tag" data-i18n="features.8.tag">Memories</span>
+        <div class="decision-title" data-i18n="features.8.title">Memories</div>
+        <div class="decision-body" data-i18n="features.8.body">A place to collect and revisit photos and moments from the celebration.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREENS -->
+  <div class="screens-section fade-up">
+    <img src="uploads/thebigreveal-babystats.png" alt="Guess the baby stats game: birth date, time, weight, length, and hair color predictions" style="display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--stroke);" />
+  </div>
+
+  <!-- OUTCOME -->
+  <section class="outcome-section">
+    <div class="outcome-inner">
+      <p class="section-eyebrow fade-up"><span class="accent-line"></span><span data-i18n="outcome.eyebrow">Outcome</span></p>
+      <h2 class="section-title fade-up" data-i18n="outcome.title">A joyful product, <span style="font-family:'Instrument Serif',serif;font-style:italic;">systematically built</span></h2>
+      <div class="goals-list fade-up">
+        <div class="goal-item">
+          <div class="goal-dot"></div>
+          <div class="goal-text" data-i18n="outcome.1">A complete UX/UI design for a multi-feature, community-based celebration platform spanning web and a companion mobile app.</div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-dot"></div>
+          <div class="goal-text" data-i18n="outcome.2">A themeable, cross-platform design system ("Celestial Joy") that supports per-family personalization without sacrificing consistency.</div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-dot"></div>
+          <div class="goal-text" data-i18n="outcome.3">A product architecture that makes a genuinely feature-rich experience (registry, games, livestream, planning, memories) feel like one coherent, joyful place.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S NEXT -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="next.eyebrow">What I'd Explore Next</span></p>
+    <h2 class="section-title" data-i18n="next.title">Where it <span style="font-family:'Instrument Serif',serif;font-style:italic;">goes from here</span></h2>
+    <div class="next-cards-4">
+      <div class="next-card">
+        <div class="next-title" data-i18n="next.1.title">Usability testing on the reveal flow</div>
+        <div class="next-body" data-i18n="next.1.body">The synchronized-reveal moment is exactly the kind of high-stakes interaction worth validating with real groups across devices and time zones.</div>
+      </div>
+      <div class="next-card">
+        <div class="next-title" data-i18n="next.2.title">Accessibility across themes</div>
+        <div class="next-body" data-i18n="next.2.body">Verifying color-contrast and legibility for every switchable theme, so personalization never costs usability.</div>
+      </div>
+      <div class="next-card">
+        <div class="next-title" data-i18n="next.3.title">Onboarding for first-time guests</div>
+        <div class="next-body" data-i18n="next.3.body">Smoothing the email-invite-to-participation path, since many guests will only ever open the app once, for one celebration.</div>
+      </div>
+      <div class="next-card">
+        <div class="next-title" data-i18n="next.4.title">Full mobile feature parity</div>
+        <div class="next-body" data-i18n="next.4.body">Extending web-first features (e.g. URL-based registry adding) to mobile where it makes sense.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="case-footer fade-up">
+    <div class="footer-credits">
+      <strong>The Big Reveal! — Personal Project</strong><br/>
+      <span data-i18n="footer.credits">Founder, developer, UX/UI &amp; design system by <strong>Shinbu Abdul-Muqit Fuseini</strong></span><br/>
+      <span data-i18n="footer.status">Status: In development</span>
+    </div>
+    <a href="index.html" class="ghost-btn" data-i18n="footer.back">Back to portfolio</a>
+  </div>
+
+  <!-- LANGUAGE DATA + RUNTIME (shared key/pattern with index.html's switcher) -->
+  <script>
+    window.I18N_DE = {
+      "nav.back": "Zurück zum Portfolio",
+      "hero.eyebrow": "Case Study · Produktdesign & Entwicklung",
+      "hero.subtitle": "Eine Community-basierte Plattform, um Gender-Reveals und Babypartys gemeinsam zu feiern — egal, wo alle gerade sind.",
+      "hero.product.label": "Produkt",
+      "hero.role.label": "Rolle",
+      "hero.role.value": "Gründer · Entwickler · UX/UI-Designer",
+      "hero.platform.label": "Plattform",
+      "hero.status.label": "Status",
+      "hero.status.value": "In Entwicklung — Web fertig, Mobile in Arbeit",
+      "hero.tools.label": "Tools",
+      "overview.lead": "Zwei der schönsten Momente der frühen Elternschaft in eine gemeinsame digitale Feier verwandeln, an der alle teilhaben können.",
+      "overview.p1": "Reveal! verwandelt zwei der schönsten Momente der frühen Elternschaft — den Gender-Reveal und die Babyparty — in eine gemeinsame digitale Feier, an der jeder teilhaben kann, egal wo er ist. Statt einer Einzelzweck-Neuheiten-App basiert die Plattform auf privaten Community-Bereichen: Ein Elternteil erstellt einen Raum für die eigene Feier, lädt Familie und Freunde ein, und alles findet darin statt — ein Countdown bis zum großen Tag, eine Geschenkliste, Rate-Spiele, ein live gestreamter Reveal-Moment, die Planung der Babyparty und ein Ort, um die Erinnerungen zu bewahren.",
+      "overview.p2": "Ich habe die UX und UI des Produkts von Anfang bis Ende gestaltet — die Community-Architektur, die Nutzerflows, die Oberfläche jeder Kernfunktion sowie das Designsystem „Celestial Joy“, das dem gesamten Erlebnis auf Web und Mobile sein warmes, festliches Gefühl verleiht.",
+      "challenge.eyebrow": "Die Herausforderung",
+      "challenge.title": "Fünf harte Probleme <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">hinter einem einzigen Glücksmoment</span>",
+      "challenge.intro": "Reveal! ist emotional einfach, aber strukturell komplex. Es muss sich wie reine Freude anfühlen, während im Hintergrund Echtzeit-Erlebnisse mit mehreren Personen und Geräten koordiniert werden.",
+      "challenge.1.title": "Für einen emotionalen Höhepunkt gestalten",
+      "challenge.1.desc": "Ein Gender-Reveal ist ein einmaliges, hochemotionales Ereignis. Das Produkt darf sich nicht nur funktional anfühlen — der Reveal selbst muss als Moment der Freude und Überraschung wirken, und das gesamte Erlebnis muss durchgehend Wärme ausstrahlen.",
+      "challenge.2.title": "Ein funktionsreiches Produkt mühelos wirken lassen",
+      "challenge.2.desc": "Geschenkliste, Spiele, Livestream, Countdown, Planung, Erinnerungen — das ist eine Menge Funktionsfläche. Unstrukturiert wird daraus eine überwältigende Alleskönner-App. Das Community-Modell musste all das wie einen einzigen, stimmigen und einfachen Ort wirken lassen.",
+      "challenge.3.title": "Menschen einbeziehen, die nicht vor Ort sein können",
+      "challenge.3.desc": "Familie ist oft über das ganze Land oder die Welt verteilt. Das Design musste entfernten Gästen das Gefühl geben, genauso präsent zu sein wie die Menschen vor Ort — live oder zu ihrer eigenen Zeit.",
+      "challenge.4.title": "Echtzeit-Interaktionen elegant koordinieren",
+      "challenge.4.desc": "Live-Abstimmungsergebnisse, ein synchronisierter Reveal, ein Livestream mit Chat — genau bei Echtzeit-Funktionen werden Oberflächen schnell unübersichtlich. Sie mussten sich ruhig, klar und zuverlässig anfühlen.",
+      "challenge.5.title": "Jeder Familie ermöglichen, den Raum zu ihrem eigenen zu machen",
+      "challenge.5.desc": "Keine zwei Feiern sind gleich, daher brauchte das Design eingebaute Personalisierung — ohne dass Nutzende dabei etwas Unschönes oder Kaputtes erschaffen konnten.",
+      "role.eyebrow": "Meine Rolle",
+      "role.title": "Gründer, <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">Entwickler</span>, Designer",
+      "role.1": "<strong>Produkt- &amp; UX-Design</strong> — Definition der Community-basierten Architektur und wie sich alle Funktionen darin einfügen.",
+      "role.2": "<strong>Nutzerflows</strong> — die Reise der Eltern (Owner) von der Raumerstellung bis zum Reveal, und die Reise der Gäste von der E-Mail-Einladung bis zur Teilnahme.",
+      "role.3": "<strong>UI-Design</strong> — Oberfläche für jede Kernfunktion auf Web und Mobile.",
+      "role.4": "<strong>Designsystem</strong> — Entwicklung von „Celestial Joy“, einem themenfähigen System für beide Plattformen.",
+      "role.5": "<strong>Gründerrolle</strong> — nach der Ausrichtung von zwei Babypartys und Gender-Reveal-Feiern für Freunde wurde mir klar, dass eine App die Organisation einer Gender-Reveal-Party deutlich einfacher machen könnte.",
+      "role.6": "<strong>Produktstrategie &amp; Prototyping</strong> — mit mehr Recherche und Zeit habe ich die App strategisch gestaltet und prototypisiert.",
+      "users.eyebrow": "Nutzer &amp; Rollen",
+      "users.title": "Drei Rollen, <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">eine Community</span>",
+      "users.intro": "Alles in Reveal! findet innerhalb einer Community statt — einem privaten Feierraum — mit drei Rollen, die danach gestaltet sind, wie Menschen tatsächlich teilnehmen.",
+      "users.1.label": "Rolle 01",
+      "users.1.body": "Die Eltern oder Organisierenden — erstellen die Community (Name, Kosename des Babys, Geburtstermin, Thema), laden Personen ein und leiten die Feier.",
+      "users.2.label": "Rolle 02",
+      "users.2.body": "Helfende — Freunde oder Familie, die bei der Planung der Babyparty helfen und im Hintergrund koordinieren.",
+      "users.3.label": "Rolle 03",
+      "users.3.body": "Eingeladene Teilnehmende, die per E-Mail beitreten, an Spielen teilnehmen, zur Geschenkliste beitragen und am Reveal teilnehmen — persönlich oder per Stream.",
+      "users.outro": "Eine einzelne Person kann mehreren Communitys angehören — Elternteil im eigenen Raum, Gast in drei Räumen von Freunden — daher musste das Design den Wechsel zwischen Räumen und das Verständnis von „Wo bin ich, und welche Rolle habe ich hier?“ mühelos machen.",
+      "process.eyebrow": "Prozess &amp; Vorgehen",
+      "process.title": "Die <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">emotionale Architektur</span> aufbauen",
+      "process.quote": "„Diese eine Entscheidung — die Community als Ausgangspunkt — sorgt dafür, dass sich ein funktionsreiches Produkt wie ein ruhiger Ort anfühlt statt wie ein überladener Werkzeugkasten.“",
+      "process.step1.title": "Die Community als Ordnungsprinzip",
+      "process.step1.body": "Statt eines Funktionsrasters habe ich das gesamte Produkt um die Community als Ausgangspunkt herum aufgebaut. Ein Elternteil erstellt einen Raum, und alles — Countdown, Geschenkliste, Spiele, Stream, Planung, Erinnerungen — findet darin statt, begrenzt auf die eingeladenen Personen.",
+      "process.step2.title": "Den Reveal als emotionalen Höhepunkt gestalten",
+      "process.step2.body": "Der Reveal-Moment erhielt als Höhepunkt des Produkts besondere Aufmerksamkeit: ein synchronisierter Reveal, den alle gemeinsam erleben, verstärkt durch Konfetti und (auf Mobile) haptisches Feedback. Der umgebende Ablauf — der Countdown, der Vorfreude aufbaut, Spiele, die zum Reveal-Zeitpunkt gesperrt werden, Gewinner, die im entscheidenden Moment bekanntgegeben werden — wurde gezielt darauf ausgelegt, auf diesen Höhepunkt hinzuarbeiten und ihn einzulösen.",
+      "process.step3.title": "Entfernte Gäste ins Geschehen holen",
+      "process.step3.body": "Da Familie oft weit entfernt ist, habe ich das Livestream-Erlebnis so gestaltet, dass entfernte Gäste sich präsent fühlen — live zusehen, im Moment dabei sein, und für alle, die wirklich nicht teilnehmen können, eine Aufnahme- und Später-ansehen-Option, damit niemand ihn ganz verpasst. Die Einbeziehung entfernter Angehöriger wurde als erstklassiges Designziel behandelt, nicht als Nachgedanke.",
+      "process.step4.title": "Echtzeit ruhig wirken lassen",
+      "process.step4.body": "Für die interaktiven Funktionen — Live-Geschlechtsraten mit laufenden Ergebnissen, gesperrte Ergebnisse bis zum Reveal-Zeitpunkt, Livestream-Chat — lag mein Fokus auf Klarheit in Bewegung: klare Zustände für „Abstimmung offen“, „gesperrt“ und „aufgedeckt“, damit ein schnelles Echtzeit-Erlebnis trotzdem verständlich und vertrauenswürdig bleibt.",
+      "process.step5.title": "Eine Geschenkliste, die Unannehmlichkeiten vermeidet",
+      "process.step5.body": "Die Geschenkliste wurde rund um ein echtes soziales Problem gestaltet: doppelte Geschenke und Koordination. Artikel können von Shopping-Plattformen hinzugefügt werden, und Gäste können sie reservieren oder als gekauft markieren, sodass niemand doppelt schenkt — inklusive Gruppen-Geschenken für größere Artikel und einer Cash-Fund-Option. Klare Status-Badges (Verfügbar / Reserviert / Gekauft) halten alle koordiniert, ohne dass jemand über Logistik sprechen muss.",
+      "process.step6.title": "Personalisierung ohne Chaos",
+      "process.step6.body": "Jede Familie kann ihren Raum durch wechselbare Themes zu ihrem eigenen machen — gestaltet als kontrolliertes System, damit der Raum immer schön aussieht, egal welches Theme ein Elternteil wählt.",
+      "designsystem.eyebrow": "Das Designsystem",
+      "designsystem.title": "Ein System namens <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">„Celestial Joy“</span>",
+      "designsystem.intro": "Da Reveal! sich über Web und Mobile erstreckt und Nutzenden erlaubt, ihre eigenen Räume zu themen, musste Konsistenz systematisch gelöst werden. Ich habe Celestial Joy entwickelt — eine warme, festliche Designsprache, die über Plattformen und Themes hinweg skaliert.",
+      "designsystem.themes.label": "Themenfähiges Farbsystem",
+      "designsystem.themes.body": "Vier von Nutzenden wechselbare Themes, jedes mit einem abgestimmten Primär-/Akzent-/Hintergrund-Set, damit eine Familie ihren Raum personalisieren kann, während das Design stimmig und lesbar bleibt.",
+      "designsystem.type.label": "Typografie",
+      "designsystem.type.body": "Eine Paarung aus Fraunces (einer ausdrucksstarken Serifenschrift) für Überschriften und Inter für Fließtext — Wärme und Charakter in der Auszeichnungsschrift, Klarheit und Neutralität in der Lesetypografie.",
+      "designsystem.visual.label": "Visuelle Sprache",
+      "designsystem.visual.body": "Weiche Pastellverläufe, großzügig abgerundete Ecken (16–32 px bei Karten, voll abgerundete Buttons), weiche Schatten mit geringer Deckkraft, schwebende Illustrationen von Luftballons und Konfetti sowie funkelnde Mikro-Interaktionen — ein System, das fröhlich und greifbar wirken soll, ohne an Klarheit und Nutzbarkeit zu verlieren.",
+      "designsystem.closing": "Das Theming als tokenbasiertes System zu gestalten — statt als Einzelbildschirme — ist das, was Personalisierung und Konsistenz nebeneinander bestehen lässt: genau das, was systematisches Design von einer Bildschirm-für-Bildschirm-Herangehensweise unterscheidet.",
+      "features.eyebrow": "Zentrale Funktionen &amp; Entscheidungen",
+      "features.title": "Acht Funktionen, <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">ein ruhiger Ort</span>",
+      "features.1.tag": "Community",
+      "features.1.title": "Community-Räume &amp; Einladungen",
+      "features.1.body": "Der Ausgangspunkt. Einen Raum erstellen, per E-Mail einladen, mit einem Tap beitreten — begrenzt, sodass jede Community nur ihre eigenen Inhalte zeigt, mit klarem Rollenbewusstsein.",
+      "features.2.tag": "Vorfreude",
+      "features.2.title": "Countdown bis zum Reveal",
+      "features.2.body": "Ein Vorfreude-Element auf der Community-Startseite, das bis zum großen Tag herunterzählt und dem Raum einen lebendigen, ereignisgetriebenen Herzschlag verleiht.",
+      "features.3.tag": "Spiele",
+      "features.3.title": "Geschlechtsrate-Spiele",
+      "features.3.body": "Gäste raten das Geschlecht; Stimmen werden in Echtzeit gezählt; Ergebnisse werden zum Reveal-Zeitpunkt gesperrt, und Gewinner werden im entscheidenden Moment verkündet — das macht aus passivem Warten gemeinsame Teilnahme.",
+      "features.4.tag": "Höhepunkt",
+      "features.4.title": "Der synchronisierte Reveal",
+      "features.4.body": "Der emotionale Höhepunkt — ein gemeinsamer Reveal-Moment mit Konfetti und haptischem Feedback, gestaltet, damit alle ihn gemeinsam erleben.",
+      "features.5.tag": "Livestream",
+      "features.5.title": "Livestream (live + später ansehen)",
+      "features.5.body": "Ein gestreamter Reveal, damit entfernte Gäste Teil des Moments sind, inklusive Aufnahme, damit niemand, der nicht teilnehmen konnte, ihn verpasst.",
+      "features.6.tag": "Geschenkliste",
+      "features.6.title": "Geschenkliste",
+      "features.6.body": "Artikel von Shopping-Plattformen hinzufügen; reservieren / als gekauft markieren, um Doppelungen zu vermeiden; Gruppen-Geschenke für größere Artikel und eine Cash-Fund-Option; durchgängig klare Status-Badges.",
+      "features.7.tag": "Planung",
+      "features.7.title": "Planungs-Hub für die Babyparty",
+      "features.7.body": "Ein Koordinationsraum, in dem Co-Hosts und Freunde die Babyparty gemeinsam planen.",
+      "features.8.tag": "Erinnerungen",
+      "features.8.title": "Erinnerungen",
+      "features.8.body": "Ein Ort, um Fotos und Momente der Feier zu sammeln und wieder aufzurufen.",
+      "outcome.eyebrow": "Ergebnis",
+      "outcome.title": "Ein freudiges Produkt, <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">systematisch gebaut</span>",
+      "outcome.1": "Ein vollständiges UX/UI-Design für eine funktionsreiche, Community-basierte Feier-Plattform, die Web und eine begleitende Mobile-App umfasst.",
+      "outcome.2": "Ein themenfähiges, plattformübergreifendes Designsystem („Celestial Joy“), das Personalisierung pro Familie unterstützt, ohne Konsistenz zu verlieren.",
+      "outcome.3": "Eine Produktarchitektur, die ein wirklich funktionsreiches Erlebnis (Geschenkliste, Spiele, Livestream, Planung, Erinnerungen) wie einen einzigen, stimmigen und freudigen Ort wirken lässt.",
+      "next.eyebrow": "Was ich als Nächstes erkunden würde",
+      "next.title": "Wie es <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">von hier aus weitergeht</span>",
+      "next.1.title": "Usability-Tests für den Reveal-Flow",
+      "next.1.body": "Der synchronisierte Reveal-Moment ist genau die Art von folgenreicher Interaktion, die es wert ist, mit echten Gruppen über Geräte und Zeitzonen hinweg zu validieren.",
+      "next.2.title": "Barrierefreiheit über alle Themes hinweg",
+      "next.2.body": "Überprüfung von Farbkontrast und Lesbarkeit für jedes wechselbare Theme, damit Personalisierung nie zu Lasten der Nutzbarkeit geht.",
+      "next.3.title": "Onboarding für Erstgäste",
+      "next.3.body": "Den Weg von der E-Mail-Einladung bis zur Teilnahme glätten, da viele Gäste die App nur einmal öffnen werden, für eine einzige Feier.",
+      "next.4.title": "Vollständige Feature-Parität auf Mobile",
+      "next.4.body": "Web-first-Funktionen (z. B. das Hinzufügen zur Geschenkliste per URL) dort auf Mobile erweitern, wo es sinnvoll ist.",
+      "footer.credits": "Gründer, Entwickler, UX/UI &amp; Designsystem von <strong>Shinbu Abdul-Muqit Fuseini</strong>",
+      "footer.status": "Status: In Entwicklung",
+      "footer.back": "Zurück zum Portfolio"
+    };
+
+    (function () {
+      var LANG_KEY = 'portfolio-lang';
+      function getLang() { try { return localStorage.getItem(LANG_KEY) || 'en'; } catch (e) { return 'en'; } }
+
+      var originals = null;
+      function captureOriginals() {
+        originals = {};
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          originals[el.getAttribute('data-i18n')] = el.innerHTML;
+        });
+      }
+
+      function applyLang(lang) {
+        document.documentElement.lang = lang;
+        if (!originals) captureOriginals();
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n');
+          if (lang === 'de' && window.I18N_DE && window.I18N_DE[key] != null) {
+            el.innerHTML = window.I18N_DE[key];
+          } else {
+            el.innerHTML = originals[key];
+          }
+        });
+        document.querySelectorAll('.lang-switch-btn').forEach(function (b) {
+          b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+        });
+      }
+
+      window.__setLang = function (lang) {
+        try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+        applyLang(lang);
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        applyLang(getLang());
+      });
+    })();
+  </script>
+
+  <script>
+    const els = document.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '-40px' });
+    els.forEach((el) => obs.observe(el));
+    document.querySelectorAll('.hero .fade-up').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 200 + i * 150);
+    });
+  </script>
+</body>
+</html>
