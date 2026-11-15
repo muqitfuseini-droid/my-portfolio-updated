@@ -671,6 +671,13 @@ const EXPLORATIONS = [
   "uploads/reveal-mobile-registry.png",
   "uploads/reveal-mobile-boyorgirl.png",
   "uploads/reveal-mobile-planning.png",
+  "uploads/zeyma-play-lavender.webp",
+  "uploads/zeyma-play-cocoa.webp",
+  "uploads/zeyma-play-sunflowers.webp",
+  "uploads/zeyma-play-shea.webp",
+  "uploads/zeyma-play-ladybugs.webp",
+  "uploads/zeyma-play-fufu.webp",
+  "uploads/zeyma-play-teal-florals.webp",
 ];
 
 // ── Localization ────────────────────────────────────────────────────────────
@@ -706,6 +713,11 @@ const PROJECT_I18N_DE = {
     category: "UX/UI · Produktdesign",
     role: "Gründer · Entwickler · UX/UI-Designer",
     description: "Eine Community-basierte Plattform, um Gender-Reveals und Babypartys gemeinsam zu feiern — mit einem themenfähigen Designsystem „Celestial Joy“ für Web und Mobile.",
+  },
+  p6: {
+    category: "Marke · Produktdesign",
+    role: "Marken- & Produktdesigner",
+    description: "Eine von Adinkra inspirierte Accessoire-Marke für die ghanaische Jugend — eine zeitgemäße visuelle Sprache, ein Mustersystem und eine Kollektionsstruktur, beginnend mit dem Schal.",
   },
 };
 
@@ -795,7 +807,7 @@ const I18N = {
       subtext: "Experiments, side quests, and things made purely for the joy of it.",
     },
     stats: [
-      { value: "5+", label: "Years Experience" },
+      { value: "10+", label: "Years Experience" },
       { value: "20+", label: "Projects Done" },
       { value: "200%", label: "Satisfied Clients" },
     ],
@@ -901,7 +913,7 @@ const I18N = {
       subtext: "Experimente, Nebenprojekte und Dinge, die einfach aus Freude an der Sache entstanden sind.",
     },
     stats: [
-      { value: "5+", label: "Jahre Erfahrung" },
+      { value: "10+", label: "Jahre Erfahrung" },
       { value: "20+", label: "Abgeschlossene Projekte" },
       { value: "200%", label: "Zufriedene Kunden" },
     ],
@@ -1745,6 +1757,9 @@ function Explorations() {
   const s = I18N[lang].explorations;
 
   const colSplit = Math.ceil(EXPLORATIONS.length / 2);
+  // The parallax columns scale with the number of cards, so the section must too
+  // (px per card after the column's upward parallax; smaller cards on phones).
+  const perCard = window.innerWidth >= 768 ? 350 : 160;
   const colA = EXPLORATIONS.slice(0, colSplit);
   const colB = EXPLORATIONS.slice(colSplit);
 
@@ -1794,7 +1809,7 @@ function Explorations() {
   );
 
   return (
-    <section ref={sectionRef} className="relative bg-bg" style={{ minHeight: "300vh" }}>
+    <section ref={sectionRef} className="relative bg-bg" style={{ minHeight: `max(300vh, calc(${colSplit * perCard}px + 24vh))` }}>
       {/* Layer 1: pinned center content */}
       <div ref={contentRef} className="relative z-10 h-screen flex items-center justify-center pointer-events-none">
         <div className="text-center px-6 max-w-lg pointer-events-auto">
@@ -2137,6 +2152,17 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
       "imgBg": "#0f1a2e",
       "caseStudyUrl": "aarondouglas.html",
       "description": "Consulting website for a Chicago-based firm — turning a broad, multi-disciplinary offering into a clear, conversion-focused experience."
+    },
+    {
+      "id": "p6",
+      "title": "Zeyma Accessories",
+      "category": "Brand · Product Design",
+      "year": "2026",
+      "role": "Brand & Product Designer",
+      "img": "uploads/zeyma-logo.png",
+      "imgBg": "#FBF8F1",
+      "caseStudyUrl": "zeyma.html",
+      "description": "An Adinkra-inspired accessories brand for Ghanaian youth — a contemporary visual language, pattern system and collection structure, starting with the scarf."
     }
   ]
 }/*EDITMODE-END*/;

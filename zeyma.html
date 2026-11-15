@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zeyma Accessories — Case Study · Shinbu Abdul-Muqit Fuseini</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --surface2: #1a1a1a;
+      --text: #f5f5f5;
+      --muted: #888;
+      --stroke: #222;
+      --z-gold: #B8955C;
+      --z-gold-light: #DBC088;
+      --z-green: #2E7A57;
+      --z-green-deep: #14402C;
+      --z-cream: #FBF8F1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.6; }
+    body::-webkit-scrollbar { width: 6px; }
+    body::-webkit-scrollbar-track { background: var(--bg); }
+    body::-webkit-scrollbar-thumb { background: var(--stroke); border-radius: 3px; }
+    .serif-i { font-family: 'Instrument Serif', serif; font-style: italic; }
+
+    /* ── UTILITIES ── */
+    .accent-text {
+      background: linear-gradient(90deg, var(--z-gold), var(--z-gold-light));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .accent-line {
+      display: inline-block; width: 40px; height: 1px;
+      background: linear-gradient(90deg, var(--z-gold), var(--z-gold-light));
+      vertical-align: middle; margin-right: 12px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 40px; display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+    }
+    .nav-back { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--text); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+    .lang-switch { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.04); border: 1px solid var(--stroke); border-radius: 999px; padding: 6px; flex-shrink: 0; }
+    .lang-switch-btn { width: 24px; height: 24px; border-radius: 50%; overflow: hidden; border: 0; padding: 0; cursor: pointer; display: flex; opacity: 0.5; transition: opacity 0.2s, transform 0.2s; }
+    .lang-switch-btn:hover { transform: scale(1.1); opacity: 0.85; }
+    .lang-switch-btn[aria-pressed="true"] { opacity: 1; box-shadow: 0 0 0 2px rgba(255,255,255,0.8); }
+    .lang-switch-btn svg { width: 100%; height: 100%; }
+
+    /* ── HERO ── */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 40px 80px; position: relative; overflow: hidden; }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 70% 25%, rgba(46,122,87,0.20) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 15% 85%, rgba(184,149,92,0.08) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(184,149,92,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(184,149,92,0.05) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+    }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; position: relative; }
+    .hero-title-row { display: flex; align-items: center; gap: 32px; margin-bottom: 40px; position: relative; flex-wrap: wrap; }
+    .hero-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(64px, 12vw, 148px); line-height: 0.9; letter-spacing: -0.02em; }
+    .hero-title small { display: block; font-size: 0.28em; letter-spacing: 0.02em; margin-top: 10px; color: var(--muted); -webkit-text-fill-color: var(--muted); }
+    .hero-logo { display: none; width: clamp(88px, 11vw, 140px); height: clamp(88px, 11vw, 140px); border-radius: 50%; object-fit: cover; border: 1px solid rgba(184,149,92,0.4); background: #0b0b0c; flex-shrink: 0; }
+    .hero-logo.show { display: block; }
+    .hero-meta { display: flex; flex-wrap: wrap; border-top: 1px solid var(--stroke); padding-top: 32px; position: relative; }
+    .hero-meta-item { flex: 1; min-width: 160px; padding: 20px 32px 20px 0; border-right: 1px solid var(--stroke); }
+    .hero-meta-item:last-child { border-right: none; }
+    .hero-meta-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .hero-meta-value { font-size: 14px; color: var(--text); font-weight: 500; }
+
+    /* ── OVERVIEW BAND ── */
+    .overview-band { background: var(--surface); border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); padding: 80px 40px; }
+    .overview-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .overview-lead { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(20px, 2.5vw, 28px); line-height: 1.4; color: var(--text); }
+    .overview-body { font-size: 15px; line-height: 1.75; color: #aaa; }
+    .overview-body p { margin-bottom: 16px; }
+    .overview-body p:last-child { margin-bottom: 0; }
+
+    /* ── SECTION ── */
+    .section { max-width: 900px; margin: 0 auto; padding: 100px 40px; }
+    .section + .section { border-top: 1px solid var(--stroke); }
+    .section-eyebrow { display: flex; align-items: center; font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; }
+    .section-title { font-family: 'Instrument Serif', serif; font-size: clamp(32px, 4vw, 52px); line-height: 1.1; margin-bottom: 40px; }
+    .section-title em { font-family: 'Instrument Serif', serif; font-style: italic; }
+    .section-body { font-size: 15px; line-height: 1.8; color: #aaa; }
+    .section-body p { margin-bottom: 20px; }
+    .section-body p:last-child { margin-bottom: 0; }
+    .sub-title { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin: 56px 0 20px; }
+
+    /* ── GENERIC CARD GRIDS ── */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; border-radius: 16px; overflow: hidden; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 32px; border-radius: 16px; overflow: hidden; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 40px; border-radius: 16px; overflow: hidden; }
+    .card { background: var(--surface); padding: 32px; }
+    .card-num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 44px; line-height: 1; color: #2c2c2c; margin-bottom: 14px; }
+    .card-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .card-desc { font-size: 13px; line-height: 1.65; color: var(--muted); }
+    .card-tag { display: inline-block; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; background: rgba(184,149,92,0.12); color: var(--z-gold); border: 1px solid rgba(184,149,92,0.25); margin-bottom: 14px; }
+    .card-tag.green { background: rgba(46,122,87,0.14); color: #6FBF98; border-color: rgba(46,122,87,0.35); }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote { border-left: 2px solid var(--z-gold); padding: 24px 36px; margin: 48px 0; background: var(--surface); border-radius: 0 12px 12px 0; }
+    .pull-quote p { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(18px, 2.5vw, 24px); line-height: 1.45; color: var(--text); }
+
+    /* ── CHIPS ── */
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+    .chip { font-size: 13px; padding: 9px 18px; border-radius: 99px; border: 1px solid var(--stroke); background: var(--surface); color: #ccc; }
+    .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 40px; border-radius: 16px; overflow: hidden; }
+    .vs > div { padding: 32px; background: var(--surface); }
+    .vs .no { opacity: 0.7; }
+    .vs .label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 12px; color: var(--muted); }
+    .vs .yes .label { color: var(--z-gold); }
+    .vs p { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; line-height: 1.3; color: var(--text); }
+    .vs .no p { text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.25); color: #999; }
+
+    /* ── SYMBOLS ── */
+    .sym { background: var(--surface); padding: 32px; display: flex; flex-direction: column; gap: 6px; }
+    .sym-name { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 28px; color: var(--text); line-height: 1.1; }
+    .sym-meaning { font-size: 13px; color: #bbb; line-height: 1.6; }
+    .sym-move { font-size: 12px; color: var(--muted); line-height: 1.6; margin-top: 8px; padding-top: 10px; border-top: 1px solid var(--stroke); }
+    .sym-move b { color: var(--z-gold); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 10px; display: block; margin-bottom: 2px; }
+    .syms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; border-radius: 16px; overflow: hidden; }
+    .syms .sym:nth-child(4), .syms .sym:nth-child(5) { }
+    .story { margin-top: 2px; background: var(--surface); padding: 32px; border-radius: 0 0 16px 16px; }
+    .story-row { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 14px; font-size: 14px; color: #ccc; }
+    .story-row span b { color: var(--z-gold); font-weight: 600; }
+
+    /* ── LAYERS ── */
+    .layers { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; }
+    .layer { display: grid; grid-template-columns: 80px 1fr; gap: 24px; padding: 30px 32px; background: var(--surface); align-items: start; }
+    .layer:first-child { border-radius: 12px 12px 0 0; }
+    .layer:last-child { border-radius: 0 0 12px 12px; }
+    .layer-num { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--z-gold); padding-top: 6px; }
+    .layer-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .layer-body { font-size: 13px; line-height: 1.7; color: var(--muted); }
+    .layer-eg { margin-top: 10px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #666; }
+
+    /* ── PALETTES ── */
+    .palettes { display: flex; flex-direction: column; gap: 2px; margin-top: 48px; border-radius: 16px; overflow: hidden; }
+    .palette { background: var(--surface); padding: 28px 32px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: center; }
+    .palette-name { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 24px; line-height: 1.15; }
+    .palette-letter { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--z-gold); display: block; margin-bottom: 6px; font-family: 'Inter', sans-serif; font-style: normal; }
+    .palette-feel { font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.55; font-family: 'Inter', sans-serif; font-style: normal; }
+    .swatches { display: flex; height: 76px; border-radius: 10px; overflow: hidden; border: 1px solid #2a2a2a; }
+    .swatch { flex: 1; display: flex; align-items: flex-end; padding: 8px; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; transition: flex 0.35s ease; }
+    .swatch:hover { flex: 2.2; }
+    .swatch.dark-t { color: rgba(0,0,0,0.65); }
+    .swatch.light-t { color: rgba(255,255,255,0.75); }
+    .swatch.wide { flex: 0.45; }
+
+    /* ── ZONES / SIDES ── */
+    .scarf { margin-top: 40px; border: 1px solid #2c2c2c; border-radius: 14px; overflow: hidden; background: #0e0e0e; }
+    .scarf-zone { padding: 34px 28px; text-align: center; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: #bbb; position: relative; }
+    .scarf-zone + .scarf-zone { border-top: 1px dashed #3a3a3a; }
+    .scarf-zone.main { padding: 74px 28px; background: radial-gradient(circle at 50% 50%, rgba(46,122,87,0.22), transparent 70%); color: var(--z-cream); }
+    .scarf-zone.border { background: repeating-linear-gradient(90deg, rgba(184,149,92,0.15) 0 14px, transparent 14px 28px); color: var(--z-gold); }
+    .scarf-zone small { display: block; margin-top: 8px; letter-spacing: 0.1em; text-transform: none; font-size: 12px; color: #777; }
+    .sides { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 32px; border-radius: 16px; overflow: hidden; }
+    .side { padding: 32px; min-height: 220px; display: flex; flex-direction: column; justify-content: flex-end; }
+    .side.a { background: linear-gradient(160deg, var(--z-green-deep), #14090c 75%); }
+    .side.b { background: var(--z-cream); color: #1b1b1b; }
+    .side .label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.7; margin-bottom: 10px; }
+    .side .t { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 26px; line-height: 1.15; margin-bottom: 10px; }
+    .side p { font-size: 13px; line-height: 1.6; opacity: 0.8; }
+    .side.b p, .side.b .label { color: #333; opacity: 0.85; }
+
+    /* ── WARDROBE ── */
+    .wardrobe { margin-top: 40px; display: flex; flex-direction: column; gap: 2px; border-radius: 16px; overflow: hidden; }
+    .ward { display: grid; grid-template-columns: 160px 1fr 200px; gap: 24px; align-items: center; background: var(--surface); padding: 22px 28px; }
+    .ward-name { font-weight: 600; font-size: 14px; }
+    .ward-fit { font-size: 13px; color: var(--muted); }
+    .ward-level { font-size: 12px; color: #bbb; text-align: right; }
+    .meter { display: inline-flex; gap: 4px; vertical-align: middle; margin-left: 10px; }
+    .meter i { width: 14px; height: 6px; border-radius: 2px; background: #2a2a2a; }
+    .meter i.on { background: linear-gradient(90deg, var(--z-gold), var(--z-gold-light)); }
+
+    /* ── DNA ── */
+    .dna { margin-top: 40px; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; }
+    .dna-row { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 20px 28px; background: var(--surface); align-items: start; }
+    .dna-k { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+    .dna-v { font-size: 14px; color: #ddd; line-height: 1.65; }
+    .dna-v ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .dna-v li::before { content: '—'; color: var(--z-gold); margin-right: 10px; }
+    .ratio { display: flex; height: 64px; border-radius: 12px; overflow: hidden; margin-top: 24px; font-size: 12px; font-weight: 600; }
+    .ratio div { display: flex; align-items: center; justify-content: center; letter-spacing: 0.08em; }
+    .ratio .r70 { flex: 70; background: #1d1d1d; color: #ddd; }
+    .ratio .r20 { flex: 20; background: var(--z-green-deep); color: #fff; }
+    .ratio .r10 { flex: 10; background: var(--z-gold); color: #111; }
+    .ratio-legend { display: grid; grid-template-columns: 70fr 20fr 10fr; gap: 12px; margin-top: 12px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* ── CONCEPT ── */
+    .concept { background: linear-gradient(160deg, #0b1a13 0%, #0b0b0c 70%); border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); padding: 110px 40px; text-align: center; }
+    .concept-inner { max-width: 860px; margin: 0 auto; }
+    .concept-big { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(56px, 11vw, 132px); line-height: 0.95; letter-spacing: -0.02em; margin: 20px 0 28px; }
+    .concept-small { font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--z-cream); opacity: 0.85; }
+    .concept-coord { margin-top: 18px; font-size: 11px; letter-spacing: 0.35em; color: var(--z-gold); }
+    .concept-sub { margin-top: 36px; font-size: 14px; color: #aaa; max-width: 620px; margin-left: auto; margin-right: auto; line-height: 1.75; }
+    .concept-pal { display: flex; justify-content: center; gap: 10px; margin-top: 32px; }
+    .concept-pal i { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); }
+
+    /* ── PROCESS ── */
+    .steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 48px; border-radius: 16px; overflow: hidden; }
+    .step { display: grid; grid-template-columns: 44px 1fr; gap: 12px; background: var(--surface); padding: 20px 24px; align-items: baseline; }
+    .step b { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 24px; color: var(--z-gold); font-weight: 400; }
+    .step span { font-size: 14px; color: #ccc; }
+    .callout { background: rgba(184,149,92,0.06); border: 1px solid rgba(184,149,92,0.22); border-radius: 12px; padding: 24px 28px; margin-top: 32px; font-size: 13px; line-height: 1.7; color: #aaa; }
+    .callout strong { color: var(--z-gold); }
+    .words { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 0; }
+    .word { font-size: 11px; letter-spacing: 0.2em; padding: 8px 14px; border: 1px solid #2c2c2c; border-radius: 6px; color: #ccc; }
+
+    /* ── DESIGNS GALLERY (filled from ZEYMA_DESIGNS below) ── */
+    .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 40px; }
+    .gallery figure { background: var(--surface); border-radius: 16px; overflow: hidden; border: 1px solid var(--stroke); }
+    .gallery figure.wide { grid-column: 1 / -1; }
+    .gallery img { display: block; width: 100%; height: auto; }
+    .gallery figcaption { padding: 14px 18px; font-size: 12px; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    .case-footer { max-width: 900px; margin: 0 auto; padding: 80px 40px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--stroke); gap: 32px; flex-wrap: wrap; }
+    .footer-credits { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .footer-credits strong { color: var(--text); }
+    .footer-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--z-gold), var(--z-gold-light)); color: #0a0a0a; font-size: 13px; font-weight: 600; padding: 14px 28px; border-radius: 99px; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+    .cta-btn:hover { opacity: 0.9; transform: scale(1.03); }
+
+    /* ── SCROLL REVEAL ── */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.8s cubic-bezier(0.25,0.1,0.25,1), transform 0.8s cubic-bezier(0.25,0.1,0.25,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 0 20px 60px; }
+      .hero-meta-item { min-width: 140px; padding: 16px 16px 16px 0; }
+      .overview-inner { grid-template-columns: 1fr; gap: 32px; }
+      .overview-band { padding: 60px 20px; }
+      .section { padding: 70px 20px; }
+      .grid-3, .grid-2, .grid-4, .syms, .vs, .sides, .steps, .gallery { grid-template-columns: 1fr; }
+      .layer { grid-template-columns: 1fr; gap: 8px; padding: 24px 20px; }
+      .palette { grid-template-columns: 1fr; gap: 16px; padding: 24px 20px; }
+      .ward { grid-template-columns: 1fr; gap: 6px; }
+      .ward-level { text-align: left; }
+      .dna-row { grid-template-columns: 1fr; gap: 6px; }
+      .concept { padding: 80px 20px; }
+      .case-footer { flex-direction: column; align-items: flex-start; padding: 60px 20px; }
+      .swatch { font-size: 8px; padding: 6px; }
+      .ratio-legend { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span data-i18n="nav.back">Back to portfolio</span>
+    </a>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button type="button" class="lang-switch-btn" data-lang="en" aria-label="English" title="English" onclick="__setLang('en')">
+          <svg viewBox="0 0 60 30" aria-hidden="true">
+            <rect width="60" height="30" fill="#00247d" />
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" />
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2" />
+            <path d="M30,0 L30,30 M0,15 L60,15" stroke="#fff" stroke-width="10" />
+            <path d="M30,0 L30,30 M0,15 L60,15" stroke="#cf142b" stroke-width="6" />
+          </svg>
+        </button>
+        <button type="button" class="lang-switch-btn" data-lang="de" aria-label="Deutsch" title="Deutsch" onclick="__setLang('de')">
+          <svg viewBox="0 0 5 3" aria-hidden="true">
+            <rect width="5" height="1" y="0" fill="#000000" />
+            <rect width="5" height="1" y="1" fill="#DD0000" />
+            <rect width="5" height="1" y="2" fill="#FFCE00" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <p class="hero-eyebrow fade-up"><span class="accent-line"></span><span data-i18n="hero.eyebrow">Case Study · Brand &amp; Product Design</span></p>
+    <div class="hero-title-row fade-up">
+      <!-- Logo: set ZEYMA_LOGO in the script at the bottom once the file is in uploads/ -->
+      <img id="zeyma-logo" class="hero-logo" alt="Zeyma logo" />
+      <h1 class="hero-title"><span class="accent-text">Zeyma</span><small data-i18n="hero.sub">Accessories</small></h1>
+    </div>
+    <div class="hero-meta fade-up">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.product.label">Product</div>
+        <div class="hero-meta-value" data-i18n="hero.product.value">Scarves &amp; accessories</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.year.label">Year</div>
+        <div class="hero-meta-value">2026</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.role.label">Role</div>
+        <div class="hero-meta-value" data-i18n="hero.role.value">Brand &amp; Product Designer</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.audience.label">Audience</div>
+        <div class="hero-meta-value" data-i18n="hero.audience.value">Ghanaian youth, 18–30</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.collection.label">First collection</div>
+        <div class="hero-meta-value" data-i18n="hero.collection.value">01 — Roots</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.status.label">Status</div>
+        <div class="hero-meta-value" data-i18n="hero.status.value">In development</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW BAND -->
+  <div class="overview-band">
+    <div class="overview-inner fade-up">
+      <p class="overview-lead" data-i18n="overview.lead">Not an “African-looking scarf.” A contemporary fashion product that happens to carry a strong Ghanaian identity.</p>
+      <div class="overview-body">
+        <p data-i18n="overview.p1">Zeyma is an accessories brand for young Ghanaians and the diaspora, starting with the scarf. The question behind it: how do you translate Ghanaian identity into a visual language that an 18-year-old would be proud to wear in Accra, Kumasi, London, New York or Berlin?</p>
+        <p data-i18n="overview.p2">I designed the brand idea, an Adinkra-inspired pattern system, colour palettes, composition rules and the collection structure — built as a reusable design system rather than a one-off print.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE BRIEF -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="brief.eyebrow">The Challenge</span></p>
+    <h2 class="section-title" data-i18n="brief.title">Heritage that doesn’t read as a <em>souvenir</em></h2>
+    <div class="section-body">
+      <p data-i18n="brief.p1">Adinkra is rich, meaningful and instantly recognisable — which is exactly the trap. Repeat a symbol across a rectangle and you get a souvenir. The brief was to make something a young person would reach for on a normal Tuesday and still feel something about.</p>
+    </div>
+    <div class="pull-quote">
+      <p data-i18n="brief.quote">“Accra meets global street fashion” — not “traditional Ghanaian textile printed on a scarf.”</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-num">01</div>
+        <div class="card-title" data-i18n="brief.1.title">Fashion first</div>
+        <div class="card-desc" data-i18n="brief.1.desc">Modern composition, typography, spacing and colour lead. Culture is the voice inside the design, not a costume over it.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">02</div>
+        <div class="card-title" data-i18n="brief.2.title">Wearable everywhere</div>
+        <div class="card-desc" data-i18n="brief.2.desc">With jeans, sneakers, a hoodie, a suit, a dress or traditional dress — it has to belong in the wardrobe, not just at festivals.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">03</div>
+        <div class="card-title" data-i18n="brief.3.title">Ghanaian, globally fluent</div>
+        <div class="card-desc" data-i18n="brief.3.desc">One strong cultural idea plus excellent graphic design — legible to someone in Berlin, meaningful to someone in Kumasi.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRAND IDEA -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="brand.eyebrow">Brand Idea</span></p>
+    <h2 class="section-title" data-i18n="brand.title">Start with the idea, <em>not the pattern</em></h2>
+    <div class="section-body">
+      <p data-i18n="brand.p1">Before any artwork, I defined what the scarf is supposed to say. That decision shapes every later choice — symbol, colour, scale, fabric.</p>
+    </div>
+    <div class="chips">
+      <span class="chip" data-i18n="brand.c1">Ghanaian</span>
+      <span class="chip" data-i18n="brand.c2">Young</span>
+      <span class="chip" data-i18n="brand.c3">Confident</span>
+      <span class="chip" data-i18n="brand.c4">Creative</span>
+      <span class="chip" data-i18n="brand.c5">Modern</span>
+      <span class="chip" data-i18n="brand.c6">Proud</span>
+      <span class="chip" data-i18n="brand.c7">Artistic</span>
+      <span class="chip" data-i18n="brand.c8">Slightly rebellious</span>
+      <span class="chip" data-i18n="brand.c9">International</span>
+    </div>
+    <div class="vs">
+      <div class="no"><div class="label" data-i18n="brand.no.label">Not this</div><p data-i18n="brand.no">Traditional Ghanaian textile printed on a scarf.</p></div>
+      <div class="yes"><div class="label" data-i18n="brand.yes.label">This</div><p data-i18n="brand.yes">Accra meets global street fashion.</p></div>
+    </div>
+  </div>
+
+  <!-- ADINKRA AS A LANGUAGE -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="symbols.eyebrow">Visual Language</span></p>
+    <h2 class="section-title" data-i18n="symbols.title">Adinkra as a <em>language</em>, not a stamp</h2>
+    <div class="section-body">
+      <p data-i18n="symbols.p1">“Symbol → repeat → symbol → repeat” is decoration. Instead I studied the geometry and the philosophy behind each symbol and chose a specific design move for it: simplify, enlarge, rotate, crop, overlap, or turn it into a pattern.</p>
+    </div>
+
+    <div class="syms">
+      <div class="sym">
+        <span class="card-tag">Sankofa</span>
+        <div class="sym-name">Sankofa</div>
+        <div class="sym-meaning" data-i18n="sym.1.meaning">Learning from the past; retrieving what is valuable from it.</div>
+        <div class="sym-move"><b data-i18n="sym.move">Design move</b><span data-i18n="sym.1.move">The hero form — simplified, cropped large, rotated and overlapped, even combined with type.</span></div>
+      </div>
+      <div class="sym">
+        <span class="card-tag">Gye Nyame</span>
+        <div class="sym-name">Gye Nyame</div>
+        <div class="sym-meaning" data-i18n="sym.2.meaning">The supremacy and uniqueness of God.</div>
+        <div class="sym-move"><b data-i18n="sym.move">Design move</b><span data-i18n="sym.2.move">Not one giant centrepiece — small repeated versions inside a more sophisticated pattern.</span></div>
+      </div>
+      <div class="sym">
+        <span class="card-tag">Nyame Dua</span>
+        <div class="sym-name">Nyame Dua</div>
+        <div class="sym-meaning" data-i18n="sym.3.meaning">God’s presence and protection.</div>
+        <div class="sym-move"><b data-i18n="sym.move">Design move</b><span data-i18n="sym.3.move">Its geometric structure becomes a framing element.</span></div>
+      </div>
+      <div class="sym">
+        <span class="card-tag green">Dwennimmen</span>
+        <div class="sym-name">Dwennimmen</div>
+        <div class="sym-meaning" data-i18n="sym.4.meaning">The ram’s horns: strength together with humility.</div>
+        <div class="sym-move"><b data-i18n="sym.move">Design move</b><span data-i18n="sym.4.move">A strong, graphic shape — a natural fit for the streetwear end of the range.</span></div>
+      </div>
+      <div class="sym">
+        <span class="card-tag green">Nkyim</span>
+        <div class="sym-name">Nkyim</div>
+        <div class="sym-meaning" data-i18n="sym.5.meaning">Initiative, adaptability and resourcefulness.</div>
+        <div class="sym-move"><b data-i18n="sym.move">Design move</b><span data-i18n="sym.5.move">Its repeated geometry makes an excellent border pattern.</span></div>
+      </div>
+      <div class="sym" style="justify-content:center;">
+        <div class="card-title" data-i18n="sym.rule.title">The 4–7 rule</div>
+        <div class="sym-meaning" data-i18n="sym.rule.body">Pick 4–7 core symbols for the whole brand — never every symbol on one scarf. Each one needs a reason to be there.</div>
+      </div>
+    </div>
+    <div class="story">
+      <div class="card-tag" data-i18n="story.tag">Collection 01 story</div>
+      <div class="story-row">
+        <span><b>Sankofa</b> → <span data-i18n="story.1">heritage</span></span>
+        <span><b>Gye Nyame</b> → <span data-i18n="story.2">identity</span></span>
+        <span><b>Dwennimmen</b> → <span data-i18n="story.3">strength</span></span>
+        <span><b>Nkyim</b> → <span data-i18n="story.4">adaptability</span></span>
+        <span><b>Nyame Dua</b> → <span data-i18n="story.5">spirituality &amp; protection</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PATTERN SYSTEM -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="system.eyebrow">Pattern System</span></p>
+    <h2 class="section-title" data-i18n="system.title">Five layers, <em>one brand-specific system</em></h2>
+    <div class="section-body">
+      <p data-i18n="system.p1">Rather than downloading symbols and tiling them, I built a layered system inspired by Adinkra — so every scarf in the range is recognisably Zeyma.</p>
+    </div>
+    <div class="layers">
+      <div class="layer">
+        <div class="layer-num" data-i18n="layer.1.num">Layer 1</div>
+        <div><div class="layer-title" data-i18n="layer.1.title">Primary symbol</div><div class="layer-body" data-i18n="layer.1.body">A single large Sankofa form that anchors the composition.</div></div>
+      </div>
+      <div class="layer">
+        <div class="layer-num" data-i18n="layer.2.num">Layer 2</div>
+        <div><div class="layer-title" data-i18n="layer.2.title">Secondary symbols</div><div class="layer-body" data-i18n="layer.2.body">Small Gye Nyame and Dwennimmen marks that reward a closer look.</div></div>
+      </div>
+      <div class="layer">
+        <div class="layer-num" data-i18n="layer.3.num">Layer 3</div>
+        <div><div class="layer-title" data-i18n="layer.3.title">Geometry</div><div class="layer-body" data-i18n="layer.3.body">Lines, circles, grids and diamonds drawn from Ghanaian geometric structures — the connective tissue between symbols.</div></div>
+      </div>
+      <div class="layer">
+        <div class="layer-num" data-i18n="layer.4.num">Layer 4</div>
+        <div>
+          <div class="layer-title" data-i18n="layer.4.title">Texture</div>
+          <div class="layer-body" data-i18n="layer.4.body">Subtle surface cues from Kente weaving, woven cloth, hand stamping, wood carving, brass and traditional printing.</div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-num" data-i18n="layer.5.num">Layer 5</div>
+        <div>
+          <div class="layer-title" data-i18n="layer.5.title">Typography</div>
+          <div class="layer-body" data-i18n="layer.5.body">Very small words and phrases — never dominant.</div>
+          <div class="layer-eg">GHANA · ROOTS · SANKOFA · ADINKRA · ACCRA · KUMASI · COAST · ORIGIN</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout">
+      <strong data-i18n="sig.label">Signature motif.</strong> <span data-i18n="sig.body">On top of existing symbols, I’d create a new graphic motif of Zeyma’s own — a blend of the logo, a Sankofa-inspired curve and Kente geometry — so the identity can travel to shirts, jackets, bags, caps, packaging, labels and social, and a scarf can be recognised without seeing the logo.</span>
+    </div>
+  </div>
+
+  <!-- BEYOND ADINKRA -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="beyond.eyebrow">Beyond Adinkra</span></p>
+    <h2 class="section-title" data-i18n="beyond.title">Ghanaian identity is <em>bigger than one system</em></h2>
+    <div class="grid-4">
+      <div class="card">
+        <div class="card-title" data-i18n="beyond.1.title">Kente</div>
+        <div class="card-desc" data-i18n="beyond.1.desc">Not copying a cloth — studying stripes, colour relationships, weaving, repetition, symmetry and proportion, and extracting a colour rhythm.</div>
+      </div>
+      <div class="card">
+        <div class="card-title" data-i18n="beyond.2.title">Architecture</div>
+        <div class="card-desc" data-i18n="beyond.2.desc">Old Accra, coastal forts, compounds, windows, doors and decorative patterns — subtle geometric elements.</div>
+      </div>
+      <div class="card">
+        <div class="card-title" data-i18n="beyond.3.title">Landscape</div>
+        <div class="card-desc" data-i18n="beyond.3.desc">Atlantic Ocean, red earth, tropical vegetation and Accra streets as collection themes.</div>
+      </div>
+      <div class="card">
+        <div class="card-title" data-i18n="beyond.4.title">Signage &amp; type</div>
+        <div class="card-desc" data-i18n="beyond.4.desc">Tro-tro lettering, shop signs, hand-painted ads, taxis, markets, football culture, street posters — their visual character, not a copy.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLOUR -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="colour.eyebrow">Colour</span></p>
+    <h2 class="section-title" data-i18n="colour.title">Modern Ghanaian palettes, <em>not red-yellow-green</em></h2>
+    <div class="section-body">
+      <p data-i18n="colour.p1">Red, yellow and green is the obvious route. I built five alternative palettes, each with its own feeling. Swatch values are illustrative starting points to be matched to real dye and yarn samples.</p>
+    </div>
+    <div class="palettes">
+      <div class="palette">
+        <div class="palette-name"><span class="palette-letter" data-i18n="pal.a.letter">Palette A</span><span data-i18n="pal.a.name">Accra Night</span><div class="palette-feel" data-i18n="pal.a.feel">Fashion-forward and sophisticated.</div></div>
+        <div class="swatches">
+          <div class="swatch light-t" style="background:#0B0B0C" data-i18n="pal.a.1">Deep black</div>
+          <div class="swatch light-t" style="background:#2B2B2E" data-i18n="pal.a.2">Charcoal</div>
+          <div class="swatch dark-t" style="background:#F3EDE0" data-i18n="pal.a.3">Off-white</div>
+          <div class="swatch light-t" style="background:#8A1C2B" data-i18n="pal.a.4">Deep red</div>
+          <div class="swatch dark-t wide" style="background:#C9A24B" data-i18n="pal.a.5">Gold</div>
+        </div>
+      </div>
+      <div class="palette">
+        <div class="palette-name"><span class="palette-letter" data-i18n="pal.b.letter">Palette B</span><span data-i18n="pal.b.name">Ghana Earth</span><div class="palette-feel" data-i18n="pal.b.feel">Natural, warm and premium.</div></div>
+        <div class="swatches">
+          <div class="swatch light-t" style="background:#B5573A" data-i18n="pal.b.1">Terracotta</div>
+          <div class="swatch dark-t" style="background:#D8C3A0" data-i18n="pal.b.2">Sand</div>
+          <div class="swatch light-t" style="background:#6B4A33" data-i18n="pal.b.3">Brown</div>
+          <div class="swatch dark-t" style="background:#F1E8D6" data-i18n="pal.b.4">Cream</div>
+          <div class="swatch light-t" style="background:#2F4A3A" data-i18n="pal.b.5">Dark green</div>
+        </div>
+      </div>
+      <div class="palette">
+        <div class="palette-name"><span class="palette-letter" data-i18n="pal.c.letter">Palette C</span><span data-i18n="pal.c.name">Coastal Ghana</span><div class="palette-feel" data-i18n="pal.c.feel">Young, fresh and coastal.</div></div>
+        <div class="swatches">
+          <div class="swatch light-t" style="background:#1F5F8B" data-i18n="pal.c.1">Ocean blue</div>
+          <div class="swatch dark-t" style="background:#2BB5B0" data-i18n="pal.c.2">Turquoise</div>
+          <div class="swatch dark-t" style="background:#F1E8D6" data-i18n="pal.c.3">Cream</div>
+          <div class="swatch dark-t" style="background:#F0705A" data-i18n="pal.c.4">Coral</div>
+          <div class="swatch light-t" style="background:#12203F" data-i18n="pal.c.5">Deep navy</div>
+        </div>
+      </div>
+      <div class="palette">
+        <div class="palette-name"><span class="palette-letter" data-i18n="pal.d.letter">Palette D</span><span data-i18n="pal.d.name">Modern Ghana</span><div class="palette-feel" data-i18n="pal.d.feel">Easy to wear and strongly Ghanaian.</div></div>
+        <div class="swatches">
+          <div class="swatch light-t" style="background:#0B0B0C" data-i18n="pal.d.1">Black</div>
+          <div class="swatch dark-t" style="background:#FFFFFF" data-i18n="pal.d.2">White</div>
+          <div class="swatch light-t" style="background:#1E7B4B" data-i18n="pal.d.3">Ghana green</div>
+          <div class="swatch light-t" style="background:#6E1423" data-i18n="pal.d.4">Burgundy</div>
+          <div class="swatch dark-t wide" style="background:#D4AF37" data-i18n="pal.d.5">Gold</div>
+        </div>
+      </div>
+      <div class="palette">
+        <div class="palette-name"><span class="palette-letter" data-i18n="pal.e.letter">Palette E</span><span data-i18n="pal.e.name">Kente Remix</span><div class="palette-feel" data-i18n="pal.e.feel">Kente colours, desaturated — instantly more contemporary.</div></div>
+        <div class="swatches">
+          <div class="swatch light-t" style="background:#6E1423" data-i18n="pal.e.1">Burgundy</div>
+          <div class="swatch dark-t" style="background:#D9A21B" data-i18n="pal.e.2">Mustard</div>
+          <div class="swatch light-t" style="background:#2E5A3C" data-i18n="pal.e.3">Forest green</div>
+          <div class="swatch dark-t" style="background:#F1E8D6" data-i18n="pal.e.4">Cream</div>
+          <div class="swatch light-t" style="background:#0B0B0C" data-i18n="pal.e.5">Black</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPOSITION -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="comp.eyebrow">Composition &amp; Product</span></p>
+    <h2 class="section-title" data-i18n="comp.title">Designing the scarf as a <em>product</em>, not a rectangle</h2>
+
+    <p class="sub-title" data-i18n="comp.zones.label">Zones</p>
+    <div class="section-body"><p data-i18n="comp.zones.body">The ends are the branding opportunity. A distinctive border that appears on every scarf in the collection builds recognition — “that’s a Zeyma scarf” — before anyone reads a logo.</p></div>
+    <div class="scarf" aria-label="Scarf zone diagram">
+      <div class="scarf-zone main"><span data-i18n="comp.z1">Main pattern</span><small data-i18n="comp.z1s">Adinkra + geometric composition</small></div>
+      <div class="scarf-zone border"><span data-i18n="comp.z2">Brand border</span><small data-i18n="comp.z2s">The same on every scarf</small></div>
+      <div class="scarf-zone"><span data-i18n="comp.z3">Adinkra motif</span><small data-i18n="comp.z3s">Ends and fringe designed separately</small></div>
+    </div>
+
+    <p class="sub-title" data-i18n="comp.sides.label">A loud side and a quiet side</p>
+    <div class="section-body"><p data-i18n="comp.sides.body">Not both faces need to be equally busy. Two styling personalities in one product is far more commercially useful.</p></div>
+    <div class="sides">
+      <div class="side a"><div class="label" data-i18n="comp.sideA.label">Side A</div><div class="t" data-i18n="comp.sideA.t">Loud → cultural statement</div><p data-i18n="comp.sideA.p">Bold Adinkra pattern.</p></div>
+      <div class="side b"><div class="label" data-i18n="comp.sideB.label">Side B</div><div class="t" data-i18n="comp.sideB.t">Subtle → everyday fashion</div><p data-i18n="comp.sideB.p">Mostly black or cream with one small repeating motif.</p></div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title" data-i18n="comp.asym.title">Asymmetry</div>
+        <div class="card-desc" data-i18n="comp.asym.body">Traditional patterns lean on symmetry; youth fashion doesn’t have to. A large cropped Sankofa on one side, small geometry, text and empty space on the other gives an editorial feel.</div>
+      </div>
+      <div class="card">
+        <div class="card-title" data-i18n="comp.neg.title">Negative space</div>
+        <div class="card-desc" data-i18n="comp.neg.body">At least 20–30% breathing room. Fill every centimetre and it becomes textile wallpaper; leave room and it feels premium.</div>
+      </div>
+      <div class="card">
+        <div class="card-title" data-i18n="comp.fabric.title">Fabric</div>
+        <div class="card-desc" data-i18n="comp.fabric.body">Satin for vibrance, cotton for everyday, silk for premium — and woven jacquard, where the Adinkra is woven into the cloth instead of printed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WARDROBE + COLLECTIONS -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="ward.eyebrow">Real wardrobes</span></p>
+    <h2 class="section-title" data-i18n="ward.title">Where would someone <em>actually wear it?</em></h2>
+    <div class="section-body"><p data-i18n="ward.p1">That question sets how loud a design can be. The range needs different levels of visual intensity.</p></div>
+    <div class="wardrobe">
+      <div class="ward"><div class="ward-name" data-i18n="ward.1.name">Everyday</div><div class="ward-fit" data-i18n="ward.1.fit">Scarf + T-shirt + jeans + sneakers</div><div class="ward-level"><span data-i18n="ward.1.lvl">Subtle pattern</span><span class="meter"><i class="on"></i><i></i><i></i><i></i></span></div></div>
+      <div class="ward"><div class="ward-name" data-i18n="ward.2.name">Streetwear</div><div class="ward-fit" data-i18n="ward.2.fit">Scarf + oversized hoodie + cargo pants</div><div class="ward-level"><span data-i18n="ward.2.lvl">Bold graphics</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div></div>
+      <div class="ward"><div class="ward-name" data-i18n="ward.3.name">Going out</div><div class="ward-fit" data-i18n="ward.3.fit">Scarf + shirt + trousers</div><div class="ward-level"><span data-i18n="ward.3.lvl">Sophisticated pattern</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div></div>
+      <div class="ward"><div class="ward-name" data-i18n="ward.4.name">Formal</div><div class="ward-fit" data-i18n="ward.4.fit">Scarf + blazer or suit</div><div class="ward-level"><span data-i18n="ward.4.lvl">Elegant, restrained</span><span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i></span></div></div>
+      <div class="ward"><div class="ward-name" data-i18n="ward.5.name">Cultural events</div><div class="ward-fit" data-i18n="ward.5.fit">Scarf + African print outfit</div><div class="ward-level"><span data-i18n="ward.5.lvl">Stronger Ghanaian expression</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div></div>
+    </div>
+
+    <p class="sub-title" data-i18n="coll.label">Three collections, not one scarf</p>
+    <div class="grid-3" style="margin-top:0">
+      <div class="card">
+        <span class="card-tag">01</span>
+        <div class="card-title">Roots</div>
+        <div class="card-desc"><span data-i18n="coll.1.theme">Where we come from.</span><br/><br/><b style="color:#ccc;font-weight:500;" data-i18n="coll.sym">Symbols</b> — Sankofa, Gye Nyame, Nyame Dua<br/><b style="color:#ccc;font-weight:500;" data-i18n="coll.col">Colours</b> — <span data-i18n="coll.1.col">black, cream, burgundy, gold</span></div>
+      </div>
+      <div class="card">
+        <span class="card-tag green">02</span>
+        <div class="card-title">Strength</div>
+        <div class="card-desc"><span data-i18n="coll.2.theme">Young Ghanaian ambition.</span><br/><br/><b style="color:#ccc;font-weight:500;" data-i18n="coll.sym">Symbols</b> — Dwennimmen, Nkyim, Aya<br/><b style="color:#ccc;font-weight:500;" data-i18n="coll.col">Colours</b> — <span data-i18n="coll.2.col">dark green, black, orange, cream</span></div>
+      </div>
+      <div class="card">
+        <span class="card-tag">03</span>
+        <div class="card-title">Accra</div>
+        <div class="card-desc"><span data-i18n="coll.3.theme">Modern urban Ghanaian life — less Adinkra, more architecture, street type, abstract maps and coastal forms. Aimed squarely at 18–30-year-olds.</span><br/><br/><b style="color:#ccc;font-weight:500;" data-i18n="coll.col">Colours</b> — <span data-i18n="coll.3.col">concrete grey, black, white, yellow, red</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN DNA -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="dna.eyebrow">Design DNA</span></p>
+    <h2 class="section-title" data-i18n="dna.title">A system <em>before</em> twenty scarves</h2>
+    <div class="section-body"><p data-i18n="dna.p1">Symbols, grid, colours, borders, typography and pattern components live as reusable assets, so every future design follows the same visual DNA.</p></div>
+    <div class="dna">
+      <div class="dna-row"><div class="dna-k" data-i18n="dna.1.k">Cultural foundation</div><div class="dna-v" data-i18n="dna.1.v">Ghanaian heritage · Adinkra · contemporary African identity</div></div>
+      <div class="dna-row"><div class="dna-k" data-i18n="dna.2.k">Audience</div><div class="dna-v" data-i18n="dna.2.v">18–30</div></div>
+      <div class="dna-row"><div class="dna-k" data-i18n="dna.3.k">Personality</div><div class="dna-v" data-i18n="dna.3.v">Bold · intelligent · creative · confident</div></div>
+      <div class="dna-row"><div class="dna-k" data-i18n="dna.4.k">Visual language</div><div class="dna-v" data-i18n="dna.4.v">Geometry + symbolism + typography + negative space</div></div>
+      <div class="dna-row"><div class="dna-k" data-i18n="dna.5.k">Colour</div><div class="dna-v" data-i18n="dna.5.v">Primary: black, cream, Ghana green · Accents: gold, burgundy, terracotta</div></div>
+      <div class="dna-row"><div class="dna-k" data-i18n="dna.6.k">Pattern rules</div><div class="dna-v"><ul>
+        <li data-i18n="dna.6.1">Maximum 5 major symbols</li>
+        <li data-i18n="dna.6.2">Minimum 20–30% negative space</li>
+        <li data-i18n="dna.6.3">One dominant motif</li>
+        <li data-i18n="dna.6.4">One secondary pattern</li>
+        <li data-i18n="dna.6.5">A consistent border</li>
+      </ul></div></div>
+      <div class="dna-row"><div class="dna-k" data-i18n="dna.7.k">Typography</div><div class="dna-v" data-i18n="dna.7.v">Modern sans-serif with occasional Ghanaian-inspired display type</div></div>
+    </div>
+
+    <p class="sub-title" data-i18n="ratio.label">The 70 / 20 / 10 rule</p>
+    <div class="ratio"><div class="r70">70%</div><div class="r20">20%</div><div class="r10">10%</div></div>
+    <div class="ratio-legend">
+      <div data-i18n="ratio.70"><b style="color:#ddd">Contemporary fashion</b> — composition, type, spacing, colour, geometry.</div>
+      <div data-i18n="ratio.20"><b style="color:#ddd">Ghanaian visual culture</b> — Adinkra, Kente geometry, architecture, language.</div>
+      <div data-i18n="ratio.10"><b style="color:#ddd">Story</b> — hidden symbols, small text, coordinates, micro-patterns.</div>
+    </div>
+    <div class="callout">
+      <strong data-i18n="ratio.note.label">The test.</strong> <span data-i18n="ratio.note">Ghanaian without looking like a souvenir. If a scarf carries Kente, Adinkra, flag, map, drums, baobab, elephant and Black Star at once, it communicates “Africa” but not good contemporary fashion. One strong cultural idea, executed well.</span>
+    </div>
+  </div>
+
+  <!-- CONCEPT IN FOCUS -->
+  <section class="concept">
+    <div class="concept-inner fade-up">
+      <p class="section-eyebrow" style="justify-content:center;"><span class="accent-line"></span><span data-i18n="concept.eyebrow">Concept in focus</span></p>
+      <div class="serif-i" style="font-size:clamp(18px,2.4vw,26px);color:#ccc;" data-i18n="concept.lead">“We remember where we come from.”</div>
+      <div class="concept-big accent-text">SANKOFA</div>
+      <div class="concept-small" data-i18n="concept.small">We move forward with what we carry from behind.</div>
+      <div class="concept-coord">GHANA — 05°33′N</div>
+      <p class="concept-sub" data-i18n="concept.sub">Large cropped Sankofa forms, geometric lines, small repeated Adinkra symbols and contemporary typography. Less souvenir, more statement about identity.</p>
+      <div class="concept-pal" aria-hidden="true"><i style="background:#0B0B0C"></i><i style="background:#F3EDE0"></i><i style="background:#8A1C2B"></i><i style="background:#C9A24B"></i></div>
+    </div>
+  </section>
+
+  <!-- DESIGNS (hidden until ZEYMA_DESIGNS has entries) -->
+  <div class="section fade-up" id="designs-section" hidden>
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="designs.eyebrow">The Designs</span></p>
+    <h2 class="section-title" data-i18n="designs.title">The first <em>designs</em></h2>
+    <div class="section-body"><p data-i18n="designs.p1">Scarf artwork that puts the system to work: the ZM monogram as a pattern, Adinkra-led compositions in different palettes, and a Heritage Ghana series built around cocoa. Loud and quiet colourways sit side by side.</p></div>
+    <div class="gallery" id="designs-gallery"></div>
+  </div>
+
+  <!-- LANGUAGE CARE + PROCESS -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="lang.eyebrow">Language &amp; Care</span></p>
+    <h2 class="section-title" data-i18n="lang.title">Words need to be <em>right</em></h2>
+    <div class="section-body"><p data-i18n="lang.p1">Ghanaian-language words make a design feel far more authentic than “GHANA” alone — but only if they’re correct.</p></div>
+    <div class="words">
+      <span class="word">SANKOFA</span><span class="word">AKWAABA</span><span class="word">YƐN KO</span><span class="word">AYA</span><span class="word">NYAME</span><span class="word">ADWUMA</span>
+    </div>
+    <div class="callout">
+      <strong data-i18n="lang.note.label">Before production.</strong> <span data-i18n="lang.note">Every word, spelling and meaning is verified with a reliable Ghanaian source or native speaker. A beautiful scarf with a linguistic mistake is not a risk worth taking.</span>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="process.eyebrow">Process</span></p>
+    <h2 class="section-title" data-i18n="process.title">From research to <em>refined product</em></h2>
+    <div class="steps">
+      <div class="step"><b>01</b><span data-i18n="process.1">Research Ghanaian visual culture</span></div>
+      <div class="step"><b>02</b><span data-i18n="process.2">Choose the target youth persona</span></div>
+      <div class="step"><b>03</b><span data-i18n="process.3">Define the story and theme</span></div>
+      <div class="step"><b>04</b><span data-i18n="process.4">Select 4–7 symbols</span></div>
+      <div class="step"><b>05</b><span data-i18n="process.5">Analyse their geometry</span></div>
+      <div class="step"><b>06</b><span data-i18n="process.6">Develop an own pattern language</span></div>
+      <div class="step"><b>07</b><span data-i18n="process.7">Build 3–5 colour palettes</span></div>
+      <div class="step"><b>08</b><span data-i18n="process.8">Experiment with composition</span></div>
+      <div class="step"><b>09</b><span data-i18n="process.9">Apply to real scarf dimensions</span></div>
+      <div class="step"><b>10</b><span data-i18n="process.10">Mock up on young Ghanaian models</span></div>
+      <div class="step"><b>11</b><span data-i18n="process.11">Test styling: streetwear and smartwear</span></div>
+      <div class="step"><b>12</b><span data-i18n="process.12">Refine and produce</span></div>
+    </div>
+  </div>
+
+  <!-- STATUS -->
+  <div class="section fade-up">
+    <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="next.eyebrow">Where it stands</span></p>
+    <h2 class="section-title" data-i18n="next.title">Foundation set, <em>collection next</em></h2>
+    <div class="section-body"><p data-i18n="next.p1">The brand idea, symbol set, pattern system, palettes and composition rules are defined, and the first scarf designs and logo are above. More designs are added to this case study as they’re finished.</p></div>
+    <div class="grid-4">
+      <div class="card"><div class="card-title" data-i18n="next.1.title">Signature motif</div><div class="card-desc" data-i18n="next.1.body">Draw Zeyma’s own mark from the logo, a Sankofa curve and Kente geometry.</div></div>
+      <div class="card"><div class="card-title" data-i18n="next.2.title">Collection 01 — Roots</div><div class="card-desc" data-i18n="next.2.body">Finish the first scarves in Palette A and test loud/quiet sides.</div></div>
+      <div class="card"><div class="card-title" data-i18n="next.3.title">Jacquard pilot</div><div class="card-desc" data-i18n="next.3.body">Explore weaving the pattern into the fabric for a premium edition.</div></div>
+      <div class="card"><div class="card-title" data-i18n="next.4.title">Beyond the scarf</div><div class="card-desc" data-i18n="next.4.body">Carry the system to caps, bags, shirts, jackets, labels and packaging.</div></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="case-footer fade-up">
+    <div class="footer-credits">
+      <strong>Zeyma Accessories</strong><br/>
+      <span data-i18n="footer.credits">Brand &amp; product design by <strong>Shinbu Abdul-Muqit Fuseini</strong></span>
+    </div>
+    <div class="footer-btns">
+      <a href="index.html" class="cta-btn"><span data-i18n="footer.back">Back to portfolio</span></a>
+    </div>
+  </div>
+
+  <!-- CONTENT YOU CAN FILL IN LATER -->
+  <script>
+    // Logo: drop the file in uploads/ and set the path, e.g. "uploads/zeyma-logo.png"
+    window.ZEYMA_LOGO = "uploads/zeyma-logo.png";
+    // Designs: { src, en, de, wide } — add more entries here as new designs are finished.
+    window.ZEYMA_DESIGNS = [
+      { src: "uploads/zeyma-sankofa-birds.webp",
+        en: "Sankofa repeat — burgundy, black and gold on cream, with the coordinates set small",
+        de: "Sankofa-Wiederholung — Bordeaux, Schwarz und Gold auf Creme, mit klein gesetzten Koordinaten" },
+      { src: "uploads/zeyma-monogram-centrepiece.webp",
+        en: "Signature monogram — the ZM mark at the centre of a gold, Adinkra-inspired composition",
+        de: "Signatur-Monogramm — das ZM-Zeichen im Zentrum einer goldenen, von Adinkra inspirierten Komposition" },
+      { src: "uploads/zeyma-gold-sun.webp",
+        en: "Gold medallion on navy — small Adinkra marks, stepped borders and zig-zag edging",
+        de: "Goldenes Medaillon auf Marine — kleine Adinkra-Zeichen, gestufte Bordüren und Zickzack-Kante" },
+      { src: "uploads/zeyma-kente-mandala.webp",
+        en: "Kente-inspired mandala — Adinkra symbols ringed over a woven stripe field",
+        de: "Kente-inspiriertes Mandala — Adinkra-Symbole in Ringen über einem gewebten Streifenfeld" },
+      { src: "uploads/zeyma-monogram-loud.webp",
+        en: "ZM monogram pattern — the loud colourway, with cream and gold medallions",
+        de: "ZM-Monogrammmuster — die laute Farbvariante mit Creme- und Gold-Medaillons" },
+      { src: "uploads/zeyma-monogram-quiet.webp",
+        en: "ZM monogram pattern — the quiet, all-dark colourway",
+        de: "ZM-Monogrammmuster — die leise, ganz dunkle Farbvariante" },
+      { src: "uploads/zeyma-gye-nyame-coastal.webp",
+        en: "Gye Nyame in a coastal palette — ocean blue, turquoise, cream and coral",
+        de: "Gye Nyame in einer Küstenpalette — Ozeanblau, Türkis, Creme und Koralle" },
+      { src: "uploads/zeyma-cocoa-night.webp",
+        en: "Heritage Ghana — a cocoa branch on night black inside a geometric border",
+        de: "Heritage Ghana — ein Kakaozweig auf Nachtschwarz in einer geometrischen Bordüre" }
+    ];
+  </script>
+
+  <!-- LANGUAGE DATA + RUNTIME (same pattern as the other case studies) -->
+  <script>
+    window.I18N_DE = {
+      "nav.back": "Zurück zum Portfolio",
+      "hero.eyebrow": "Case Study · Marken- & Produktdesign",
+      "hero.sub": "Accessoires",
+      "hero.product.label": "Produkt",
+      "hero.product.value": "Schals & Accessoires",
+      "hero.year.label": "Jahr",
+      "hero.role.label": "Rolle",
+      "hero.role.value": "Marken- & Produktdesigner",
+      "hero.audience.label": "Zielgruppe",
+      "hero.audience.value": "Ghanaische Jugend, 18–30",
+      "hero.collection.label": "Erste Kollektion",
+      "hero.collection.value": "01 — Roots",
+      "hero.status.label": "Status",
+      "hero.status.value": "In Entwicklung",
+      "overview.lead": "Kein „afrikanisch aussehender Schal“. Ein zeitgemäßes Modeprodukt, das zufällig eine starke ghanaische Identität trägt.",
+      "overview.p1": "Zeyma ist eine Accessoire-Marke für junge Ghanaerinnen und Ghanaer und die Diaspora, beginnend mit dem Schal. Die Frage dahinter: Wie übersetzt man ghanaische Identität in eine visuelle Sprache, die ein 18-Jähriger in Accra, Kumasi, London, New York oder Berlin stolz tragen würde?",
+      "overview.p2": "Ich habe die Markenidee, ein von Adinkra inspiriertes Mustersystem, Farbpaletten, Kompositionsregeln und die Kollektionsstruktur gestaltet — als wiederverwendbares Designsystem statt als einmaligen Druck.",
+      "brief.eyebrow": "Die Herausforderung",
+      "brief.title": "Erbe, das nicht wie ein <em>Souvenir</em> wirkt",
+      "brief.p1": "Adinkra ist reich, bedeutungsvoll und sofort erkennbar — genau darin liegt die Falle. Wiederholt man ein Symbol über ein Rechteck, entsteht ein Souvenir. Die Aufgabe war, etwas zu gestalten, nach dem ein junger Mensch an einem ganz normalen Dienstag greift und trotzdem etwas dabei fühlt.",
+      "brief.quote": "„Accra trifft globale Streetfashion“ — nicht „traditionelles ghanaisches Textil, auf einen Schal gedruckt“.",
+      "brief.1.title": "Mode zuerst",
+      "brief.1.desc": "Moderne Komposition, Typografie, Abstände und Farbe führen. Kultur ist die Stimme im Design, kein Kostüm darüber.",
+      "brief.2.title": "Überall tragbar",
+      "brief.2.desc": "Zu Jeans, Sneakern, Hoodie, Anzug, Kleid oder traditioneller Kleidung — er muss in den Kleiderschrank passen, nicht nur zu Festen.",
+      "brief.3.title": "Ghanaisch, global verständlich",
+      "brief.3.desc": "Eine starke kulturelle Idee plus exzellentes Grafikdesign — lesbar für jemanden in Berlin, bedeutungsvoll für jemanden in Kumasi.",
+      "brand.eyebrow": "Markenidee",
+      "brand.title": "Mit der Idee beginnen, <em>nicht mit dem Muster</em>",
+      "brand.p1": "Bevor irgendein Artwork entstand, habe ich festgelegt, was der Schal sagen soll. Diese Entscheidung prägt jede spätere Wahl — Symbol, Farbe, Maßstab, Stoff.",
+      "brand.c1": "Ghanaisch", "brand.c2": "Jung", "brand.c3": "Selbstbewusst", "brand.c4": "Kreativ", "brand.c5": "Modern",
+      "brand.c6": "Stolz", "brand.c7": "Künstlerisch", "brand.c8": "Leicht rebellisch", "brand.c9": "International",
+      "brand.no.label": "Nicht das",
+      "brand.no": "Traditionelles ghanaisches Textil, auf einen Schal gedruckt.",
+      "brand.yes.label": "Sondern das",
+      "brand.yes": "Accra trifft globale Streetfashion.",
+      "symbols.eyebrow": "Visuelle Sprache",
+      "symbols.title": "Adinkra als <em>Sprache</em>, nicht als Stempel",
+      "symbols.p1": "„Symbol → wiederholen → Symbol → wiederholen“ ist Dekoration. Stattdessen habe ich Geometrie und Philosophie hinter jedem Symbol untersucht und für jedes einen konkreten Gestaltungsschritt gewählt: vereinfachen, vergrößern, drehen, beschneiden, überlagern oder zum Muster machen.",
+      "sym.move": "Gestaltungsschritt",
+      "sym.1.meaning": "Aus der Vergangenheit lernen; das Wertvolle aus ihr zurückholen.",
+      "sym.1.move": "Die Hauptform — vereinfacht, groß angeschnitten, gedreht und überlagert, sogar mit Schrift kombiniert.",
+      "sym.2.meaning": "Die Vorherrschaft und Einzigartigkeit Gottes.",
+      "sym.2.move": "Kein riesiges Zentrum — kleine, wiederholte Versionen innerhalb eines raffinierteren Musters.",
+      "sym.3.meaning": "Gottes Gegenwart und Schutz.",
+      "sym.3.move": "Seine geometrische Struktur wird zum Rahmenelement.",
+      "sym.4.meaning": "Die Widderhörner: Stärke zusammen mit Demut.",
+      "sym.4.move": "Eine starke, grafische Form — wie gemacht für den Streetwear-Teil der Reihe.",
+      "sym.5.meaning": "Initiative, Anpassungsfähigkeit und Einfallsreichtum.",
+      "sym.5.move": "Seine wiederholte Geometrie ergibt ein hervorragendes Bordürenmuster.",
+      "sym.rule.title": "Die 4–7-Regel",
+      "sym.rule.body": "4–7 Kernsymbole für die ganze Marke — nie jedes Symbol auf einem Schal. Jedes braucht einen Grund, da zu sein.",
+      "story.tag": "Story der Kollektion 01",
+      "story.1": "Erbe", "story.2": "Identität", "story.3": "Stärke", "story.4": "Anpassungsfähigkeit", "story.5": "Spiritualität & Schutz",
+      "system.eyebrow": "Mustersystem",
+      "system.title": "Fünf Ebenen, <em>ein markeneigenes System</em>",
+      "system.p1": "Statt Symbole herunterzuladen und zu kacheln, habe ich ein von Adinkra inspiriertes Ebenensystem gebaut — damit jeder Schal der Reihe erkennbar Zeyma ist.",
+      "layer.1.num": "Ebene 1", "layer.1.title": "Primärsymbol", "layer.1.body": "Eine einzelne große Sankofa-Form, die die Komposition verankert.",
+      "layer.2.num": "Ebene 2", "layer.2.title": "Sekundärsymbole", "layer.2.body": "Kleine Gye-Nyame- und Dwennimmen-Zeichen, die einen zweiten Blick belohnen.",
+      "layer.3.num": "Ebene 3", "layer.3.title": "Geometrie", "layer.3.body": "Linien, Kreise, Raster und Rauten aus ghanaischen geometrischen Strukturen — das Bindegewebe zwischen den Symbolen.",
+      "layer.4.num": "Ebene 4", "layer.4.title": "Textur", "layer.4.body": "Dezente Oberflächenhinweise aus Kente-Weberei, gewebtem Stoff, Handstempel, Holzschnitzerei, Messing und traditionellem Druck.",
+      "layer.5.num": "Ebene 5", "layer.5.title": "Typografie", "layer.5.body": "Sehr kleine Wörter und Phrasen — nie dominant.",
+      "sig.label": "Signatur-Motiv.",
+      "sig.body": "Zusätzlich zu bestehenden Symbolen würde ich ein neues, eigenes grafisches Motiv für Zeyma entwickeln — eine Mischung aus Logo, einer von Sankofa inspirierten Kurve und Kente-Geometrie —, damit die Identität auf Shirts, Jacken, Taschen, Caps, Verpackung, Labels und Social Media übertragen werden kann und ein Schal auch ohne Logo erkennbar ist.",
+      "beyond.eyebrow": "Jenseits von Adinkra",
+      "beyond.title": "Ghanaische Identität ist <em>größer als ein System</em>",
+      "beyond.1.title": "Kente",
+      "beyond.1.desc": "Kein Kopieren eines Stoffs — Studium von Streifen, Farbbeziehungen, Weberei, Wiederholung, Symmetrie und Proportion und Ableitung eines Farbrhythmus.",
+      "beyond.2.title": "Architektur",
+      "beyond.2.desc": "Altes Accra, Küstenforts, Gehöfte, Fenster, Türen und Ornamente — dezente geometrische Elemente.",
+      "beyond.3.title": "Landschaft",
+      "beyond.3.desc": "Atlantik, rote Erde, tropische Vegetation und Straßen von Accra als Kollektionsthemen.",
+      "beyond.4.title": "Beschilderung & Schrift",
+      "beyond.4.desc": "Tro-tro-Schriftzüge, Ladenschilder, handgemalte Werbung, Taxis, Märkte, Fußballkultur, Straßenplakate — ihr visueller Charakter, keine Kopie.",
+      "colour.eyebrow": "Farbe",
+      "colour.title": "Moderne ghanaische Paletten, <em>nicht Rot-Gelb-Grün</em>",
+      "colour.p1": "Rot, Gelb und Grün ist der naheliegende Weg. Ich habe fünf alternative Paletten mit jeweils eigener Wirkung gebaut. Die Farbwerte sind illustrative Ausgangspunkte, die an echte Färbe- und Garnmuster angepasst werden.",
+      "pal.a.letter": "Palette A", "pal.a.name": "Accra Night", "pal.a.feel": "Modisch und anspruchsvoll.",
+      "pal.a.1": "Tiefschwarz", "pal.a.2": "Anthrazit", "pal.a.3": "Gebrochenes Weiß", "pal.a.4": "Tiefrot", "pal.a.5": "Gold",
+      "pal.b.letter": "Palette B", "pal.b.name": "Ghana Earth", "pal.b.feel": "Natürlich, warm und hochwertig.",
+      "pal.b.1": "Terrakotta", "pal.b.2": "Sand", "pal.b.3": "Braun", "pal.b.4": "Creme", "pal.b.5": "Dunkelgrün",
+      "pal.c.letter": "Palette C", "pal.c.name": "Coastal Ghana", "pal.c.feel": "Jung, frisch und küstennah.",
+      "pal.c.1": "Ozeanblau", "pal.c.2": "Türkis", "pal.c.3": "Creme", "pal.c.4": "Koralle", "pal.c.5": "Tiefmarine",
+      "pal.d.letter": "Palette D", "pal.d.name": "Modern Ghana", "pal.d.feel": "Leicht zu tragen und unverkennbar ghanaisch.",
+      "pal.d.1": "Schwarz", "pal.d.2": "Weiß", "pal.d.3": "Ghana-Grün", "pal.d.4": "Bordeaux", "pal.d.5": "Gold",
+      "pal.e.letter": "Palette E", "pal.e.name": "Kente Remix", "pal.e.feel": "Kente-Farben, entsättigt — sofort zeitgemäßer.",
+      "pal.e.1": "Bordeaux", "pal.e.2": "Senf", "pal.e.3": "Waldgrün", "pal.e.4": "Creme", "pal.e.5": "Schwarz",
+      "comp.eyebrow": "Komposition & Produkt",
+      "comp.title": "Den Schal als <em>Produkt</em> gestalten, nicht als Rechteck",
+      "comp.zones.label": "Zonen",
+      "comp.zones.body": "Die Enden sind die Branding-Chance. Eine markante Bordüre, die auf jedem Schal der Kollektion erscheint, schafft Wiedererkennung — „das ist ein Zeyma-Schal“ —, bevor jemand ein Logo liest.",
+      "comp.z1": "Hauptmuster", "comp.z1s": "Adinkra + geometrische Komposition",
+      "comp.z2": "Markenbordüre", "comp.z2s": "Auf jedem Schal gleich",
+      "comp.z3": "Adinkra-Motiv", "comp.z3s": "Enden und Fransen separat gestaltet",
+      "comp.sides.label": "Eine laute und eine leise Seite",
+      "comp.sides.body": "Nicht beide Seiten müssen gleich voll sein. Zwei Stil-Persönlichkeiten in einem Produkt sind kommerziell weit nützlicher.",
+      "comp.sideA.label": "Seite A", "comp.sideA.t": "Laut → kulturelles Statement", "comp.sideA.p": "Kräftiges Adinkra-Muster.",
+      "comp.sideB.label": "Seite B", "comp.sideB.t": "Dezent → Alltagsmode", "comp.sideB.p": "Überwiegend Schwarz oder Creme mit einem kleinen, wiederholten Motiv.",
+      "comp.asym.title": "Asymmetrie",
+      "comp.asym.body": "Traditionelle Muster setzen stark auf Symmetrie; Jugendmode muss das nicht. Ein großes angeschnittenes Sankofa auf der einen Seite, kleine Geometrie, Text und Leerraum auf der anderen ergeben eine redaktionelle Anmutung.",
+      "comp.neg.title": "Negativraum",
+      "comp.neg.body": "Mindestens 20–30 % Luft. Füllt man jeden Zentimeter, wird es zur Textiltapete; mit Raum wirkt es hochwertig.",
+      "comp.fabric.title": "Stoff",
+      "comp.fabric.body": "Satin für Leuchtkraft, Baumwolle für den Alltag, Seide für Premium — und gewebter Jacquard, bei dem das Adinkra in den Stoff gewebt statt gedruckt wird.",
+      "ward.eyebrow": "Echte Kleiderschränke",
+      "ward.title": "Wo würde man ihn <em>wirklich tragen?</em>",
+      "ward.p1": "Diese Frage bestimmt, wie laut ein Design sein darf. Die Reihe braucht verschiedene Intensitätsstufen.",
+      "ward.1.name": "Alltag", "ward.1.fit": "Schal + T-Shirt + Jeans + Sneaker", "ward.1.lvl": "Dezentes Muster",
+      "ward.2.name": "Streetwear", "ward.2.fit": "Schal + Oversize-Hoodie + Cargohose", "ward.2.lvl": "Kräftige Grafik",
+      "ward.3.name": "Ausgehen", "ward.3.fit": "Schal + Hemd + Hose", "ward.3.lvl": "Raffiniertes Muster",
+      "ward.4.name": "Formell", "ward.4.fit": "Schal + Blazer oder Anzug", "ward.4.lvl": "Elegant, zurückhaltend",
+      "ward.5.name": "Kulturelle Anlässe", "ward.5.fit": "Schal + Outfit mit afrikanischen Prints", "ward.5.lvl": "Stärkerer ghanaischer Ausdruck",
+      "coll.label": "Drei Kollektionen, nicht ein Schal",
+      "coll.sym": "Symbole", "coll.col": "Farben",
+      "coll.1.theme": "Wo wir herkommen.", "coll.1.col": "Schwarz, Creme, Bordeaux, Gold",
+      "coll.2.theme": "Der Ehrgeiz der jungen Ghanaer.", "coll.2.col": "Dunkelgrün, Schwarz, Orange, Creme",
+      "coll.3.theme": "Modernes urbanes Leben in Ghana — weniger Adinkra, mehr Architektur, Straßenschrift, abstrakte Karten und Küstenformen. Gezielt für 18- bis 30-Jährige.",
+      "coll.3.col": "Betongrau, Schwarz, Weiß, Gelb, Rot",
+      "dna.eyebrow": "Design-DNA",
+      "dna.title": "Ein System <em>vor</em> zwanzig Schals",
+      "dna.p1": "Symbole, Raster, Farben, Bordüren, Typografie und Musterbausteine liegen als wiederverwendbare Assets vor, damit jedes künftige Design derselben visuellen DNA folgt.",
+      "dna.1.k": "Kulturelle Grundlage", "dna.1.v": "Ghanaisches Erbe · Adinkra · zeitgenössische afrikanische Identität",
+      "dna.2.k": "Zielgruppe", "dna.2.v": "18–30",
+      "dna.3.k": "Persönlichkeit", "dna.3.v": "Mutig · intelligent · kreativ · selbstbewusst",
+      "dna.4.k": "Visuelle Sprache", "dna.4.v": "Geometrie + Symbolik + Typografie + Negativraum",
+      "dna.5.k": "Farbe", "dna.5.v": "Primär: Schwarz, Creme, Ghana-Grün · Akzente: Gold, Bordeaux, Terrakotta",
+      "dna.6.k": "Musterregeln",
+      "dna.6.1": "Höchstens 5 große Symbole", "dna.6.2": "Mindestens 20–30 % Negativraum", "dna.6.3": "Ein dominantes Motiv", "dna.6.4": "Ein sekundäres Muster", "dna.6.5": "Eine durchgängige Bordüre",
+      "dna.7.k": "Typografie", "dna.7.v": "Moderne Sans-Serif mit gelegentlicher ghanaisch inspirierter Display-Schrift",
+      "ratio.label": "Die 70 / 20 / 10-Regel",
+      "ratio.70": "<b style=\"color:#ddd\">Zeitgemäße Mode</b> — Komposition, Typografie, Abstände, Farbe, Geometrie.",
+      "ratio.20": "<b style=\"color:#ddd\">Ghanaische Bildkultur</b> — Adinkra, Kente-Geometrie, Architektur, Sprache.",
+      "ratio.10": "<b style=\"color:#ddd\">Story</b> — versteckte Symbole, kleiner Text, Koordinaten, Mikromuster.",
+      "ratio.note.label": "Der Test.",
+      "ratio.note": "Ghanaisch, ohne wie ein Souvenir zu wirken. Trägt ein Schal Kente, Adinkra, Flagge, Karte, Trommeln, Baobab, Elefant und Black Star zugleich, steht er für „Afrika“, aber nicht für gute zeitgenössische Mode. Eine starke kulturelle Idee, gut umgesetzt.",
+      "concept.eyebrow": "Konzept im Fokus",
+      "concept.lead": "„Wir erinnern uns, woher wir kommen.“",
+      "concept.small": "Wir gehen vorwärts mit dem, was wir von hinten mittragen.",
+      "concept.sub": "Große angeschnittene Sankofa-Formen, geometrische Linien, kleine wiederholte Adinkra-Symbole und zeitgemäße Typografie. Weniger Souvenir, mehr Statement über Identität.",
+      "lang.eyebrow": "Sprache & Sorgfalt",
+      "lang.title": "Wörter müssen <em>stimmen</em>",
+      "lang.p1": "Wörter aus ghanaischen Sprachen lassen ein Design deutlich authentischer wirken als „GHANA“ allein — aber nur, wenn sie korrekt sind.",
+      "lang.note.label": "Vor der Produktion.",
+      "lang.note": "Jedes Wort, jede Schreibweise und Bedeutung wird mit einer verlässlichen ghanaischen Quelle oder einer Muttersprachlerin bzw. einem Muttersprachler geprüft. Ein schöner Schal mit sprachlichem Fehler ist kein Risiko, das man eingehen sollte.",
+      "process.eyebrow": "Prozess",
+      "process.title": "Von der Recherche zum <em>ausgereiften Produkt</em>",
+      "process.1": "Ghanaische Bildkultur recherchieren", "process.2": "Junge Zielgruppe/Persona wählen", "process.3": "Story und Thema definieren", "process.4": "4–7 Symbole auswählen",
+      "process.5": "Ihre Geometrie analysieren", "process.6": "Eine eigene Mustersprache entwickeln", "process.7": "3–5 Farbpaletten bauen", "process.8": "Mit Komposition experimentieren",
+      "process.9": "Auf reale Schalmaße anwenden", "process.10": "Mockups an jungen Ghanaern und Ghanaerinnen", "process.11": "Styling testen: Streetwear und Smartwear", "process.12": "Verfeinern und produzieren",
+      "designs.eyebrow": "Die Entwürfe",
+      "designs.title": "Die ersten <em>Entwürfe</em>",
+      "designs.p1": "Schal-Artwork, das das System in die Praxis bringt: das ZM-Monogramm als Muster, Adinkra-geführte Kompositionen in verschiedenen Paletten und eine Heritage-Ghana-Serie rund um Kakao. Laute und leise Farbvarianten stehen nebeneinander.",
+      "next.eyebrow": "Aktueller Stand",
+      "next.title": "Fundament steht, <em>Kollektion folgt</em>",
+      "next.p1": "Markenidee, Symbolset, Mustersystem, Paletten und Kompositionsregeln sind definiert. Die ersten Schal-Entwürfe und das Logo stehen oben. Weitere Entwürfe kommen zu dieser Case Study hinzu, sobald sie fertig sind.",
+      "next.1.title": "Signatur-Motiv", "next.1.body": "Zeymas eigenes Zeichen aus Logo, einer Sankofa-Kurve und Kente-Geometrie zeichnen.",
+      "next.2.title": "Kollektion 01 — Roots", "next.2.body": "Die ersten Schals in Palette A fertigstellen und laute/leise Seiten testen.",
+      "next.3.title": "Jacquard-Pilot", "next.3.body": "Das Muster in den Stoff weben, für eine Premium-Edition.",
+      "next.4.title": "Über den Schal hinaus", "next.4.body": "Das System auf Caps, Taschen, Shirts, Jacken, Labels und Verpackung übertragen.",
+      "footer.credits": "Marken- & Produktdesign von <strong>Shinbu Abdul-Muqit Fuseini</strong>",
+      "footer.back": "Zurück zum Portfolio"
+    };
+
+    (function () {
+      var LANG_KEY = 'portfolio-lang';
+      function getLang() { try { return localStorage.getItem(LANG_KEY) || 'en'; } catch (e) { return 'en'; } }
+
+      var originals = null;
+      function captureOriginals() {
+        originals = {};
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          originals[el.getAttribute('data-i18n')] = el.innerHTML;
+        });
+      }
+
+      function applyLang(lang) {
+        document.documentElement.lang = lang;
+        if (!originals) captureOriginals();
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n');
+          if (lang === 'de' && window.I18N_DE && window.I18N_DE[key] != null) {
+            el.innerHTML = window.I18N_DE[key];
+          } else {
+            el.innerHTML = originals[key];
+          }
+        });
+        document.querySelectorAll('.lang-switch-btn').forEach(function (b) {
+          b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+        });
+        renderDesigns(lang);
+      }
+
+      // Logo + designs gallery (hidden unless filled in above)
+      function renderDesigns(lang) {
+        var logo = document.getElementById('zeyma-logo');
+        if (window.ZEYMA_LOGO && logo) { logo.src = window.ZEYMA_LOGO; logo.classList.add('show'); }
+        var list = window.ZEYMA_DESIGNS || [];
+        var sec = document.getElementById('designs-section');
+        var box = document.getElementById('designs-gallery');
+        if (!sec || !box) return;
+        sec.hidden = list.length === 0;
+        box.innerHTML = '';
+        list.forEach(function (d) {
+          var fig = document.createElement('figure');
+          if (d.wide) fig.className = 'wide';
+          var img = document.createElement('img');
+          img.src = d.src; img.alt = (lang === 'de' && d.de) || d.en || 'Zeyma design'; img.loading = 'lazy';
+          fig.appendChild(img);
+          var cap = (lang === 'de' && d.de) || d.en;
+          if (cap) { var fc = document.createElement('figcaption'); fc.textContent = cap; fig.appendChild(fc); }
+          box.appendChild(fig);
+        });
+      }
+
+      window.__setLang = function (lang) {
+        try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+        applyLang(lang);
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        applyLang(getLang());
+      });
+    })();
+  </script>
+
+  <script>
+    const els = document.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '-40px' });
+    els.forEach((el) => obs.observe(el));
+    document.querySelectorAll('.hero .fade-up').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 200 + i * 150);
+    });
+  </script>
+</body>
+</html>
