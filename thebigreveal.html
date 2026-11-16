@@ -207,6 +207,7 @@
       .overview-inner { grid-template-columns: 1fr; gap: 32px; }
       .overview-band { padding: 60px 20px; }
       .section { padding: 70px 20px; }
+      .appstore-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
       .challenge-grid { grid-template-columns: 1fr !important; }
       .pillars-grid { grid-template-columns: 1fr; }
       .pillar-card:first-child { border-radius: 12px 12px 0 0; }
@@ -282,11 +283,15 @@
       </div>
       <div class="hero-meta-item">
         <div class="hero-meta-label" data-i18n="hero.status.label">Status</div>
-        <div class="hero-meta-value" data-i18n="hero.status.value">In development — web built, mobile in progress</div>
+        <div class="hero-meta-value" data-i18n="hero.status.value">Live — web and iOS app (EU release pending)</div>
       </div>
       <div class="hero-meta-item">
         <div class="hero-meta-label" data-i18n="hero.live.label">Live Site</div>
         <div class="hero-meta-value"><a href="https://www.thebigrevealapp.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(255,255,255,0.2);">thebigrevealapp.com</a></div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label" data-i18n="hero.appstore.label">iOS App</div>
+        <div class="hero-meta-value"><a href="https://apps.apple.com/us/app/the-big-reveal-baby-shower/id6807687661" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(255,255,255,0.2);">App Store</a></div>
       </div>
       <div class="hero-meta-item">
         <div class="hero-meta-label" data-i18n="hero.tools.label">Tools</div>
@@ -311,6 +316,25 @@
   <!-- HERO SCREENSHOT -->
   <div style="max-width:900px;margin:0 auto;padding:80px 40px 0;">
     <img src="uploads/thebigreveal-hero.png" alt="Reveal! landing page, community home, and games hub" style="display:block;width:100%;height:auto;border-radius:20px;border:1px solid var(--stroke);" />
+  </div>
+
+  <!-- NOW ON THE APP STORE -->
+  <div class="section fade-up">
+    <div style="display:grid;grid-template-columns:1fr auto;gap:56px;align-items:center;" class="appstore-grid">
+      <div>
+        <p class="section-eyebrow"><span class="accent-line"></span><span data-i18n="appstore.eyebrow">Now on the App Store</span></p>
+        <h2 class="section-title" data-i18n="appstore.title">The mobile app is <span style="font-family:'Instrument Serif',serif;font-style:italic;">live</span></h2>
+        <div class="section-body">
+          <p data-i18n="appstore.p1">The Big Reveal: Baby Shower launched on the Apple App Store on 1 September 2026, alongside the web platform. It's the same community spaces, registry, games and reveal moment, designed and built for the phone — including haptic feedback at the reveal.</p>
+          <p data-i18n="appstore.p2">It isn't available in the EU yet: Apple requires developers to register as a trader before distributing there, and that registration is still pending.</p>
+        </div>
+        <a href="https://apps.apple.com/us/app/the-big-reveal-baby-shower/id6807687661" target="_blank" rel="noopener" class="ghost-btn" style="margin-top:28px;">
+          <span data-i18n="appstore.cta">View on the App Store</span>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <video src="uploads/thebigreveal-app-store.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Announcement: The Big Reveal: Baby Shower is now available on the App Store" style="display:block;width:240px;max-width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:24px;border:1px solid var(--stroke);background:#0a0f1c;"></video>
+    </div>
   </div>
 
   <!-- THE CHALLENGE -->
@@ -619,6 +643,10 @@
           <div class="goal-dot"></div>
           <div class="goal-text" data-i18n="outcome.3">A product architecture that makes a genuinely feature-rich experience (registry, games, livestream, planning, memories) feel like one coherent, joyful place.</div>
         </div>
+        <div class="goal-item">
+          <div class="goal-dot"></div>
+          <div class="goal-text" data-i18n="outcome.4"><strong>Shipped on web and iOS.</strong> The web platform is live, and the mobile app launched on the Apple App Store on 1 September 2026, with EU availability pending trader registration.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -652,7 +680,7 @@
     <div class="footer-credits">
       <strong>The Big Reveal! — Personal Project</strong><br/>
       <span data-i18n="footer.credits">Founder, developer, UX/UI &amp; design system by <strong>Shinbu Abdul-Muqit Fuseini</strong></span><br/>
-      <span data-i18n="footer.status">Status: In development</span>
+      <span data-i18n="footer.status">Status: Live on web and the App Store (EU release pending)</span>
     </div>
     <a href="index.html" class="ghost-btn" data-i18n="footer.back">Back to portfolio</a>
   </div>
@@ -668,7 +696,13 @@
       "hero.role.value": "Gründer · Entwickler · UX/UI-Designer",
       "hero.platform.label": "Plattform",
       "hero.status.label": "Status",
-      "hero.status.value": "In Entwicklung — Web fertig, Mobile in Arbeit",
+      "hero.status.value": "Live — Web und iOS-App (EU-Start steht noch aus)",
+      "hero.appstore.label": "iOS-App",
+      "appstore.eyebrow": "Jetzt im App Store",
+      "appstore.title": "Die mobile App ist <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">live</span>",
+      "appstore.p1": "The Big Reveal: Baby Shower ist am 1. September 2026 im Apple App Store gestartet, parallel zur Web-Plattform. Es sind dieselben Community-Räume, Geschenkliste, Spiele und derselbe Reveal-Moment, gestaltet und gebaut fürs Smartphone — inklusive haptischem Feedback beim Reveal.",
+      "appstore.p2": "In der EU ist sie noch nicht verfügbar: Apple verlangt vor dem Vertrieb dort eine Registrierung als Händler (Trader), und diese Registrierung steht noch aus.",
+      "appstore.cta": "Im App Store ansehen",
       "hero.live.label": "Live-Seite",
       "hero.tools.label": "Tools",
       "overview.lead": "Zwei der schönsten Momente der frühen Elternschaft in eine gemeinsame digitale Feier verwandeln, an der alle teilhaben können.",
@@ -761,6 +795,7 @@
       "outcome.1": "Ein vollständiges UX/UI-Design für eine funktionsreiche, Community-basierte Feier-Plattform, die Web und eine begleitende Mobile-App umfasst.",
       "outcome.2": "Ein themenfähiges, plattformübergreifendes Designsystem („Celestial Joy“), das Personalisierung pro Familie unterstützt, ohne Konsistenz zu verlieren.",
       "outcome.3": "Eine Produktarchitektur, die ein wirklich funktionsreiches Erlebnis (Geschenkliste, Spiele, Livestream, Planung, Erinnerungen) wie einen einzigen, stimmigen und freudigen Ort wirken lässt.",
+      "outcome.4": "<strong>Auf Web und iOS ausgeliefert.</strong> Die Web-Plattform ist live, und die mobile App ist am 1. September 2026 im Apple App Store gestartet — die Verfügbarkeit in der EU steht noch aus, bis die Händlerregistrierung abgeschlossen ist.",
       "next.eyebrow": "Was ich als Nächstes erkunden würde",
       "next.title": "Wie es <span style=\"font-family:'Instrument Serif',serif;font-style:italic;\">von hier aus weitergeht</span>",
       "next.1.title": "Usability-Tests für den Reveal-Flow",
@@ -772,7 +807,7 @@
       "next.4.title": "Vollständige Feature-Parität auf Mobile",
       "next.4.body": "Web-first-Funktionen (z. B. das Hinzufügen zur Geschenkliste per URL) dort auf Mobile erweitern, wo es sinnvoll ist.",
       "footer.credits": "Gründer, Entwickler, UX/UI &amp; Designsystem von <strong>Shinbu Abdul-Muqit Fuseini</strong>",
-      "footer.status": "Status: In Entwicklung",
+      "footer.status": "Status: Live im Web und im App Store (EU-Start steht noch aus)",
       "footer.back": "Zurück zum Portfolio"
     };
 
